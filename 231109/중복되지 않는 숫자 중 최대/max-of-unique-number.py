@@ -1,10 +1,14 @@
 N = int(input()) 
-
 nums = list(map(int,input().split())) 
 
-unique_nums = list(set(list(nums))) 
+max_num = -1 
 
-if len(unique_nums) == 0: 
-    print(-1) 
-else:
-    print(max(unique_nums))
+for n in nums: 
+    if max_num < n: 
+        cnt = 0 
+        for elem in nums: 
+            if elem == n: 
+                cnt += 1 
+    if cnt == 1: 
+        max_num = n 
+print(max_num)
