@@ -20,6 +20,7 @@ for j in range(4):
 print() 
 
 # 전체 평균 
+sum_val = 0
 for i in range(4): 
     for j in range(2): 
         sum_val += nums[i][j] 
