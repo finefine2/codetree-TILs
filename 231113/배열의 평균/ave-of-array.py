@@ -1,22 +1,26 @@
 nums = [] 
 
-
-'''
-0,0  0,1  0,2  0,3 
-1,0  1,1  1,2  1,3
-'''
-for i in range(2): 
+for _ in range(2): 
     nums.append(list(map(int,input().split()))) 
 
-# 가로 평균 출력 
+# 가로 평균
 for i in range(2): 
-    print(round(sum(nums[i]) / len(nums[0]),1),end=" ")
-print() 
-# 세로 평균 출력? 
-print(round((nums[0][0] + nums[1][0])/2,1),end=" ")
-print(round((nums[0][1] + nums[1][1])/2,1),end=" ")
-print(round((nums[0][2] + nums[1][2])/2,1),end=" ")
-print(round((nums[0][3] + nums[1][3])/2,1),end=" ")
+    sum_val = 0 
+    for j in range(4): 
+        sum_val += nums[i][j] 
+    print(f"{sum_val / 4:.1f}",end=" ")
 print() 
 
-print(round((nums[0][0] + nums[1][0] + nums[0][1] + nums[1][1] +nums[0][2] + nums[1][2] +nums[0][3] + nums[1][3])/8,1))
+# 세로 평균 
+for j in range(4): 
+    sum_val = 0 
+    for i in range(2): 
+        sum_val += nums[i][j] 
+    print(f"{sum_val / 2:.1f}",end=" ")
+print() 
+
+# 전체 평균 
+for i in range(4): 
+    for j in range(2): 
+        sum_val += nums[i][j] 
+print(f"{sum_val / 8:.1f}")
