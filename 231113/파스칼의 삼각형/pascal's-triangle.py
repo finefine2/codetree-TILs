@@ -5,11 +5,9 @@ start = 1
 
 for i in range(n): 
     nums[i][0] = 1 
-    for j in range(n): 
-        if i == j: 
-            nums[i][j] = 1 
-        elif i > 0 and i > j: 
-            nums[i][j] = nums[i-1][j-1] + nums[i-1][j]
+    nums[i][i] = 1 
+    for j in range(1,i): 
+        nums[i][j]  = nums[i-1][j] + nums[i-1][j-1] 
 for i in range(n): 
     for j in range(n): 
         if nums[i][j] > 0: 
