@@ -5,11 +5,13 @@ for _ in range(10):
 
 input_x = input() 
 
-cnt = 0 
+check_x = False
 for i in range(10): 
-    if input_x == chars[i][-1]: 
+    if input_x == chars[i][-1]:
         print(chars[i]) 
-        cnt += 1
-
-    if cnt == 0: 
-        print("None")
+        check_x = True 
+    else: 
+        continue 
+    
+if check_x == False: 
+    print("None")
