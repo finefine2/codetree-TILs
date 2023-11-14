@@ -11,5 +11,4 @@ for ch in chars:
         le += len(ch) 
 
 
-print(cnt,end=" ") 
-print(f"{le/cnt:.2f}")
+print(f"{cnt} {le / cnt:.2f}")
