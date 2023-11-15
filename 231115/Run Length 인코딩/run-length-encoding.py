@@ -1,30 +1,27 @@
 A = input() 
-cnt = 0 
-ans = [] 
 
-for i in range(len(A)): 
-    
-    if i == 0: 
-        ans.append(A[i]) 
-        cnt = 1 
-        ans.append(cnt) 
-        continue 
-    
-    prev = ans[-2] 
+ans = "" 
 
-    if prev == A[i]: 
-        cnt += 1 
-        ans[-1] = cnt 
-    
+# 입력의 첫 값을 읽고 초기화 
+curr_char = A[0] 
+cnt = 1 
+
+for target_char in A[1:]: 
+    if target_char == curr_char: 
+        # 지금까지 문자와 같으면 연속된 문자 개수만 추가해주고 넘어감 
+        cnt += 1
     else: 
-        ans.append(A[i]) 
+        # 지금까지 문자와 다르면 새로운 문자로 바꿈 
+        # 지금까지 센 curr_char 와 cnt를 기록함 
+        ans += curr_char 
+        ans += str(cnt) 
+
+        # curr_char와 cnt를 현재 값으로 초기화
+        curr_char = target_char
         cnt = 1 
-        ans.append(cnt) 
-ans = [str(i) for i in ans] 
-ans1 = 0 
+# 마지막 덩어리에 해당하는 curr_char와 cnt를 기록함 
+ans += curr_char
+ans += str(cnt) 
 
-for a in ans: 
-    ans1 += len(a) 
-
-print(ans1)
-print("".join(ans))
+print(len(ans)) 
+print(ans)
