@@ -21,5 +21,4 @@ for i in range(input_len):#각 입력 문자열은 시작점으로 잡아야하�
         print(i)
         sys.exit(0)
 
-
 print(-1)
