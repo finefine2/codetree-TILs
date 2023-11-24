@@ -10,7 +10,7 @@ def gcd(num1,num2):
 def lcm(num1,num2): 
     gc = gcd(num1,num2)
     ans = 0
-    for i in range(1,100): 
+    for i in range(1,10000): 
         ans = gc * i 
         if ans % num1 == 0 and ans % num2 == 0: 
             print(ans) 
