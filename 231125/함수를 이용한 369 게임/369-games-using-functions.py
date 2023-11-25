@@ -56,17 +56,36 @@ def three_in(n):
         return False 
 
 '''
+# 내 풀이 
+# a,b = map(int,input().split())
 
-a,b = map(int,input().split())
+# def three_in(n): 
+#     n_str = str(n) 
+#     if '3' in n_str or '6' in n_str or '9' in n_str: 
+#         return True 
+#     else: 
+#         return False 
+# cnt = 0 
+# for i in range(a,b+1): 
+#     if three_in(i) or i % 3 == 0: 
+#         cnt += 1
+# print(cnt)
 
-def three_in(n): 
-    n_str = str(n) 
-    if '3' in n_str or '6' in n_str or '9' in n_str: 
-        return True 
-    else: 
-        return False 
+a,b = map(int,input().split()) 
+
+# 3,6,9 숫자가 하나라도 포함되어있는지 확인 
+def check_369(n): 
+    # 계속 10으로 나눠주며 일의 자리를 체크 
+    while n > 0: 
+        if n % 10 == 3 or n % 10 == 6 or n % 10 == 9: 
+            return True
+        n //= 10 
+    return False 
+# 3,6,9 를 포함하거나 3의 배수인지 판단 
+def is_369_number(n): 
+    return check_369(n) or (n % 3 == 0) 
 cnt = 0 
 for i in range(a,b+1): 
-    if three_in(i) or i % 3 == 0: 
-        cnt += 1
+    if is_369_number(i):
+        cnt += 1 
 print(cnt)
