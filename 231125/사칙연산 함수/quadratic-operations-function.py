@@ -10,7 +10,7 @@ def calc(num1,num2,o):
     elif o == "-": 
         return num1 - num2 
     elif o == "/": 
-        return num1 / num2 
+        return int(num1 / num2)
     elif o == "*": 
         return num1 * num2 
 ans = calc(num1,num2,o)
