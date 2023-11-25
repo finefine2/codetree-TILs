@@ -1,5 +1,5 @@
 def power(num1,num2): 
-    ans = num1 
+    ans = 1 
     for i in range(num2): 
         ans *= num1 
     return ans 
