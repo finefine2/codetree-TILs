@@ -62,12 +62,11 @@ a,b = map(int,input().split())
 def three_in(n): 
     n_str = str(n) 
     if '3' in n_str or '6' in n_str or '9' in n_str: 
-        return True
+        return True 
     else: 
-        return False
+        return False 
 cnt = 0 
 for i in range(a,b+1): 
-    if three_in or i % 3 == 0: 
-        cnt += 1 
-
+    if three_in(i) or i % 3 == 0: 
+        cnt += 1
 print(cnt)
