@@ -4,7 +4,8 @@ def lunar_year(n):
             return False 
         if n % 100 == 0 and n % 400 == 0: 
             return True 
-        return True 
+        elif n % 100 != 0: 
+            return True
     return False 
 
     
