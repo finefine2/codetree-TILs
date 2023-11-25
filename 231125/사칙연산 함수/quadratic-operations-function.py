@@ -13,5 +13,10 @@ def calc(num1,num2,o):
         return int(num1 / num2)
     elif o == "*": 
         return num1 * num2 
+    else: return False 
+
 ans = calc(num1,num2,o)
-print("{} {} {} = {}".format(num1,o,num2,ans))
+if ans: 
+    print("{} {} {} = {}".format(num1,o,num2,ans))
+else: 
+    print("False")
