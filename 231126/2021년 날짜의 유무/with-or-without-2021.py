@@ -22,7 +22,7 @@ def check_day(M,D):
 
     return False
 
-if check_day(): 
+if check_day(M,D): 
     print("Yes") 
 else: 
     print("No")
