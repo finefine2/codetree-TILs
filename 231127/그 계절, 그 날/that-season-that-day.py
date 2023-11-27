@@ -27,44 +27,68 @@ def leap_year(y):
     return False 
 
 # 2. M월 D일이 존재하는지 확인한다 
-def check_day(y,m,d): 
-    if leap_year(y): # 2월은 29일
-        if m == 2: 
-            if d <= 29: 
-                return True 
-        elif m == 4 or m == 6 or m == 9 or m == 11: 
-            if d <= 30: 
-                return True
-        else: 
-            if d <= 31: 
-                return True 
-    else: # 윤년이면 2월은 28일까지 
-        if m == 2: 
-            if d <= 28: 
-                return True 
-        elif m == 4 or m == 6 or m == 9 or m == 11: 
-            if d <= 30: 
-                return True 
-        else: 
-            if d <= 31: 
-                return True 
-    return False
-    
-# 계절을 출력한다 
-def season(m): 
-    ans = ""
-    if 3 <= m <= 5: 
-        ans = "Spring"
-    elif 6 <= m <= 8: 
-        ans = "Summer" 
-    elif 9 <= m <= 11: 
-        ans = "Fall"
-    else: 
-        ans = "Winter" 
-    return ans 
+# my solution 
+# def check_day(y,m,d): 
+#     if leap_year(y): # 2월은 29일
+#         if m == 2: 
+#             if d <= 29: 
+#                 return True 
+#         elif m == 4 or m == 6 or m == 9 or m == 11: 
+#             if d <= 30: 
+#                 return True
+#         else: 
+#             if d <= 31: 
+#                 return True 
+#     else: # 윤년이면 2월은 28일까지 
+#         if m == 2: 
+#             if d <= 28: 
+#                 return True 
+#         elif m == 4 or m == 6 or m == 9 or m == 11: 
+#             if d <= 30: 
+#                 return True 
+#         else: 
+#             if d <= 31: 
+#                 return True 
+#     return False
+
+# # 계절을 출력한다 
+# def season(m): 
+#     ans = ""
+#     if 3 <= m <= 5: 
+#         ans = "Spring"
+#     elif 6 <= m <= 8: 
+#         ans = "Summer" 
+#     elif 9 <= m <= 11: 
+#         ans = "Fall"
+#     else: 
+#         ans = "Winter" 
+#     return ans 
 
 
-if check_day(Y,M,D): 
-    print(season(M)) 
+# if check_day(Y,M,D): 
+#     print(season(M)) 
+# else: 
+#     print(-1)
+
+# given solution 
+def exist_day(y,m,d): 
+    #                  1. 2.  3. 4.  5    6.  7.  8.  9. 10. 11  12   
+    num_of_days = [0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    # 윤년 확인 
+    num_of_days[2] = 29 if leap_year(y) else 28 
+    # d 가 해당 월의 최대 일 수를 넘지 않아야 함 
+    return d <= num_of_days[m] 
+
+# y년 m월 d일이 존재 하지 않으면 -1 
+if not exist_day(Y,M,D): 
+    print(-1) 
 else: 
-    print(-1)
+    if 3 <= M <= 5: 
+        print("Spring") 
+    elif 6 <= M <= 8: 
+        print("Summer") 
+    elif 9 <= M <= 11: 
+        print("Fall") 
+    else: 
+        print("Winter")
