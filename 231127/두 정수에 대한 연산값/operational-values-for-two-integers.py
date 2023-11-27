@@ -5,7 +5,7 @@ def big(num1,num2):
     ans1 = max(num1,num2) + 25 
     ans2 = min(num1,num2) * 2 
 
-    return ans1, ans2 
+    return ans2, ans1
 
 a,b = big(a,b) 
 print(a, b)
