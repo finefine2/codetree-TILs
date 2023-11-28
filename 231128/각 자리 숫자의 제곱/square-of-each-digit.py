@@ -5,6 +5,7 @@
 #         return n 
 #     return f(n//10) + (n % 10) 
 
+# f(1234) = f(123) + 7 처럼 생각하기 
 N = int(input()) 
 
 def recur_power(n): 
