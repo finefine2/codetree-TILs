@@ -1,6 +1,6 @@
 in_s = input() 
 target = input() 
-ans = ""
+ans = -1
 def check_s(): 
     global in_s, target, ans
     # 8, 2 
@@ -11,8 +11,5 @@ def check_s():
             break 
 
     return False 
-
-if not check_s(): 
-    print(ans)
-else: 
-    print(check_s())
+check_s()
+print(ans)
