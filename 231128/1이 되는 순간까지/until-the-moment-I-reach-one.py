@@ -16,19 +16,18 @@
 
 N = int(input()) 
 
-def count(n): 
-    cnt = 0 
-    new_n = 0 
+# N 이 1이 되면 끝나는 조건임 
+# N 이 1이 아니면 나누고 카운트를 추가해야한다 
+cnt = 0 
+def calc(n): 
+    global cnt 
+    cnt += 1 
     if n == 1: 
-        return cnt + 1
-
+        return cnt 
+    
     if n % 2 == 0: 
-        new_n = int(n / 2)
-        cnt += 1
-        return count(new_n)  
+        return calc(n//2) 
     else: 
-        new_n = n // 3 
-        cnt += 1
-        return count(new_n) 
-
-print(count(N))
+        return calc(n//3) 
+calc(N) 
+print(cnt-1)
