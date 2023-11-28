@@ -13,28 +13,35 @@
 # check_s()
 # print(ans)
 
-text = input() 
-target input() 
+#############################
+# 변수 선언 및 입력:
+text = input()
+pattern = input()
+# 일치하는 문자열인지를 판단합니다.
+def is_substr(start_idx):
+    n, m = len(text), len(pattern)
+    
+    # 만약 pattern을 매칭 시키기에
+    # text 문자열 범위를 초과하게 된다면
+    # 부분 문자열이 될 수 없으므로 false를 반환합니다.
+    if start_idx + m - 1 >= n:
+        return False
 
-# 일치하는 문자열 판단 
-def is_substr(start_idx): 
-    n,m = len(text), len(target) 
+    for j in range(m):
+        # 하나라도 다르다면, 부분 문자열이 아니므로 false를 반환합니다.
+        if text[start_idx + j] != pattern[j]:
+            return False
 
-    # 만약 text 길이를 넘게 되면 false 
-    if start_idx + m - 1 >= n: 
-        return False 
-    # 하나라도 다르면 부분 문자열이 아님
-    for j in range(m): 
-        if text[start_idx+j] != target[j]: 
-            return False 
-    # 전부 일치하면 부분 문자열
-    return True 
+    # 전부 일치한다면 부분 문자열이므로 true를 반환합니다.
+    return True
 
-# 부분 문자열 위치를 return
-def find_idx(): 
-    n = len(text) 
-    for i in range(n): 
+# 부분 문자열의 위치를 찾아 반환합니다.
+def find_index():
+    n = len(text)
+    for i in range(n):
+        # i번째를 시작으로 부분 문자열이 된다면, 해당 위치를 반환합니다.
         if is_substr(i):
-            return i 
-    return -1 
-print(find_idx())
+            return i
+    # 없다면, -1을 반환합니다.
+    return -1
+print(find_index())
