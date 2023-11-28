@@ -1,14 +1,14 @@
 n,m = map(int,input().split()) 
-A = list(map(int,input().split())) 
-ans = 0
-while True: 
-    ans += A[int(m)-1]
+arr = [0] + list(map(int,input().split())) 
 
-    if m % 2 == 0: 
-        m /= 2 
-    elif m % 2 != 0: 
-        m -= 1 
-
-    if m == 1:
-        break 
-print(ans+A[0])
+def calc(): 
+    global m 
+    ans = 0 
+    while m: 
+        ans += arr[m] 
+        if m % 2 == 0: 
+            m //= 2 
+        else: 
+            m -= 1
+    return ans 
+print(calc())
