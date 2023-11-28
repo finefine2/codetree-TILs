@@ -9,4 +9,5 @@ def calc(n1,n2):
         n2 *= 2 
     return n1, n2 
 
-print(calc(a,b))
+a,b = calc(a,b) 
+print(a, b)
