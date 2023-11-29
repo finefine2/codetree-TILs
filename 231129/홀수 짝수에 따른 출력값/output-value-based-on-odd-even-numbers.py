@@ -5,5 +5,5 @@ def sum_num(n):
         return 1 
     if n == 2: 
         return 2 
-    return sum_num(n) + n 
+    return sum_num(n-2) + n 
 print(sum_num(N))
