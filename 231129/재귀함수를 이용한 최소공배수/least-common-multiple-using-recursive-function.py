@@ -8,8 +8,10 @@ def gcd(n1,n2):
 
 def lcm(n1,n2): 
     return (n1 * n2) // gcd(n1,n2) 
-
-ans = lcm(nums[0],nums[1]) 
-for i in range(1,len(nums)-1): 
-    ans = lcm(ans,nums[i+1])
-print(ans)
+if N == 1: 
+    print(nums[0]) 
+else: 
+    ans = lcm(nums[0],nums[1]) 
+    for i in range(1,len(nums)-1): 
+        ans = lcm(ans,nums[i+1])
+    print(ans)
