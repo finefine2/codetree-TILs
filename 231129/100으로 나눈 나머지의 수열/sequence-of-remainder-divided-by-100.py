@@ -1,11 +1,9 @@
 N = int(input()) 
 
-nums = [0] * 30 
-nums[0] = 2 
-nums[1] = 4  
-
-for i in range(len(nums)): 
-    if i >= 2:
-        nums[i] = (nums[i-1] * nums[i-2]) % 100
-
-print(nums[N-1])
+def get_num(n): 
+    if n == 1: 
+        return 2 
+    if n == 2: 
+        return 4 
+    return (get_num(n-1) * get_num(n-2)) % 100 
+print(get_num(N))
