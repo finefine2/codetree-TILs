@@ -10,5 +10,5 @@ while True:
 
     if d1 > num_of_days[m1-1]: 
         m1 += 1
-        d1 = 0
-print(ans)
+        d1 = 1
+print(ans+1)
