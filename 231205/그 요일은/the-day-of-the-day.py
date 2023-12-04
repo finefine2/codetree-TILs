@@ -46,7 +46,7 @@ target_idx = 0
 target_idx = check_idx(find_idx(A))
 
 ans = 0 
-for day in range(start,end): 
+for day in range(start,end+1): 
     if day % 7 == target_idx: 
         ans += 1 
 print(ans)
