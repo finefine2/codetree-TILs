@@ -9,7 +9,7 @@ people = []
 for _ in range(n): 
     n,h,w = input().split()
     people.append(Person(n,int(h),int(w)))
-people.sort(key=lambda x: -x.height)
+people.sort(key=lambda x: (x.height, -x.weight))
 
 for p in people: 
-    print(p.name, p.height, p.name)
+    print(p.name, p.height, p.weight)
