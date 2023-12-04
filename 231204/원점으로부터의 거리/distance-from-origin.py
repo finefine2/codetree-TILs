@@ -21,7 +21,7 @@ dist = []
 def get_dist_from_origin(x,y): 
     return abs(x) + abs(y) 
 
-for i in range(n): 
+for i in range(N): 
     x,y = map(int,input().split()) 
     dist.append((get_dist_from_origin(x,y), i+1))
 dist.sort() 
