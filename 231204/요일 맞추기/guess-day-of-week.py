@@ -10,30 +10,28 @@ dates= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
 m1,d1,m2,d2 = map(int,input().split())
 def count_num_days(m,d):
     passed_days = 0
-
     for i in range(m): 
-
         passed_days += day_list[i]
-
     return (passed_days + d) % 7 
 
-def print_ans(d1,d2): 
-    cnt_day = d1-d2
-    if cnt_day == 0: 
-        print("Mon")
-    elif cnt_day == 1: 
-        print("Sun")
-    elif cnt_day == 2: 
-        print("Sat")
-    elif cnt_day == 3: 
-        print("Fri")
-    elif cnt_day == 4: 
-        print("Thu")
-    elif cnt_day == -1: 
-        print("Wed")
-    elif cnt_day == -2: 
-        print("Tue")
+# 문제는 d1 이 0일 때 mon일수도 있고, 1일 때 mon일 수도 있다는 사실임 
 
+def print_ans(d1,d2): 
+    dates[d1] == "Mon"
+    if d2 == d1-1: 
+        print("Sun")
+    elif d2 == d1: 
+        print("Mon") 
+    elif d2 == d1 + 1:
+        print("Tue")
+    elif d2 == d1 + 2:
+        print("Wed")
+    elif d2 == d1 + 3:
+        print("Thu")
+    elif d2 == d1 + 4:
+        print("Fri")    
+    elif d2 == d1 + 5:
+        print("Sat")
 day1 = count_num_days(m1,d1)
 day2 = count_num_days(m2,d2)
 print_ans(day1,day2)
