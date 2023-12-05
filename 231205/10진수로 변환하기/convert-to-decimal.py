@@ -13,16 +13,24 @@ from binary number to decimal
 #     num = num * 2 + binary[i] 
 # print(num)
 
-n = int(input()) 
+# my solution 
+# n = int(input()) 
 
-n_str = str(n) 
-nums = []
+# n_str = str(n) 
+# nums = []
 
-for i in range(len(n_str)): 
-    nums.append(int(n_str[i]))
+# for i in range(len(n_str)): 
+#     nums.append(int(n_str[i]))
 
+# ans = 0 
+
+# for i in range(len(nums)): 
+#     ans = ans * 2 + nums[i] 
+# print(ans) 
+
+# given sol 
+binary = list(map(int,list(input())))
 ans = 0 
-
-for i in range(len(nums)): 
-    ans = ans * 2 + nums[i] 
+for i in range(len(binary)): 
+    ans = ans * 2 + binary[i] 
 print(ans)
