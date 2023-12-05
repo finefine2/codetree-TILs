@@ -14,16 +14,10 @@ def convert_binary(num):
             break 
         ans.append(num % 2) 
         num //= 2 
-        return ans[::-1] 
+    return ans
 
 dnum = convert_decimal(N)
 dnum *= 17 
-ans = [] 
-while True: 
-    if dnum < 2: 
-        ans.append(dnum)
-        break 
-    ans.append(dnum % 2) 
-    dnum //= 2
+ans = convert_binary(dnum)
 for a in ans[::-1]: 
     print(a,end="")
