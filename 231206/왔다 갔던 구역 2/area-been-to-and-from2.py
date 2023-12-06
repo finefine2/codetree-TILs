@@ -48,7 +48,7 @@ for _ in range(n):
         # 오른쪽으로 이동: cur ~ cur + dist까지 경로 이동 
         seg_left = curr
         seg_right = curr + dist 
-        cur += dist
+        curr += dist
     segments.append([seg_left,seg_right])
 checked = [0] * (1 + MAX_R) 
 
