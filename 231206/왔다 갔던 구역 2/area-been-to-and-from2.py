@@ -23,36 +23,44 @@
 #     if cnt[i+1] - cnt[i] == 1:
 #         ans += 1
 # print(ans)
-n = int(input())
 
-arr = []
+# 각 이동마다 시작 - 도착점을 각각 배열에 표시해야 
+# 그 후 원소 i에 대해 x1[i] ~ x2[i] 값까지 checked[] 에 표시
 
-#현재 위치
-loca = 1000
+OFFSET = 1000
+MAX_R = 2000 
 
-for _ in range(n):
-    a, b = input().split()
-    a = int(a)
-    if b == 'R':
-        right = loca + a
-        left = loca
-        loca += a
-            
-    elif b == 'L':
-        left = loca - a
-        right = loca
-        loca -= a
+n = int(input()) 
+segments = [] 
 
-    arr.append([left, right])
+curr =0 
 
-check = [0] * 10001
+for _ in range(n): 
+    dist, direc = input().split()
+    dist = int(dist) 
 
-for x1, x2 in arr:
-    for i in range(x1, x2):
-        check[i] += 1
+    if direc == "L": 
+        # 왼쪽으로 이동: cur - dist ~ cur 까지 경로 이동 
+        seg_left = curr - dist
+        seg_right = curr
+        cur -= dist 
+    else: 
+        # 오른쪽으로 이동: cur ~ cur + dist까지 경로 이동 
+        seg_left = curr
+        seg_right = curr + dist 
+        cur += dist
+    segments.append([seg_left,seg_right])
+checked = [0] * (1 + MAX_R) 
 
-cnt = 0
-for i in check:
-    if i >= 2:
-        cnt += 1
+for x1, x2 in segments: 
+    # OFFSET을 더해줌 
+    x1,x2 = x1 + OFFSET, x2 + OFFSET
+    # 구간을 칠한다 
+    for i in range(x1,x2): 
+        checked[i] += 1 
+# 2번 이상 지난 영역을 구함 
+cnt = 0 
+for c in checked: 
+    if c >= 2: 
+        cnt += 1 
 print(cnt)
