@@ -28,7 +28,7 @@ n = int(input())
 arr = []
 
 #현재 위치
-loca = 0
+loca = 1000
 
 for _ in range(n):
     a, b = input().split()
@@ -45,7 +45,7 @@ for _ in range(n):
 
     arr.append([left, right])
 
-check = [0] * 101
+check = [0] * 10001
 
 for x1, x2 in arr:
     for i in range(x1, x2):
