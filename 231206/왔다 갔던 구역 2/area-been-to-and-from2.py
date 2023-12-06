@@ -22,4 +22,4 @@ ans = 0
 for i in range(len(cnt)-1): 
     if cnt[i+1] - cnt[i] == 1:
         ans += 1
-print(ans)
+print(ans-1)
