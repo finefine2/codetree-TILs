@@ -43,7 +43,7 @@ for _ in range(n):
         # 왼쪽으로 이동: cur - dist ~ cur 까지 경로 이동 
         seg_left = curr - dist
         seg_right = curr
-        cur -= dist 
+        curr -= dist 
     else: 
         # 오른쪽으로 이동: cur ~ cur + dist까지 경로 이동 
         seg_left = curr
