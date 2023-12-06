@@ -15,7 +15,7 @@ for _ in range(N):
         start = start - x 
 cnt = [] 
 for i in range(len(lines)): 
-    if lines[i] > 1: 
+    if lines[i] >= 2: 
         cnt.append(i) 
 ans = 0 
 
