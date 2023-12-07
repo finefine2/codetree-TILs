@@ -6,8 +6,8 @@ rects = [[0] * MAX_R for _ in range(MAX_R)]
 for i in range(2): 
     x1,y1,x2,y2 = map(int,input().split())
     x1,y1,x2,y2 = x1+OFFSET,y1+OFFSET,x2+OFFSET,y2+OFFSET
-    for j in range(x1,x2+1):
-        for k in range(y1,y2+1): 
+    for j in range(x1,x2):
+        for k in range(y1,y2): 
             rects[j][k] = i + 1 
 cnt = []
 ans = 0 
@@ -29,4 +29,4 @@ else:
         max_x = max(x,max_x) 
         min_y = min(y,min_y) 
         max_y = max(y,max_y)
-    print((max_x-min_x) * (max_y-min_y))
+    print((max_x-min_x+1) * (max_y-min_y+1))
