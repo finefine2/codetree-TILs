@@ -13,18 +13,19 @@ for _ in range(N):
     
     # left --> white. let it be 1
     if d == "L": 
-        for i in range(start,start-x-1,-1): 
+        for i in range(start,start-x,-1): 
             lines[i] = 1
-        start = start - x
+        start = start - x +1
     # right --> black. let it be -1 
     elif d == "R":
-        for i in range(start,start+x+1): 
+        for i in range(start,start+x): 
             lines[i] = -1
-        start = start + x 
+        start = start + x -1
+
 ans1, ans2 = 0,0
 for l in lines:
     if l == 1: 
         ans1 += 1 
     elif l == -1: 
         ans2 += 1 
-print(ans1-1, ans2)
+print(ans1, ans2)
