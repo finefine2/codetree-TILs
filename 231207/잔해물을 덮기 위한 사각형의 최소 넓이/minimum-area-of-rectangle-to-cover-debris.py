@@ -18,9 +18,9 @@ for i in range(MAX_R):
             ans += 1
 
 min_x = 10000
-max_x = 0 
+max_x = -10000 
 min_y = 10000
-max_y = 0 
+max_y = -10000 
 for x,y in cnt: 
     if x < min_x:
         min_x = x 
