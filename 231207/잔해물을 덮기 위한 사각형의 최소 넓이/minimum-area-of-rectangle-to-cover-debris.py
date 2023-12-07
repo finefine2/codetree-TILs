@@ -22,12 +22,8 @@ max_x = -10000
 min_y = 10000
 max_y = -10000 
 for x,y in cnt: 
-    if x < min_x:
-        min_x = x 
-    if x > max_x: 
-        max_x = x 
-    if y < min_y: 
-        min_y = y 
-    if y > max_y: 
-        max_y = y 
+    min_x = min(x,min_x) 
+    max_x = max(x,max_x) 
+    min_y = min(y,min_y) 
+    max_y = max(y,max_y)
 print(abs(min_x-max_x) * abs(min_y - max_y))
