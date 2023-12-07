@@ -21,9 +21,12 @@ min_x = 10000
 max_x = -10000 
 min_y = 10000
 max_y = -10000 
-for x,y in cnt: 
-    min_x = min(x,min_x) 
-    max_x = max(x,max_x) 
-    min_y = min(y,min_y) 
-    max_y = max(y,max_y)
-print((max_x-min_x) * (max_y-min_y))
+if cnt == []:
+    print(0) 
+else:
+    for x,y in cnt: 
+        min_x = min(x,min_x) 
+        max_x = max(x,max_x) 
+        min_y = min(y,min_y) 
+        max_y = max(y,max_y)
+    print((max_x-min_x) * (max_y-min_y))
