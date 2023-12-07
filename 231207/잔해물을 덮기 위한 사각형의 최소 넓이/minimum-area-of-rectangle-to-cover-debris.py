@@ -17,9 +17,9 @@ for i in range(MAX_R):
             cnt.append([i,j]) 
             ans += 1
 
-min_x = 1000
+min_x = 10000
 max_x = 0 
-min_y = 1000
+min_y = 10000
 max_y = 0 
 for x,y in cnt: 
     if x < min_x:
