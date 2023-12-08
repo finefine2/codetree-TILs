@@ -31,8 +31,8 @@ count_num = [0] * (1+n)
 
 ans = -1 
 for target in penalized: 
-    penalized[target] += 1 
-    if penalized[target] >= k: 
+    count_num[target] += 1 
+    if count_num[target] >= k: 
         ans = target
         break 
 print(ans)
