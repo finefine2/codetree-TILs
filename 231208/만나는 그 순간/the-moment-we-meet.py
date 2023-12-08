@@ -1,52 +1,27 @@
+MAX_T = 100000
+
 n,m = map(int,input().split()) 
+pos_a, pos_b = [0] * (1+MAX_T), [0] * (1+MAX_T) 
 
-OFFSET = 100 
-
-A = [0] * OFFSET
-B = [0] * OFFSET
-
-'''
-idx  0 1 2 3 4 5 6 7 8 9 10 11 12 13
-A    0 1 2 3 4 5 6 7 8 9 8  7  6  7
-'''
-# A
-startA = 0
-cntA = 0
+# A 가 매 초마다 서있는 위치 기록
+time_a = 1
 for _ in range(n): 
     d,t = input().split() 
-    t = int(t) 
-
-    if d == "R": 
-        for i in range(startA,startA+t):
-            A[cntA] = i 
-            cntA += 1 
-        startA = startA + t 
-    elif d == "L":
-        for i in range(startA,startA-t,-1): 
-            A[cntA] = i 
-            cntA += 1 
-        startA = startA - t
-
-startB = 0 
-cntB = 0 
+    for _ in range(int(t)): 
+        pos_a[time_a] = pos_a[time_a-1] + (1 if d == "R" else -1)
+        time_a += 1 
+# B 가 매 초마다 서있는 위치 기록
+time_b = 1 
 for _ in range(m): 
     d,t = input().split() 
-    t = int(t) 
-    if d == "R": 
-        for i in range(startB,startB+t): 
-            B[cntB] = i 
-            cntB += 1 
-        startB = startB + t 
-    elif d == "L": 
-        for i in range(startB,startB-t,-1): 
-            B[cntB] = i 
-            cntB += 1 
-        startB = startB -t 
-ans = -1 
+    for _ in range(int(t)): 
+        pos_b[time_b] = pos_b[time_b-1] + (1 id d == "R" else -1) 
+        time_b += 1
 
-length = min(len(A),len(B))
-for t in range(1,length+1): 
-    if A[t] == B[t]: 
-        ans = t
+# 최초로 만난다 
+ans = -1 
+for i in range(1, time_a): 
+    if pos_a[i] == pos_b[i]: 
+        ans = i 
         break 
 print(ans)
