@@ -9,8 +9,8 @@ int main() {
     cin >> str;
     int len = str.length();
 
-    str = str.erase(len - 2, 1);
-    str = str.erase(1, 1);
+    str.erase(len - 2, 1);
+    str.erase(1, 1);
 
     cout << str;
 
