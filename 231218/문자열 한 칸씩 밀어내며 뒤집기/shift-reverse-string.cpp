@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,10 +23,8 @@ int main() {
             cout << str << endl;
         }
         else{
-            for (int i = str.length() -1; i>-1; i--){
-                str2 += str[i];
-            }
-            str = str2;
+            
+            reverse(str.begin(), str.end());
             cout << str << endl;
         }
     }
