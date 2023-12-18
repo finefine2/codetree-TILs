@@ -25,8 +25,12 @@ for i in range(len(pos_A)-1):
 
 ans = 0     
 
-
+# print(pos_A)
+# print(pos_B)
+# print(cnt)
 for i in range(len(cnt)-1): 
     if cnt[i] == 0 and cnt[i] != cnt[i+1]: 
         ans += 1 
+    elif cnt[i] * cnt[i+1] < 0: 
+        ans += 1
 print(ans)
