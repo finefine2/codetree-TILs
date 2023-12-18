@@ -1,5 +1,5 @@
 N,M = map(int,input().split()) 
-MAX_R = 50000
+MAX_R = 1000000
 pos_A = [0] * (MAX_R+1)
 pos_B = [0] * (MAX_R+1)
 
