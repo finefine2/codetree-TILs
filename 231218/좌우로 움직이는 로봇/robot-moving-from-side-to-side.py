@@ -31,11 +31,18 @@ for _ in range(M):
         for _ in range(t): 
             pos_B[time_b] = pos_B[time_b-1] + 1 
             time_b += 1 
-cnt = 0
 
-for i in range(1,len(pos_A)): 
+if time_a < time_b: 
+    for i in range(time_a, time_b): 
+        pos_A[i] = pos_A[i-1] 
+elif time_a > time_b: 
+    for i in range(time_b, time_a): 
+        pos_B[i] = pos_B[i-1]
+cnt = 0 
+t_max = max(time_a, time_b) 
+
+for i in range(1,t_max): 
     if pos_A[i-1] != pos_B[i-1] and pos_A[i] == pos_B[i]: 
-        # if pos_A[i-1] * pos_B[i-1] == 0 and pos_A[i] * pos_B[i] == 0: 
-        #     continue
+
         cnt += 1
 print(cnt)
