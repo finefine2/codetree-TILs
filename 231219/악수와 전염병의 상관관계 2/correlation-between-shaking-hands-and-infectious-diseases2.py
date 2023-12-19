@@ -42,16 +42,22 @@ orders.sort(key = lambda x: x[0])
 
 # 전체 악수 횟수를 카운팅하면 안 되고 각각의 사람들별로 악수횟수를 카운팅해야?
 cnt_list = [K] * N
+
 for i in range(T): 
-    t,x,y = orders[i][0], orders[i][1], orders[i][2] 
+    x,y = orders[i][1], orders[i][2] 
 
     if infects[x] == 0 and infects[y] == 0: 
         continue
     elif infects[x] == 1 and cnt_list[x] > 0:
         infects[y] = 1 
-        cnt_list[x] -= 1 
+        cnt_list[x] -= 1
+        cnt_list[y] -= 1 
     elif infects[y] == 1 and cnt_list[y] > 0: 
         infects[x] = 1 
+        cnt_list[x] -= 1
         cnt_list[y] -= 1
+    # print(i)
+    # print(infects)
+    # print(cnt_list)
 for i in infects: 
     print(i,end="")
