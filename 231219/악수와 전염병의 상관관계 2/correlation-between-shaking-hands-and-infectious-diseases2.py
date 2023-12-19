@@ -49,8 +49,10 @@ for i in range(T):
     if infects[x] == 1 and cnt_list[x] > 0:
         infects[y] = 1 
         cnt_list[x] -= 1
+        cnt_list[y] -= 1 
     elif infects[y] == 1 and cnt_list[y] > 0: 
         infects[x] = 1 
         cnt_list[x] -= 1
+        cnt_list[y] -= 1
 for i in infects: 
     print(i,end="")
