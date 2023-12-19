@@ -12,8 +12,8 @@ int main() {
     int n = 0;
     int len = a.length();
 
-    for (int i = 0; i < len+1; i++){
-        if (i == len){
+    for (int i = 0; i < len+2; i++){
+        if (i == len+1){
             cout << -1;
             break;
         }
