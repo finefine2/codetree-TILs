@@ -12,17 +12,19 @@ int main() {
     int n = 0;
     int len = a.length();
 
-    if (a == b) cout << 0;
-    else{
-
-        for (int i = 1; i < len+1; i++){
-            a = a.substr(1) + a.substr(0, 1);
-            if (a==b){
-                cout << i;
-                break;
-            }
+    for (int i = 0; i < len+1; i++){
+        if (i == len){
+            cout << -1;
+            break;
         }
+        if (a == b){
+            cout << i;
+            break;
+        }
+        a = a.substr(1) + a.substr(0, 1);
+        
     }
+    
 
     return 0;
 }
