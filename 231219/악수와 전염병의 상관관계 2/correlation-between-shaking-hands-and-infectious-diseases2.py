@@ -68,42 +68,48 @@
 배열의 시간을 오름차순으로 정렬 
 각 시간별로 악수한 두사람이 감염됐는지 체크하고, 각각의 전염 가능 횟수가 유효하면 상대를 전염 
 '''
-
-class Shake: 
-    def __init__(self, time, person1, person2): 
+# 클래스 선언
+class Shake:
+    def __init__(self, time, person1, person2):
         self.time, self.person1, self.person2 = time, person1, person2
 
-N, K, P, T = map(int,input().split()) 
+# 변수 선언 및 입력
+n, k, p, t = tuple(map(int, input().split()))	
 shakes = []
-for _ in range(T): 
-    time, person1, person2 = map(int,input().split()) 
-    shakes.append(Shake(time, person1, person2)) 
+for _ in range(t):
+    time, person1, person2 = tuple(map(int, input().split()))
+    shakes.append(Shake(time, person1, person2))
 
-shake_nums = [0] * (N+1) 
-infects = [False] * (N+1) 
+shake_num = [0] * (n + 1)
+infected = [False] * (n + 1)
 
-infects[P] = True 
+infected[p] = True
 
-# Custom Comparator를 이용한 정렬 
-shakes.sort(key = lambda x: x.time) 
-# 각 악수 횟수를 세서, K번 초과로 악수를 할 경우 전염시키지 않음 
-for shake in shakes: 
-    target1 = shake.person1
-    target2 = shake.person2
+# Custom Comparator를 활용한 정렬
+shakes.sort(key = lambda x: x.time)
 
-    # 감염되었으면 악수 횟수 증가 
-    if infects[target1]: 
-        shake_nums[target1] += 1 
-    if infects[target2]: 
-        shake_nums[target2] += 1 
-    # target1이 감염됐고 아직 악수를 K번 이하로 했다면 target2를 전염 
-    if shake_nums[target1] <= K and infects[target1]:
-        infects[target2] = True 
-
-    if shake_nums[target2] <= K and infects[target2]: 
-        infects[target2] = True 
-for i in range(1,N+1): 
-    if infects[i]: 
-        print(1,end="") 
-    else: 
-        print(0,end="")
+# 각 악수 횟수를 세서,
+# K번 초과로 악수를 했을 시 전염시키지 않습니다.
+for shake in shakes:
+	target1 = shake.person1
+	target2 = shake.person2
+	
+	# 감염되어 있을 경우 악수 횟수를 증가시킵니다.
+	if infected[target1]:
+		shake_num[target1] += 1
+	if infected[target2]:
+		shake_num[target2] += 1
+	
+	# target1이 감염되어 있고 아직 K번 이하로 악수했다면 target2를 전염시킵니다.
+	if shake_num[target1] <= k and infected[target1]:
+		infected[target2] = True
+	
+	# target2가 감염되어 있고 아직 K번 이하로 악수했다면 target1을 전염시킵니다.
+	if shake_num[target2] <= k and infected[target2]:
+		infected[target1] = True
+		
+for i in range(1, n + 1):
+	if infected[i]:
+		print(1, end="")
+	else:
+		print(0, end="")
