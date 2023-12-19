@@ -17,13 +17,20 @@ int main() {
             cout << -1;
             break;
         }
+        a = a.substr(len-1, 1) + a.substr(0, len-1);
         if (a == b){
-            cout << i;
+            cout << i+1;
             break;
         }
-        a = a.substr(1) + a.substr(0, 1);
         
     }
+    // abcdef
+    // fabcde
+    // efabcd
+    // defabc
+    // cdefab
+    // bcdefa
+    // abcdef
     
 
     return 0;
