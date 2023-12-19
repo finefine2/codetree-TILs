@@ -12,8 +12,8 @@ int main() {
     int n = 0;
     int len = a.length();
 
-    for (int i = 0; i < len+2; i++){
-        if (i == len+1){
+    for (int i = 0; i < len+1; i++){
+        if (i == len){
             cout << -1;
             break;
         }
@@ -23,15 +23,7 @@ int main() {
             break;
         }
         
-    }
-    // abcdef
-    // fabcde
-    // efabcd
-    // defabc
-    // cdefab
-    // bcdefa
-    // abcdef
-    
+    }    
 
     return 0;
 }
