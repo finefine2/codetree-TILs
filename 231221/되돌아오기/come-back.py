@@ -21,12 +21,6 @@ for _ in range(N):
         c += dcs[move_d] 
         t += 1
         
-        # print(t) 
-        # print(d) 
-        # print(move_d)
-        # print(drs[move_d], dcs[move_d])
-        # print(r,c) 
-        # print("###############")
         if r == 0 and c == 0:
             ans = t
             break 
