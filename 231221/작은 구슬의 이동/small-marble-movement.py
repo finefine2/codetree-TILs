@@ -15,7 +15,7 @@ dirs['U'] = [-1,0]
 dirs['D'] = [1,0]
 
 def in_range(r,c): 
-    return 0 <= r < N and 0 <= c < N 
+    return 0 <= r < N and 0 <= c < N
 
 def reverse_d(d): 
     if d == "L":
@@ -23,15 +23,13 @@ def reverse_d(d):
     elif d == "R": 
         d = "L"
     elif d == "U": 
-        d == "D" 
+        d = "D" 
     elif d == "D":
-        d == "U"
+        d = "U"
     return d 
 t = 0 
-
 while t < T: 
     board[r][c] = 1 
-
     nr,nc = r + dirs[d][0], c + dirs[d][1] 
     if in_range(nr,nc) and board[nr][nc] == 0:
         board[nr][nc] = 1 
@@ -39,7 +37,6 @@ while t < T:
         r,c = nr,nc 
         t += 1 
     elif not in_range(nr,nc):
-        board[r][c] = 1
         d = reverse_d(d) 
         t += 1
 print(r+1, c+1)
