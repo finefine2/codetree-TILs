@@ -40,7 +40,7 @@ def close_cnt(r,c):
     cnt = 0 
     for dr, dc in zip(drs, dcs): 
         nr,nc = r + dr, c + dc 
-        if in_range(nr,nc) and board[nr][nc] = 1: 
+        if in_range(nr,nc) and board[nr][nc] == 1: 
             cnt += 1
     return cnt 
 
