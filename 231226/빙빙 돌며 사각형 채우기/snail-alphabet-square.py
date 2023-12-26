@@ -12,7 +12,7 @@ def in_range(r,c):
 
 def num_to_alpha(num): 
     ans = ""
-    if num < 26: 
+    if num <= 26: 
         ans = chr(65+num-1) 
     else: 
         ans = chr(65+num-26-1) 
