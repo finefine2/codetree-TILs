@@ -15,11 +15,11 @@ visited[r][c] = True
 for s in s_in: 
     if s == "F": 
         nr,nc = r + drs[dir_num], c + dcs[dir_num]
-        if in_range(nr,nc) and not visited[nr][nc]:
+        if not in_range(nr,nc):
+            continue
+        else: 
             r,c = nr,nc 
             ans += board[r][c]
-        else: 
-            r,c = r,c 
     elif s == "L": 
         dir_num = (dir_num-1) % 4 
     elif s == "R": 
