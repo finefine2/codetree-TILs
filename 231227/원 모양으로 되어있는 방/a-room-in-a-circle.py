@@ -35,6 +35,6 @@ for i in range(N):
     for j in range(N): 
         # N보다 커질 경우를 대비해서 이처럼 진행한듯? 
         dist = (j+N-i) % N 
-        sum_dist += dist * arr[i] 
+        sum_dist += dist * arr[j] 
     min_dist = min(min_dist,sum_dist)
 print(min_dist)
