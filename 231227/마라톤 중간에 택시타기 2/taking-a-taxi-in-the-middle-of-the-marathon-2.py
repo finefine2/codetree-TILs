@@ -1,17 +1,16 @@
-n = int(input())
-arr = [list(map(int, input().split())) for _ in range(n)]
+# 처음, 마지막 포인트를 제외한 나머지 포인트를 순서대로 건너뛰었을 때 거리 계산
+N = int(input()) 
+arr = [list(map(int,input().split())) for _ in range(N)] 
 
-def distance(x1,y1,x2,y2):
-    return abs(x1-x2) + abs(y1-y2)
+ans = 1e9 
 
-total = 0
-for i in range(n-1):
-    total += distance(arr[i][0], arr[i][1], arr[i+1][0], arr[i+1][1])
-
-result = float("inf")
-for i in range(1, n-1): #하나를 건너뛰는 포인트
-    check = total - distance(arr[i-1][0], arr[i-1][1], arr[i][0], arr[i][1])\
-    - distance(arr[i][0], arr[i][1], arr[i+1][0], arr[i+1][1])\
-    + distance(arr[i-1][0], arr[i-1][1], arr[i+1][0], arr[i+1][1])
-    result = min(result, check)
-print(result)
+for i in range(1,N-1): 
+    dist = 0 
+    prev_idx = 0 
+    for j in range(1,N): 
+        if i == j: 
+            continue 
+        dist += abs(arr[prev_idx][0] - arr[j][0]) + abs(arr[prev_idx][1]-arr[j][1]) 
+        prev_idx = j 
+    ans = min(ans,dist) 
+print(ans)
