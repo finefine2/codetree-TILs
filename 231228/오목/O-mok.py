@@ -1,51 +1,35 @@
-board = [list(map(int,input().split())) for _ in range(19)] 
-# D R 우대각 좌대각 
-drs = [1,0,1,1]
-dcs = [0,1,1,-1]
-flag = False
-for i in range(len(board)-4): 
-    for j in range(len(board[0])-4):
-        if board[i][j] != 0:  
-            if board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j] and board[i+3][j] == board[i+4][j]: 
-                ans1 = board[i][j] 
-                ans2 = i+3
-                ans3 = j+1
-                flag = True
-                # print(board[i][j])
-                # print(i+3, j+1)
-                break 
-            elif board[i][j] == board[i][j+1] and board[i][j+1] == board[i][j+2] and board[i][j+2] == board[i][j+3] and board[i][j+3] == board[i][j+4]: 
-                ans1 = board[i][j]
-                ans2 = i+1
-                ans3 = j+3
-                flag = True
-                # print(board[i][j])
-                # print(i+1, j+3)
-                break 
-            elif board[i][j] == board[i+1][j+1] and board[i+1][j+1] == board[i+2][j+2] and board[i+2][j+2] == board[i+3][j+3] and board[i+3][j+3] == board[i+4][j+4]:
-                ans1 = board[i][j] 
-                ans2 = i+3 
-                ans3 = j+3
-                flag = True
-                # print(board[i][j]) 
-                # print(i+3, j+3) 
-                break 
-            elif board[i][j] == board[i+1][j-1] and board[i+1][j-1] == board[i+2][j-2] and board[i+2][j-2] == board[i+3][j-3] and board[i+3][j-3] == board[i+4][j-4]: 
-                ans1 = board[i][j] 
-                ans2 = i+3
-                ans3 = j-1
-                flag = True
-                # print(board[i][j]) 
-                # print(i+3, j-1)
-                break
-for j in range(len(board)): 
-    if board[18][j] == board[18][j+1] and board[18][j+1] == board[18][j+2] and board[18][j+2] == board[18][j+3] and board[18][j+3] == board[18][j+4]:
-        flag = True
-        ans1 = board[18][j+2] 
-        ans2 = 19
-        ans3 = j+3        
-if flag: 
-    print(ans1)
-    print(ans2, ans3) 
-else: 
+N = 19
+board = [list(map(int, input().split())) for _ in range(N)]
+
+
+def in_range(x, y):
+    return 0 <= x and x < N and 0 <= y and y < N
+
+
+def check_win(x, y, dx, dy, current):
+    for k in range(1, 5):
+        nx, ny = x + k * dx, y + k * dy
+        if not in_range(nx, ny) or board[nx][ny] != current:
+            return False
+    
+    return True
+
+
+def find_winner():
+    for x in range(N):
+        for y in range(N):
+            if board[x][y] == 1 or board[x][y] == 2:
+                dxs, dys = [0, 1, 1, 1], [1, 0, 1, -1]
+                for dx, dy in zip(dxs, dys):
+                    if check_win(x, y, dx, dy, board[x][y]):
+                        return board[x][y], x + dx * 2, y + dy * 2
+    
+    return 0, None, None
+
+
+winner, x, y = find_winner()
+if winner:
+    print(winner)
+    print(x + 1, y + 1)
+else:
     print(0)
