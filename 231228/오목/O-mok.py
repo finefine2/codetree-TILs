@@ -18,12 +18,12 @@ for i in range(19):
                 nr,nc = cur_r + dr, cur_c + dc
                 if not in_range(nr,nc):
                     break 
-                if board[nr][nc] != board[cur_r][cur_c]: 
+                if board[nr][nc] != board[i][j]: 
                     break 
                 curt += 1 
                 cur_r, cur_c = nr,nc
             if curt == 5: 
                 print(board[i][j]) 
-                print(i + 2 * dr + 1, 2 * dc + 1) 
+                print(i + 2 * dr + 1, j + 2 * dc + 1) 
                 exit() 
 print(0)
