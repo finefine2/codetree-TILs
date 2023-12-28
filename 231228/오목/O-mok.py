@@ -3,7 +3,7 @@ board = [list(map(int,input().split())) for _ in range(19)]
 drs = [1,0,1,1]
 dcs = [0,1,1,-1]
 flag = False
-for i in range(len(board)): 
+for i in range(len(board)-4): 
     for j in range(len(board[0])-4):
         if board[i][j] != 0:  
             if board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j] and board[i+3][j] == board[i+4][j]: 
