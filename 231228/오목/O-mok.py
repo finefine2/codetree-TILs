@@ -1,35 +1,29 @@
-N = 19
-board = [list(map(int, input().split())) for _ in range(N)]
+board = [list(map(int,input().split())) for _ in range(19)] 
 
+def in_range(r,c): 
+    return 0 <= r < 19 and 0 <= c < 19 
 
-def in_range(x, y):
-    return 0 <= x and x < N and 0 <= y and y < N
+drs,dcs = [1,1,1,-1,-1,-1,0,0], [-1,0,1,-1,0,1,-1,1]
 
-
-def check_win(x, y, dx, dy, current):
-    for k in range(1, 5):
-        nx, ny = x + k * dx, y + k * dy
-        if not in_range(nx, ny) or board[nx][ny] != current:
-            return False
-    
-    return True
-
-
-def find_winner():
-    for x in range(N):
-        for y in range(N):
-            if board[x][y] == 1 or board[x][y] == 2:
-                dxs, dys = [0, 1, 1, 1], [1, 0, 1, -1]
-                for dx, dy in zip(dxs, dys):
-                    if check_win(x, y, dx, dy, board[x][y]):
-                        return board[x][y], x + dx * 2, y + dy * 2
-    
-    return 0, None, None
-
-
-winner, x, y = find_winner()
-if winner:
-    print(winner)
-    print(x + 1, y + 1)
-else:
-    print(0)
+# 모든 좌표 순회 
+for i in range(19): 
+    for j in range(19): 
+        if board[i][j] == 0: 
+            continue 
+        for dr,dc in zip(drs,dcs): 
+            curt = 1 
+            cur_r = i 
+            cur_c = j 
+            while True: 
+                nr,nc = cur_r + dr, cur_c + dc
+                if not in_range(nr,nc):
+                    break 
+                if board[nr][nc] != board[cur_r][cur_c]: 
+                    break 
+                curt += 1 
+                cur_r, cur_c = nr,nc
+            if curt == 5: 
+                print(board[i][j]) 
+                print(i + 2 * dr + 1, 2 * dc + 1) 
+                exit() 
+print(0)
