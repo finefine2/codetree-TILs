@@ -1,4 +1,7 @@
 board = [list(map(int,input().split())) for _ in range(19)] 
+# D R 우대각 좌대각 
+drs = [1,0,1,1]
+dcs = [0,1,1,-1]
 
 for i in range(len(board)-4): 
     for j in range(len(board[0])-4):
@@ -14,4 +17,8 @@ for i in range(len(board)-4):
             elif board[i][j] == board[i+1][j+1] and board[i+1][j+1] == board[i+2][j+2] and board[i+2][j+2] == board[i+3][j+3] and board[i+3][j+3] == board[i+4][j+4]:
                 print(board[i][j]) 
                 print(i+3, j+3) 
+                break 
+            elif board[i][j] == board[i+1][j-1] and board[i+1][j-1] == board[i+2][j-2] and board[i+2][j-2] == board[i+3][j-3] and board[i+3][j-3] == board[i+4][j-4]: 
+                print(board[i][j]) 
+                print(i+3, j-1)
                 break
