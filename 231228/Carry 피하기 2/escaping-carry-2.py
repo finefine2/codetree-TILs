@@ -16,7 +16,7 @@ def carry(a,b,c):
     else: 
         return False
 
-ans = -1e9 
+ans = -1
 # 완탐 돌리기 
 for i in range(N): 
     for j in range(i+1,N):
