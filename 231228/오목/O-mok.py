@@ -38,6 +38,12 @@ for i in range(len(board)-4):
                 # print(board[i][j]) 
                 # print(i+3, j-1)
                 break
+for j in range(len(board)): 
+    if board[18][j] == board[18][j+1] and board[18][j+1] == board[18][j+2] and board[18][j+2] == board[18][j+3] and board[18][j+3] == board[18][j+4]:
+        flag = True
+        ans1 = board[18][j+2] 
+        ans2 = 19
+        ans3 = j+3        
 if flag: 
     print(ans1)
     print(ans2, ans3) 
