@@ -15,7 +15,7 @@ nums = list(map(int,input().split()))
 cnt = 0 
 
 for i in range(N): 
-    for j in range(i+1,N):
+    for j in range(i,N):
         # if i == j: 
         #     cnt += 1
         # else: 
