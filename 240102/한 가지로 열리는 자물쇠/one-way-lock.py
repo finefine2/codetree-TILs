@@ -1,15 +1,16 @@
-N = int(input()) 
-a,b,c = map(int,input().split())
+# 변수 선언 및 입력
+n = int(input())
+a, b, c = tuple(map(int, input().split()))
+
+
+# 모든 조합을 다 만들어 봅니다.
 cnt = 0
-def check_num(n,a,b,c): 
-    if abs(n-a) <= 2 or abs(n-b) <= 2 or abs(n-c) <= 2: 
-        return True 
-for i in range(1,N+1): 
-    for j in range(1,N+1): 
-        for k in range(1,N+1): 
-            if check_num(i,a,b,c) or check_num(j,a,b,c) or check_num(k,a,b,c): 
-                continue
-            else: 
-                cnt += 1 
-total = pow(N,3)
-print(total-cnt)
+for i in range(1, n + 1):
+    for j in range(1, n + 1):
+        for k in range(1, n + 1):
+            # 한 자리라도 주어진 조합과의 거리가 2 이내인지 확인합니다.
+            if abs(a - i) <= 2 or abs(b - j) <= 2 or \
+               abs(c - k) <= 2:
+                cnt += 1
+
+print(cnt)
