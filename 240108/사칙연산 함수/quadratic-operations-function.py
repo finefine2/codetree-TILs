@@ -7,7 +7,7 @@ if b == '-':
     print(f"{a} - {c} = {int(a) - int(c)}")
 
 if b == '/':
-    print(f"{a} / {c} = {int(a) / int(c)}")
+    print(f"{a} / {c} = {int(a) // int(c)}")
 
 if b == '*':
     print(f"{a} * {c} = {int(a) * int(c)}")
