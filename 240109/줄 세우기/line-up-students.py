@@ -11,7 +11,7 @@ for i in range(n):
     height, weight = tuple(map(int, input().split()))
     user.append(User(height, weight, i+1))
 
-user.sort(key=lambda x: (-x.height, -x.weight, -x.num))
+user.sort(key=lambda x: (-x.height, -x.weight, x.num))
 
 for i in range(n):
     print(f"{user[i].height} {user[i].weight} {user[i].num}")
