@@ -2,16 +2,16 @@ n = int(input())
 
 arr = [0] * 6010
 
-idx = 0
-for i in range(n):
+idx = 3000
+for _ in range(n):
     a, b = map(str, input().split())
     if b == 'R':
         for i in range(idx, idx + int(a)):
-            arr[i+1000] += 1
+            arr[i] += 1
         idx += int(a)
     else:
-        for i in range(idx, idx - int(a), -1):
-            arr[i+1000] += 1
+        for i in range(idx-int(a), idx):
+            arr[i] += 1
         idx -= int(a)
 
 ans = 0
