@@ -10,7 +10,7 @@ n = int(input())
 user = []
 for i in range(n):
     x, y = tuple(map(int, input().split()))
-    user.append(User(x, y, (x+y), i+1))
+    user.append(User(x, y, abs(x) + abs(y), i+1))
 
 user.sort(key=lambda x: x.z)
 
