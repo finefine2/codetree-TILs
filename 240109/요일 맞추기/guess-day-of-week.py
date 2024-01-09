@@ -8,14 +8,15 @@ if a == c:
 elif a > c:
     for i in range(c, a):
         b += arr[i]
-    b += 1
+    # b += 1
     ans = b - d
 else:
     for i in range(a, c):
         d += arr[i]
-    d += 1
+    # d += 1
     ans = d - b
 
 day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
+# print(ans)
 print(day[ans % 7])
