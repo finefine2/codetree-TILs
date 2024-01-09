@@ -1,4 +1,4 @@
-arr = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+arr = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 a, b, c, d = map(int, input().split())
@@ -19,8 +19,8 @@ for i in range(a, c):
 ans += d - b
 
 # 5
-num = ans // 7 + 1
-if ans % 7 <= idx:
+num = (ans // 7)
+if ans % 7 >= idx+1:
     num += 1
 
 print(num)
