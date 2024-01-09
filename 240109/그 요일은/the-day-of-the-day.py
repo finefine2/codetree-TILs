@@ -19,7 +19,7 @@ for i in range(a, c):
 ans += d - b
 
 # 5
-num = ans // 7
+num = ans // 7 + 1
 if ans % 7 <= idx:
     num += 1
 
