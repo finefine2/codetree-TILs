@@ -1,6 +1,6 @@
 n = int(input())
 
-arr = [0] * (n+5)
+arr = [0] * (105)
 
 for i in range(n):
     a, b = map(int, input().split())
