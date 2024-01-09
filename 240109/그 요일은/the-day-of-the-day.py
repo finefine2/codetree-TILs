@@ -20,7 +20,7 @@ ans += d - b
 
 # 5
 num = (ans // 7)
-if ans % 7 >= idx+1:
+if ans % 7 >= idx:
     num += 1
 
 print(num)
