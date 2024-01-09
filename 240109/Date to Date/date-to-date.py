@@ -7,5 +7,6 @@ if a == c:
     print(d - b + 1)
 else:
     for i in range(a, c):
-        d += arr[i] + 1
+        d += arr[i]
+    d += 1
     print(d - b)
