@@ -1,29 +1,29 @@
-# 각각 크기가 3인 1차원 배열로 관리한다고 생각을 한다 
-# a가 생각할 숫자들을 고른 뒤, 각 위치에 있는 숫자들에 대해 b에 그 숫자가 있는지 확인
-# 존재하면, 그 위치가 같은지 다른지에 따라 각각 값을 count 
+N = int(input()) 
+nums = []
+for _ in range(N): 
+    num, c1, c2 = map(int,input().split()) 
+    num = list(map(int,str(num))) 
+    nums.append([num[0],num[1],num[2],c1,c2])
 
-def check(s,nums): 
-    if s[0] == s[1] or s[0] == s[2] or s[1] == s[2]: 
-        return False 
-    for num in nums: 
-        cnt1, cnt2 = 0,0
-        for i in range(3): 
-            if s[i] == num[0][i]: 
-                cnt1 += 1
-            elif s[i] in num[0]: 
-                cnt2 += 1 
-        if cnt1 != num[1] or cnt2 != num[2]: 
-            return False 
-    return True 
-
-N = int(input())
-numbers = [] 
-for i in range(N): 
-    numbers.append(list(map(int,input().split()))) 
-    numbers[-1][0] = str(numbers[-1][0]) 
 cnt = 0 
-
-for i in range(123,999): 
-    if check(str(i),numbers): 
-        cnt += 1
+for i in range(1,10): 
+    for j in range(1,10): 
+        for k in range(1,10): 
+            if i == j or j == k or i == k: 
+                continue 
+            flag = True 
+            for num in nums: 
+                cnt1, cnt2 = 0,0 
+                tmp = [i,j,k] 
+                for l in range(3): 
+                    for q in range(3): 
+                        if num[l] == tmp[q]: 
+                            if l == q: 
+                                cnt1 += 1 
+                            else: 
+                                cnt2 += 1
+                if cnt1 != num[3] or cnt2 != num[4]: 
+                    flag = False 
+            if flag: 
+                cnt += 1 
 print(cnt)
