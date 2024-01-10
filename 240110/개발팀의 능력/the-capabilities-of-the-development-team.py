@@ -1,0 +1,21 @@
+nums =list(map(int,input().split())) 
+N = len(nums) 
+total = sum(nums)
+flag = False 
+min_ans = 1e9 
+for i in range(N): 
+    for j in range(i+1,N): 
+        for k in range(j+1,N): 
+            sum1 = nums[i] 
+            sum2 = nums[j] + nums[k] 
+            sum3 = total - sum1 - sum2 
+            
+            if sum1 != sum2 and sum2 != sum3 and sum3 != sum1: 
+                min_ans = min(min_ans,max(sum1,sum2,sum3)-min(sum1,sum2,sum3))
+                flag = True 
+            else: 
+                flag = False 
+if flag:
+    print(min_ans)
+else:
+    print(-1)
