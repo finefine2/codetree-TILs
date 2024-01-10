@@ -13,8 +13,7 @@ for i in range(N):
             if sum1 != sum2 and sum2 != sum3 and sum3 != sum1: 
                 min_ans = min(min_ans,max(sum1,sum2,sum3)-min(sum1,sum2,sum3))
                 flag = True 
-            else: 
-                flag = False 
+
 if flag:
     print(min_ans)
 else:
