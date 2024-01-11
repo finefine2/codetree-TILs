@@ -10,6 +10,7 @@ for i in range(n):
     if i == 0:
         arr.append(a)
         num = a
+        cnt = 1
     else:
         arr.append(a)
         if num == a:
