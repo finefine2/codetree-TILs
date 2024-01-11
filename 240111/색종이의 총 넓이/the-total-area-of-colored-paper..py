@@ -1,17 +1,17 @@
 n = int(input())
 
-arr = [[0] * 200 for _ in range(200)]
+arr = [[0] * 400 for _ in range(400)]
 
 for _ in range(n):
     a, b = map(int, input().split())
-    for i in range(4):
-        for j in range(4):
-            arr[i+100][j+100] = 1
+    for i in range(8):
+        for j in range(8):
+            arr[a+i+100][b+j+100] = 1
 
 ans = 0
-for i in range(200):
-    for j in range(200):
+for i in range(320):
+    for j in range(320):
         if arr[i][j] == 1:
-            ans += 8
+            ans += 1
 
 print(ans)
