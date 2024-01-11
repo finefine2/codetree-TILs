@@ -18,16 +18,16 @@ Minx = 3000
 Miny = 3000
 Maxx = -1000
 Maxy = -1000
-for i in range(2020):
-    for j in range(2020):
-        if arr[i+1000][j+1000] == 1:
-            if i+1000 <= Minx and j+1000 <= Miny:
-                Minx = i + 1000
-                Miny = j + 1000
+for i in range(3020):
+    for j in range(3020):
+        if arr[i][j] == 1:
+            if i <= Minx and j <= Miny:
+                Minx = i 
+                Miny = j 
                 # print(Minx, Miny)
-            if i + 1000 >= Maxx and j + 1000 >= Maxy:
-                Maxx = i + 1000
-                Maxy = j + 1000
+            if i >= Maxx and j >= Maxy:
+                Maxx = i
+                Maxy = j
                 # print(Maxx, Maxy)
 
 # print(Maxx, Maxy, Minx, Miny)
