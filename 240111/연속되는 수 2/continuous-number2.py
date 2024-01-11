@@ -20,4 +20,7 @@ for i in range(n):
             num = a
             cnt = 1
 
-print(Max)
+if n == 1:
+    print(1)
+else:
+    print(Max)
