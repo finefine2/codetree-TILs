@@ -11,19 +11,25 @@ for _ in range(n):
     if b == 'R':
         for i in range(idx, idx + int(a)):
             arr2[i] += 1
-            color[i] = -1
-        idx += int(a)
+            if arr1[i] >= 2 and arr2[i] >= 2:
+                color[i] = 5
+            else:
+                color[i] = -1
+        idx += int(a)-1
     else:
-        for i in range(idx - int(a), idx):
+        for i in range(idx - int(a) + 1, idx+1):
             arr1[i] += 1
-            color[i] = 1
-        idx -= int(a)
+            if arr1[i] >= 2 and arr2[i] >= 2:
+                color[i] = 5
+            else:
+                color[i] = 1
+        idx -= int(a)-1
 
 white = 0
 black = 0
 gray = 0
-for i in range(200000):
-    if arr1[i] >= 2 and arr2[i] >= 2:
+for i in range(len(color)):
+    if color[i] == 5:
         gray += 1
     elif color[i] == 1:
         white += 1
@@ -31,3 +37,9 @@ for i in range(200000):
         black += 1
 
 print(white, black, gray)
+
+# for i in range(99990,100010):
+#     print(arr1[i], end = " ")
+
+# for i in range(99990,100010):
+#     print(arr2[i], end = " ")
