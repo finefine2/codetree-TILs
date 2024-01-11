@@ -31,4 +31,7 @@ for i in range(3020):
                 # print(Maxx, Maxy)
 
 # print(Maxx, Maxy, Minx, Miny)
-print((Maxx - Minx + 1) * (Maxy - Miny + 1))
+if Maxx == -1000 and Maxy == -1000 and Minx == 3000 and Miny == 3000:
+    print(0)
+else:
+    print((Maxx - Minx + 1) * (Maxy - Miny + 1))
