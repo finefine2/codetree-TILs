@@ -16,17 +16,38 @@ for i in range(m):
     b += x*y
 
 one = False
+same = False
 cnt = 1
 for i in range(max(len(arr1), len(arr2))):
     if i == 0:
-        if arr1[i] >= arr2[i]:
+        if arr1[i] > arr2[i]:
             one = True
+            same = False
+        elif arr1[i] == arr2[i]:
+            one = False
+            same = True
         else:
             one = False
+            same = False
     else:
-        if arr1[i] >= arr2[i] and not one:
+        if arr1[i] > arr2[i] and not one:
             cnt += 1
+            one = True
+            same = False
         elif arr1[i] < arr2[i] and one:
             cnt += 1
+            one = False
+            same = False
+        elif arr1[i] == arr2[i] and not same:
+            cnt += 1
+            one = False
+            same = True
+        if arr1[i] != arr2[i] and same:
+            cnt += 1
+            if arr1[i] > arr2[i]:
+                one = True
+            elif arr1[i] < arr2[i]:
+                two = True
+            same = False
 
 print(cnt)
