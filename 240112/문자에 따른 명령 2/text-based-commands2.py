@@ -15,7 +15,7 @@ for k in st:
         # x += dx[(i+1) % 3]
         # y += dx[(i+1) % 3]
     else:
-        x += dx[i % 3]
-        y += dy[i % 3]
+        x += dx[i]
+        y += dy[i]
 
 print(x, y)
