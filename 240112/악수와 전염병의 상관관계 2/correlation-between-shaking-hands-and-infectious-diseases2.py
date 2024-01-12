@@ -12,7 +12,7 @@ for i in range(t):
     hands.append(hand(t, x, y))
 
 arr = [0] * (n+1)
-check = [0] * (n+1)
+check = [False] * (n+1)
 
 hands.sort(lambda x : x.time)
 check[p] = True
@@ -30,7 +30,7 @@ for h in hands:
     if arr[bb] <= k and check[bb]:
         check[aa] = True
     
-for i in range(1, n):
+for i in range(1, n+1):
     if check[i]:
         print(1, end = "")
     else:
