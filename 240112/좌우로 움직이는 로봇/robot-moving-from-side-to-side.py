@@ -29,7 +29,7 @@ for i in range(n):
         b += x
 cnt = 0
 
-if len(arr1) >= 1:
+if len(arr1) > 1:
     for i in range(1, len(arr1)):
         if arr1[i] == arr2[i]:
             cnt += 1
