@@ -34,7 +34,7 @@ for i in range(1, max(len(arr2), len(arr1))):
         k = arr1[len(arr1) - 1]
         if k == arr2[i]:
             cnt += 1
-    elif i >= len(arr1):
+    elif i >= len(arr2):
         k = arr2[len(arr2) - 1]
         if k == arr1[i]:
             cnt += 1
