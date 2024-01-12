@@ -8,11 +8,11 @@ for i in range(n):
     x, y = map(str, input().split())
     x = int(x)
     if y == 'L':
-        for j in range(x):
+        for j in range(1,x+1):
             arr1.append(a - j)
         a -= x
     else:
-        for j in range(x):
+        for j in range(1,x+1):
             arr1.append(a + j)
         a += x
 b = 0
@@ -20,11 +20,11 @@ for i in range(m):
     x, y = map(str, input().split())
     x = int(x)
     if y == 'L':
-        for j in range(x):
+        for j in range(1,x+1):
             arr2.append(b - j)
         b -= x
     else:
-        for j in range(x):
+        for j in range(1,x+1):
             arr2.append(b + j)
         b += x
 cnt = 0
