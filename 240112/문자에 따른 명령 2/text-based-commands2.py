@@ -14,7 +14,7 @@ for k in st:
         i = (i + 1) % 4
         # x += dx[(i+1) % 3]
         # y += dx[(i+1) % 3]
-    elif k == 'F':
+    else:
         x += dx[i % 3]
         y += dy[i % 3]
 
