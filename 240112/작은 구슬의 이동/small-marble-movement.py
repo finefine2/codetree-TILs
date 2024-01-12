@@ -3,7 +3,7 @@ n, t = map(int, input().split())
 r, c, d = map(str, input().split())
 
 dx = [0,1,-1,0]
-dy = [1,0,,0,-1]
+dy = [1,0,0,-1]
 
 
 dir = {'R' : 0, 'D': 1, 'U' : 2, 'L': 3}
