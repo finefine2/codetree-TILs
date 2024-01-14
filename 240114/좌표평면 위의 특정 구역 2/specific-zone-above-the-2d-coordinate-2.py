@@ -1,6 +1,6 @@
 N = int(input()) 
 
-ans = 1e9 
+ans = 1e12
 points = [] 
 for _ in range(N): 
     r,c = map(int,input().split()) 
