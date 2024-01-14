@@ -1,25 +1,25 @@
-n,b = map(int,input().split())
+import sys
 
-prices = [
-    int(input())
-    for _ in range(n)
-]
+max_ = -sys.maxsize
 
-prices = sorted(prices) #오름차순으로 정렬해서 가격이 적은 것부터..!
+N, B = map(int, input().split())
+presents = sorted([int(input()) for _ in range(N)])
 
-cnt = 0
-chance = 0
-
-for price in prices:
-    if b < price:
-        if chance:
-            if price//2 <= b:
-                b -= price//2
-                cnt+=1
+# 반 값으로 할인 받는 선물
+for i in range(N):
+    cnt = 0
+    budget = 0
+    for j in range(N): # 나머지 선물
+        if j == i:
+            budget += presents[j] // 2
+            if budget >= B:
+                continue
+            cnt += 1
         else:
-            break #다음 가격보다 작으면 종료
-    else:
-        b -= price
-        cnt+=1
+            budget += presents[j]
+            if budget >= B:
+                continue
+            cnt += 1
 
-print(cnt+1)
+    max_ = max(max_, cnt)
+print(max_)
