@@ -13,7 +13,7 @@ for i in range(N):
     for j in range(N): 
         if j == i: 
             continue 
-        if (lines[i][0] <= lines[j][0] and lines[i][1] >= lines[j][1]) or (lines[i][0] >= lines[i][1] and lines[i][1] <= lines[j][1]): 
+        if (lines[i][0] <= lines[j][0] and lines[i][1] >= lines[j][1]) or (lines[i][0] >= lines[j][0] and lines[i][1] <= lines[j][1]): 
             overlap = True 
             break 
     if overlap == False: 
