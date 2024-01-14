@@ -26,8 +26,7 @@ for i in range(N):
         for k in range(N): 
             if k == i or k == j: 
                 continue
-            tmp = area(i,j,k)
-            # if check(i,j,k): 
-            #     tmp = area(i,j,k) 
+            if check(i,j,k): 
+                tmp = area(i,j,k) 
             max_ans = max(max_ans,tmp) 
 print(max_ans)
