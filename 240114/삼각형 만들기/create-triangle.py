@@ -28,5 +28,5 @@ for i in range(N):
                 continue
             if check(i,j,k): 
                 tmp = area(i,j,k) 
-            max_ans = max(max_ans,tmp) 
+                max_ans = max(max_ans,tmp) 
 print(max_ans)
