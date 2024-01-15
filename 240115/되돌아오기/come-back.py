@@ -24,10 +24,12 @@ for i in range(n):
         if x == 0 and y == 0:
             ans = t
             check = True
-            break
 
         if check:
             break
+
+    if ans != 0:
+        break
 
 if ans == 0:
     print(-1)
