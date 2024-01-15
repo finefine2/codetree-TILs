@@ -5,10 +5,9 @@ dy = [-1,1,0,0]
 
 dir = {'W' : 0, 'E' : 1, 'N' : 2, 'S' : 3}
 dir_num = 0
-arr = [[0] * (n*n) for _ in range(n*n)]
 
 ans = 0
-x, y = n,n
+x, y = 0,0
 t = 0
 for i in range(n):
     a,b = map(str, input().split())
@@ -19,7 +18,7 @@ for i in range(n):
         y = y + dy[dir_num]
         t += 1
         
-        if x == n and y == n:
+        if x == 0 and y == 0:
             ans = t
             break
 
