@@ -1,8 +1,10 @@
+import sys
+
 n = int(input())
 
 arr = list(map(int, input().split()))
 
-Min = 100000
+Min = sys.maxsize
 for i in range(n):
 
     dist = 0
