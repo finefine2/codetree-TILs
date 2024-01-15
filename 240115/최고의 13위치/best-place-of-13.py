@@ -13,7 +13,7 @@ for i in range(n):
         elif (arr[i][j] == 1 and arr[i][j+1] == 1) or (arr[i][j] == 1 and arr[i][j+2] == 1) or (arr[i][j+1] == 1 and arr[i][j+2] == 1):
             if ans < 2:
                 ans = 2
-        elif arr[i][j] == 1:
+        elif arr[i][j] == 1 or arr[i][j+1] == 1 or arr[i][j+2] == 1:
             if ans < 1:
                 ans = 1
 
