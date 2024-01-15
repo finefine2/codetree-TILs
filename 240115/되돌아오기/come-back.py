@@ -9,17 +9,24 @@ dir_num = 0
 ans = 0
 x, y = 0,0
 t = 0
+check = False
 for i in range(n):
     a,b = map(str, input().split())
     
-    dir_num = dir[a]
+    dir_num = (dir[a]) % 4
+
     for j in range(int(b)):
         x = x + dx[dir_num]
         y = y + dy[dir_num]
         t += 1
+
         
         if x == 0 and y == 0:
             ans = t
+            check = True
+            break
+
+        if check:
             break
 
 if ans == 0:
