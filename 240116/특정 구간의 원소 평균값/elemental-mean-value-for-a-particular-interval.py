@@ -8,12 +8,11 @@ for i in range(n):
         s = 0
 
         for k in range(i, j+1):
-            if k >= n:
-                break
             s += arr[k]
         
         av = s / (j - i + 1)
     
+
         if av in arr:
             ans += 1
 
