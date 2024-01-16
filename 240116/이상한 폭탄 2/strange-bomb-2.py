@@ -7,4 +7,7 @@ for i in range(N):
             continue 
         if abs(j-i) <= K and bombs[i] == bombs[j]: 
             ans.append(bombs[i]) 
-print(max(ans))
+if len(ans) == 0: 
+    print(-1) 
+else: 
+    print(max(ans))
