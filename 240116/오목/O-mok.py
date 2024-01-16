@@ -38,5 +38,16 @@ for i in range(15):
             x = i + 2
             y = j+2
 
+for i in range(15):
+    for j in range(4, 19):
+        if arr[i][j] == 1 and arr[i+1][j-1] == 1 and arr[i+2][j-2] == 1 and arr[i+3][j-3] == 1 and arr[i+4][j-4] == 1:
+            ans = 1
+            x = i + 2
+            y = j - 2
+        if arr[i][j] == 2 and arr[i+1][j-1] == 2 and arr[i+2][j-2] == 2 and arr[i+3][j-3] == 2 and arr[i+4][j-4] == 2:
+            ans = 2
+            x = i + 2
+            y = j - 2
+
 print(ans)
 print(x+1, y+1)
