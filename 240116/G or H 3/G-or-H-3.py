@@ -9,7 +9,7 @@ for _ in range(n):
         arr[int(a)] = 1
 
 Max = -1
-for i in range(10000):
+for i in range(100):
     ans = 0
     for j in range(i, i+k+1):
         ans += arr[j]
