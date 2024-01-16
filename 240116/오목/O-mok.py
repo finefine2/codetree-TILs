@@ -50,4 +50,5 @@ for i in range(15):
             y = j - 2
 
 print(ans)
-print(x+1, y+1)
+if ans != 0:
+    print(x+1, y+1)
