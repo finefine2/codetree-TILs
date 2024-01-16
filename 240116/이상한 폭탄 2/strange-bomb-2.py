@@ -32,5 +32,6 @@ for i in range(N):
         # if number of bombs differs, doesn't explode 
         if bombs[i] != bombs[j]: 
             continue
+
         ans = max(ans,bombs[i]) 
 print(ans)
