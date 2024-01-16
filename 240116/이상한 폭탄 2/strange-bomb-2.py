@@ -21,7 +21,7 @@ how to solve?
 각 폭탄마다 폭발하는 경우를 찾고, 폭발한다면 최댓값을 갱신 
 '''
 N,K = map(int,input().split())
-bombs = [list(map(int,input().split())) for _ in range(N)] 
+bombs = [int(input()) for _ in range(N)] 
 
 ans = -1 
 # 모든 쌍에 대해 터질 수 있는 폭탄을 찾고 그 중 최댓값을 리턴 
