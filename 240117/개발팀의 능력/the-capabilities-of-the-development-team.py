@@ -28,4 +28,7 @@ for i in range(n):
                     continue
                 Min = min(Min, diff(i, j, k, l))
 
-print(Min)
+if Min == sys.maxsize:
+    print(-1)
+else:
+    print(Min)
