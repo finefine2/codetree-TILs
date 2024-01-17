@@ -22,6 +22,5 @@ for i in range(1, 4):
     
     if Max < num:
         Max = num
-        ans = i
 
-print(ans)
+print(Max)
