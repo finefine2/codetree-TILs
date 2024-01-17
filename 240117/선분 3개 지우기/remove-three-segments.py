@@ -5,7 +5,7 @@ N = int(input())
 lines = [tuple(map(int,input().split())) for _ in range(N)] 
 
 def check_overlap(a,b,c): 
-    count = [0] * 10
+    count = [0] * 101
     ans = True
     for i in range(N): 
         if i in [a,b,c]: 
