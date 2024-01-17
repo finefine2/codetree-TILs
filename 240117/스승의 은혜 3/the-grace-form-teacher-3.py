@@ -57,7 +57,7 @@ for i in range(N):
     tmp = [0] * N 
     for j in range(N): 
         tmp[j] = prices[j] + ships[j] 
-    tmp[i] = prices[j] // 2 + ships[j] 
+    tmp[i] = prices[i] // 2 + ships[i] 
     # 학생을 선물 가격 순 정렬 
     # 가격이 가장 작은 학생부터 사줄 때, 많은 학생에게 사줄 수 있음 
     tmp.sort() 
