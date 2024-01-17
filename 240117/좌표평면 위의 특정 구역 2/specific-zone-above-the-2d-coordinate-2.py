@@ -1,7 +1,7 @@
 import sys
 n = int(input())
 
-ans = 0
+ans = sys.maxsize
 Max = 0
 arr = []
 for i in range(n):
