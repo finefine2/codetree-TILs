@@ -10,7 +10,7 @@ for _ in range(N):
     price,ship = map(int,input().split()) 
     # student.append(info(price,ship)) 
     student.append([price,ship]) 
-# student.sort(key = lambda x:x[0])
+student.sort(key = lambda x:x[0])
 
 # 예산 B가 선물비 + 배송비 합보다 작으면 되는 거 아닌가 
 ans = 0 
