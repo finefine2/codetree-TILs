@@ -16,7 +16,7 @@ for i in range(n):
 
 for i in range(1000):
     s = 0
-    for j in range(4):
+    for j in range(n):
         s += tmp(i, arr[j][0], arr[j][1])
     Max = max(Max, s)
 
