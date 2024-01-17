@@ -15,7 +15,7 @@ while True:
     s += arr[i][0] + arr[i][1]
     
     if s > b:
-        if s - (arr[i][0] * 0.5):
+        if s - (arr[i][0] * 0.5) <= b:
             num += 1
             break
         else:
