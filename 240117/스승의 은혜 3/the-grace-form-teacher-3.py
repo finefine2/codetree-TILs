@@ -6,7 +6,7 @@ for i in range(n):
     p, s = map(int, input().split())
     arr.append((p, s))
 
-arr.sort(lambda x : 0.5 * x[0] + x[1])
+arr.sort(lambda x : x[0] + x[1])
 
 i = 0
 num = 0
@@ -25,3 +25,6 @@ while True:
     num += 1
 
 print(num)
+
+# for a, b in arr:
+#     print(a, b)
