@@ -1,33 +1,29 @@
 import sys
 n = int(input())
 
-Maxx = 0
-Maxy = 0
+ans = 0
 Max = 0
 arr = []
 for i in range(n):
     a, b = map(int, input().split())
     arr.append((a, b))
 
-for a, b in arr:
-    if a * b > Max:
-        Max = a * b
-        Maxx = a
-        Maxy = b
 
-Maxxx = 0
-Maxyy = 0
-Minx = sys.maxsize
-Miny = sys.maxsize
-for a, b in arr:
-    if Maxxx < a and a != Maxx:
-        Maxxx = a
-    if Maxyy < b and b != Maxy:
-        Maxyy = b
-    if Minx > a:
-        Minx = a
-    if Miny > b:
-        Miny = b
+for i in range(n):
+    Minx = sys.maxsize
+    Miny = sys.maxsize 
+    Maxx = 1
+    Maxy = 1
 
+    for k, (a, b) in enumerate(arr):
+        if k == i:
+            continue
+        
+        Minx = min(Minx, a)
+        Miny = min(Miny, b)
+        Maxx = max(Maxx, a)
+        Maxy = max(Maxy, b)
 
-print((Maxxx - Minx) * (Maxyy - Miny))
+    ans = min(ans, (Maxx - Minx) * (Maxy - Miny))
+
+print(ans)
