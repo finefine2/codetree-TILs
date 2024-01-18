@@ -31,7 +31,7 @@ def get_score(num,ta,tb):
     global C,G,H
     if num < ta: 
         return C 
-    elif ta <= num < tb: 
+    elif ta <= num <= tb: 
         return G 
     else: 
         return H 
