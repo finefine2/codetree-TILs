@@ -66,3 +66,68 @@ print(len(s))
 #     ans += 1
 
 # print(ans)
+
+# arr = []
+# for i in range(3):
+#     tmp = list(map(int, input()))
+#     arr.append(tmp)
+
+# ans = 0
+
+# for i in range(1, 10):
+#     for j in range(1, 10):
+#         check = False
+#         numi = 0
+#         numj = 0
+
+#         for k in range(3):
+#             numi = 0
+#             numj = 0
+#             for l in range(3):
+#                 if arr[k][l] == i:
+#                     numi += 1
+#                 if arr[k][l] == j:
+#                     numj += 1
+            
+#             if numi + numj == 3 and numi >= 1 and numj >= 1:
+#                 check = True
+        
+#         for k in range(3):
+#             numi = 0
+#             numj = 0
+#             for l in range(3):
+#                 if arr[l][k] == i:
+#                     numi += 1
+#                 if arr[l][k] == j:
+#                     numj += 1
+            
+#             if numi + numj == 3 and numi >= 1 and numj >= 1:
+#                 check = True
+        
+#         numi = 0
+#         numj = 0
+#         for k in range(3):
+#             if arr[k][k] == i:
+#                 numi += 1
+#             if arr[k][k] == j:
+#                 numj += 1
+        
+#         if numi + numj == 3 and numi >= 1 and numj >= 1:
+#             check = True
+        
+#         numi = 0
+#         numj = 0
+#         for k in range(3):
+#             if arr[k][2 - k] == i:
+#                 numi += 1
+#             if arr[k][2 - k] == j:
+#                 numj += 1
+        
+#         if numi + numj == 3 and numi >= 1 and numj >= 1:
+#             check = True
+        
+#         if check:
+#             ans += 1
+#             print(numi, numj)
+
+# print(ans)
