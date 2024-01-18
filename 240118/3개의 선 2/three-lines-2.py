@@ -21,13 +21,17 @@ check = False
 for i in range(11):
     for j in range(11):
         for k in range(11):
-            cnt = 0
-            for l in range(len(arr)):
-                if arr[l][0] == i or arr[l][1] == j or arr[l][0] == k:
-                    cnt += 1
-                
-            if cnt == len(arr):
-                check = True
+            for a in range(2):
+                for b in range(2):
+                    for c in range(2):
+                        flag = True
+                        for point in arr:
+                            if point[a] == i or point[b] == j or point[c] == k:
+                                continue
+                            flag = False
+                        if flag:
+                            check = True
+            
 
 if check:
     print(1)
