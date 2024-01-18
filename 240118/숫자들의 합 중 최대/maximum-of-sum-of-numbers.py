@@ -1,20 +1,35 @@
-# cnt = 0 
-# for i in range(100,1000): 
-#     d1,d2,d3 = tuple(map(int,list(str(i)))) 
-#     if d1 + d2 == d3 or d1 + d3 == d2 or d2 + d3 == d1: 
-#         cnt += 1 
-# print(cnt) 
+'''
+my solution 
+'''
+# X,Y = map(int,input().split()) 
+# ans = -1e9 
+# def get_num(n): 
+#     ans = 0
+#     n_list = list(str(n)) 
+#     for n in n_list: 
+#         ans += int(n) 
+#     return ans
 
-X,Y = map(int,input().split()) 
-ans = -1e9 
-def get_num(n): 
-    ans = 0
-    n_list = list(str(n)) 
-    for n in n_list: 
-        ans += int(n) 
-    return ans
+# for i in range(X,Y+1): 
+#     tmp = get_num(i)
+#     ans = max(ans,tmp)
+# print(ans) 
 
-for i in range(X,Y+1): 
-    tmp = get_num(i)
-    ans = max(ans,tmp)
+'''
+given solution 
+재귀함수를 이용한 각자리 수의 합 -> DigitSum
+n 이 10보다 작으면 n 리턴 
+n 이 10 이상이면 DigitSum(n//10) + (n%10) 
+'''
+x,y = map(int,input().split()) 
+
+def digit_sum(n): 
+    if n < 10: 
+        return n 
+    else: 
+        return digit_sum(n//10) + (n%10) 
+ans = 0 
+# 각 자리 숫자 합 구하고 최댓값 갱신 
+for i in range(x,y+1): 
+    ans = max(ans,digit_sum(i)) 
 print(ans)
