@@ -10,6 +10,5 @@ ans = 0
 for i in range(n):
     for j in range(n):
         ans = max(ans, arr[i][j])
-    print()
 
 print(ans)
