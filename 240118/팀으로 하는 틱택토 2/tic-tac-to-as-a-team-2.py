@@ -5,7 +5,8 @@ for i in range(3):
 
 
 def checkline(line):
-    check = [0] * 9
+    check = [0] * 11
+    
     for k in line:
         check[int(k)] += 1
     
