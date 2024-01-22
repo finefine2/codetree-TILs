@@ -9,7 +9,7 @@ bomb = [0] * 1000001
 bomb_cnt = [0] * 1000001
 
 for i in range(n):
-    for j in range(i+1, min(i+k, n-1)):
+    for j in range(i+1, min(i+k+1, n)):
         if arr[i] == arr[j]:
             bomb[i] = 1
             bomb[j] = 1
