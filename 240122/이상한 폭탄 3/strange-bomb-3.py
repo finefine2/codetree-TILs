@@ -21,11 +21,11 @@ for i in range(len(bomb)):
 
 Max = 0
 Maxidx = 0
-for i in range(len(bomb)):
+for i in range(n):
     if bomb[i]:
         if Maxidx < bomb_cnt[arr[i]]:
             Maxidx = bomb_cnt[arr[i]]
-            Max = bomb_cnt[arr[i]]
+            Max = arr[i]
 
 print(Max)   
 
