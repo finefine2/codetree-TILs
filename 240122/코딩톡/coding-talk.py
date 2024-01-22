@@ -6,6 +6,10 @@ for i in range(m):
     arr.append((c, u))
     # if dict[c] < int(u):
     #     dict[c] = int(u)
+
+check = False
+if int(arr[p-1][1]) == 0:
+    check = True
     
 for i in range(n):
     num = chr(ord('A') + i)
@@ -14,7 +18,7 @@ for i in range(n):
         if int(u) >= int(arr[p-1][1]) and c == num:
             flag = True
 
-    if not flag:
+    if not flag and not check:
         print(num, end = " ")
 
 
