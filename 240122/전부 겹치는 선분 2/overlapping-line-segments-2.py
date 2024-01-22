@@ -1,7 +1,6 @@
 n = int(input())
 
-Max = -1
-Min = 101
+
 
 arr = []
 for i in range(n):
@@ -9,14 +8,16 @@ for i in range(n):
     arr.append((a, b))
 
 check = False
-for i in range(n):
-    for j in range(n):
+for i in range(len(arr)):
+    Max = -1
+    Min = 101
+    for j in range(len(arr)):
         if i == j:
             continue
         Max = max(Max, arr[j][0])
         Min = min(Min, arr[j][1])
-        if Max <= Min:
-            check = True
+    if Max <= Min:
+        check = True
 
 if check:
     print("Yes")
