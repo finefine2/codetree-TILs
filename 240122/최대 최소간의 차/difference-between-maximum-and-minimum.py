@@ -2,8 +2,10 @@ n, k = map(int, input().split())
 
 arr = list(map(int, input().split()))
 
-
-ans = 10000
+import sys
+ans = sys.maxsize
+# 앞의 문제처럼 기준을 i로 잡아놓고
+# 각각 그때마다 값을 구해서 가장 최소인 값을 구하기
 for i in range(10000 - k + 1):
     num = 0
     for j in range(n):
