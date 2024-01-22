@@ -21,7 +21,7 @@ def find(num):
 
 ans = 0
 for k in range(6):
-    a, b, c = find(i)
+    a, b, c = find(k)
     cnt = 0
     for x, y in arr:
         if (x, y) in [(b, a), (c, b), (a, c)]:
