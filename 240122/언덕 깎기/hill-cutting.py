@@ -10,7 +10,8 @@ arr.sort()
 a = arr[0]
 b = arr[-1]
 
-ans = 1000
+import sys
+ans = sys.maxsize
 num_a = 0
 num_b = 0
 
