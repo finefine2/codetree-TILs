@@ -9,39 +9,34 @@ for i in range(len(st)):
         arr.append(i)
         idx = i
 
+if n != 2:
+    dist = []
+    for i in range(len(arr)-1):
+        dist.append(arr[i+1] - arr[i])
 
-dist = []
-for i in range(len(arr)-1):
-    dist.append(arr[i+1] - arr[i])
+    dist.sort()
 
-dist.sort()
+    check = False
+    if dist[-1] // 2 < len(st) - 1 - idx:
+        dist.append(len(st) - 1 - idx)
+        check = True
 
-check = False
-if dist[-1] // 2 < len(st) - 1 - idx:
-    dist.append(len(st) - 1 - idx)
-    check = True
+    first = st.find("1")
+    if dist[-1] // 2 < first:
+        dist.append(first)
+        check = True
 
-first = st.find("1")
-if dist[-1] // 2 < first:
-    dist.append(first)
-    check = True
+    dist.sort()
 
-dist.sort()
+    if not check:
+        dist[-1] //= 2
 
-if not check:
-    dist[-1] //= 2
-
-# if dist[-1] % 2 == 0:
-#     dist[-1] = dist[-1] // 2 + 1
-# else:
-#     dist[-1] //= 2
 
 # for k in dist:
 #     print(k, end = " ")
 
 
 
-print(min(dist))
-
-# print()
-# print(st.find("1"))
+    print(min(dist))
+else:
+    print(1)
