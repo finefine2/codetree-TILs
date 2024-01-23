@@ -12,4 +12,4 @@ r = m * 2 + 1
 if one % r == 0:
     print(one // r)
 else:
-    print(one // r)
+    print(one // r + 1)
