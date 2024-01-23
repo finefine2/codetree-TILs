@@ -21,6 +21,11 @@ if dist[-1] // 2 < len(st) - 1 - idx:
     dist.append(len(st) - 1 - idx)
     check = True
 
+first = st.find("1")
+if dist[-1] // 2 < first:
+    dist.append(first)
+    check = True
+
 dist.sort()
 
 if not check:
@@ -35,4 +40,8 @@ if not check:
 #     print(k, end = " ")
 
 
+
 print(min(dist))
+
+# print()
+# print(st.find("1"))
