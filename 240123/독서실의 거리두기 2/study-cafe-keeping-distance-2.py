@@ -16,12 +16,15 @@ for i in range(len(arr)-1):
 
 dist.sort()
 
+check = False
 if dist[-1] // 2 < len(st) - 1 - idx:
     dist.append(len(st) - 1 - idx)
+    check = True
 
 dist.sort()
 
-dist[-1] //= 2
+if not check:
+    dist[-1] //= 2
 
 # if dist[-1] % 2 == 0:
 #     dist[-1] = dist[-1] // 2 + 1
@@ -29,8 +32,7 @@ dist[-1] //= 2
 #     dist[-1] //= 2
 
 # for k in dist:
-    # print(k, end = " ")
-
+#     print(k, end = " ")
 
 
 print(min(dist))
