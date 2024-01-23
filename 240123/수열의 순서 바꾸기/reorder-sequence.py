@@ -10,4 +10,5 @@ for i in range(n-2, 0, -1):
     if arr[i] >= arr[i+1]:
         break
     cnt += 1
-print(cnt + 1)
+
+print(n - cnt + 1)
