@@ -18,7 +18,7 @@ for i in range(len(arr)):
         idx = i
         break
 
-if arr.count(num) != 1:
+if arr.count(num) != 1 or n == 1:
     print(-1)
 else:
     print(idx+1)
