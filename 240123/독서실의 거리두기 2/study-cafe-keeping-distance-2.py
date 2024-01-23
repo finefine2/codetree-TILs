@@ -9,7 +9,7 @@ for i in range(len(st)):
         arr.append(i)
         idx = i
 
-if n != 2:
+if n != 2 and st.count("1") != 1:
     dist = []
     for i in range(len(arr)-1):
         dist.append(arr[i+1] - arr[i])
@@ -36,7 +36,8 @@ if n != 2:
 #     print(k, end = " ")
 
 
-
     print(min(dist))
+elif st.count("1") == 1:
+    print(max(st.find("1"), len(st) - 1 - st.find("1")))
 else:
     print(1)
