@@ -8,6 +8,5 @@ for i in range(1,cntA + 1):
 
         if tmp <= C: 
             ans = max(ans,tmp)
-        elif tmp > C: 
-            break 
+ 
 print(ans)
