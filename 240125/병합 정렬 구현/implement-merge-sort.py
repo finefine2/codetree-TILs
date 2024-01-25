@@ -1,41 +1,35 @@
 n = int(input())
 arr = list(map(int, input().split()))
 
-ans = merge_sort(arr, min(arr), max(arr))
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+
+    left_half = merge_sort(left_half)
+    right_half = merge_sort(right_half)
+
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    result = []
+    left_idx, right_idx = 0, 0
+
+    while left_idx < len(left) and right_idx < len(right):
+        if left[left_idx] < right[right_idx]:
+            result.append(left[left_idx])
+            left_idx += 1
+        else:
+            result.append(right[right_idx])
+            right_idx += 1
+
+    result.extend(left[left_idx:])
+    result.extend(right[right_idx:])
+
+    return result
+
+ans = merge_sort(arr)
 print(*ans)
-
-
-def merge_sort(arr[], low, high)
-  if low < high
-    mid = (low + high) / 2
-    merge_sort(arr, low, mid)
-    merge_sort(arr, mid+1, high)
-    merge(arr, low, mid, high)
-
-
-merged_arr = []
-
-function merge(arr[], low, mid, high)
-  i = low, j = mid + 1
-
-  k = low
-  while i <= mid && j <= high
-    if arr[i] <= arr[j]
-      merged_arr[k] = arr[i]
-      k += 1; i += 1
-    else
-      merged_arr[k] = arr[j]
-      k += 1; j += 1
-  
-  while i <= mid
-    merged_arr[k] = arr[i]
-    k += 1; i += 1
-
-  while j <= high
-    merged_arr[k] = arr[j]
-    k += 1; j += 1
-  
-  for k = low ... k <= high
-    arr[k] = merged_arr[k]
-  
-  return arr
