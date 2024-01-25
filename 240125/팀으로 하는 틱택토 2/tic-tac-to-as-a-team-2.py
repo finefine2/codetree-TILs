@@ -1,23 +1,53 @@
-nums = [] 
-for i in range(3): 
-    num = input()
-    nums.append([num[0],num[1],num[2]])
-# 같은 줄이어야 하고, 3 개 중 2개는 같은 숫자여야 함 
-
-tmp = [[nums[0][0],nums[0][1],nums[0][2]], [nums[1][0],nums[1][1],nums[1][2]], [nums[2][0],nums[2][1],nums[2][2]],
-        [nums[0][0],nums[1][0],nums[2][0]], [nums[0][1],nums[1][1],nums[2][1]], [nums[0][2],nums[1][2],nums[2][2]], 
-        [nums[0][0],nums[1][1],nums[2][2]], [nums[0][2],nums[1][1],nums[2][0]]]
+MAX_A = 3 
+MAX_X = 9 
+board = [list(map(int,input())) for _ in range(MAX_A)]
 ans = 0 
-def check(arr): 
-    num1, num2, num3 = arr[0], arr[1], arr[2] 
-    if num1 != num2 and num2 != num3 and num3 != num1: 
-        return False 
-    elif num1 == num2 and num2 == num3 and num3 == num1: 
-        return False 
-    else: 
-        return True 
-
-for t in tmp: 
-    if check(t): 
-        ans += 1 
+for i in range(1,MAX_X+1): 
+    for j in range(i+1,MAX_X+1): 
+        # i,j 둘이 팀이 될 때 이길 수 있는지 확인 
+        # win: 둘이 팀일 때 이길 수 있으면 true
+        win = False 
+        # num_i, num_j: 각 줄마다 i,j 가 나오는 갯수 
+        num_i,num_j = 0,0 
+        # 가로 줄 빙고 
+        for k in range(MAX_A): 
+            num_i,num_j = 0,0 
+            for l in range(MAX_A): 
+                if board[k][l] == i: 
+                    num_i += 1  
+                if board[k][l] == j: 
+                    num_j += 1 
+            # i,j 가 총 3번 나오며 둘 다 최소 1번 이상 나오면 승리 
+            if num_i + num_j == 3 and num_i >= 1 and num_j >= 1:
+                win = True
+        # 세로 줄 빙고 
+        for k in range(MAX_A): 
+            num_i, num_j = 0,0
+            for l in range(MAX_A): 
+                if board[l][k] == i: 
+                    num_i += 1 
+                if board[l][k] == j: 
+                    num_j += 1 
+            if num_i + num_j == 3 and num_i >= 1 and num_j >= 1: 
+                win = True 
+        # 우하향 대각선 빙고 
+        num_i,num_j = 0,0
+        for k in range(MAX_A): 
+            if board[k][k] == i: 
+                num_i += 1 
+            if board[k][k] == j: 
+                num_j += 1 
+        if num_i + num_j == 3 and num_i >= 1 and num_j >= 1: 
+            win = True 
+        # 좌하향 대각선 빙고 
+        num_i, num_j = 0,0 
+        for k in range(MAX_A): 
+            if board[k][MAX_A-k-1] == i: 
+                num_i += 1 
+            if board[k][MAX_A-k-1] == j: 
+                num_j += 1 
+        if num_i + num_j == 3 and num_i >= 1 and num_j >= 1: 
+            win = True 
+        if win: 
+            ans += 1
 print(ans)
