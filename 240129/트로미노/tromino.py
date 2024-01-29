@@ -14,8 +14,8 @@ for i in range(n):
         if s > Max:
             Max = s
 
-for i in range(n):
-    for j in range(m-2):
+for i in range(m):
+    for j in range(n-2):
         s = 0
         for k in range(3):
             s += arr[j+k][i]
