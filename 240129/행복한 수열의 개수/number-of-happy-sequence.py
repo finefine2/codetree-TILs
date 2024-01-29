@@ -8,17 +8,19 @@ for i in range(n):
 ans = 0
 for i in range(n):
     cnt = 0
-    for j in range(n-1):
-        if arr[i][j] == arr[i][j+1]:
-            cnt += 1
+    for j in range(n):
+        for k in range(m-1):
+            if arr[i][j+k] == arr[i][j+k+1]:
+                cnt += 1
     if cnt == m-1:
         ans += 1
 
 for i in range(n):
     cnt = 0
-    for j in range(m-1):
-        if arr[j][i] == arr[j+1][i]:
-            cnt += 1
+    for j in range(n):
+        for k in range(m-1):
+            if arr[j+k][i] == arr[j+k+1][i]:
+                cnt += 1
     if cnt == m-1:
         ans += 1
 
