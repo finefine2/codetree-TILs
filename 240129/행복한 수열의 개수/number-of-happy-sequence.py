@@ -7,7 +7,7 @@ for i in range(n):
 
 ans = 0
 for i in range(n):
-    cnt = 0
+    cnt = 1
     for j in range(1, n):
         if arr[i][j] == arr[i][j-1]:
             cnt += 1     
@@ -17,9 +17,9 @@ for i in range(n):
         ans += 1
         
 for i in range(n):
-    cnt = 0
+    cnt = 1
     for j in range(1, n):
-        if arr[j][i] == arr[j][i-1]:
+        if arr[j][i] == arr[j-1][i]:
             cnt += 1     
         else:
             cnt = 1
