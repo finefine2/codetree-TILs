@@ -32,4 +32,7 @@ for i in range(n):
         # if cnt >= m:
         #     ans += 1
 
-print(ans)
+if m == 1:
+    print(2 * n)
+else:
+    print(ans)
