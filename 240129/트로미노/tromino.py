@@ -7,7 +7,7 @@ for i in range(n):
 
 Max = -1
 for i in range(n):
-    for j in range(m-3):
+    for j in range(m-2):
         s = 0
         for k in range(3):
             s += arr[i][j+k]
@@ -15,7 +15,7 @@ for i in range(n):
             Max = s
 
 for i in range(n):
-    for j in range(m-3):
+    for j in range(m-2):
         s = 0
         for k in range(3):
             s += arr[j+k][i]
