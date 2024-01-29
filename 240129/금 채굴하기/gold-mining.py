@@ -6,7 +6,7 @@ for i in range(n):
     arr.append(st)
 
 k = 0
-Max = -1
+Max = 0
 
 for i in range(n):
     for j in range(n):
