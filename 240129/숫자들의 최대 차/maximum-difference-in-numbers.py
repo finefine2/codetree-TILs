@@ -10,5 +10,5 @@ def count_num(l,r):
 ans = 0 
 # 크기가 K인 모든 구간을 잡아 해당 구간에 들어오는 숫자를 세어 그 중 최댓값 계산 
 for i in range(1,10001): 
-    ans = max(count_num(i,i+K)) 
+    ans = max(ans, count_num(i,i+K)) 
 print(ans)
