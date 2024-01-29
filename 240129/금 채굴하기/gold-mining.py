@@ -14,7 +14,7 @@ for i in range(n):
             num = 0
             for x in range(n):
                 for y in range(n):
-                    if abs(x - j) + abs(y - i) <= k:
+                    if abs(x - i) + abs(y - j) <= k:
                         num += arr[x][y]
             if num * m >= k * k + (k + 1) * (k + 1):
                 Max = max(Max, num)
