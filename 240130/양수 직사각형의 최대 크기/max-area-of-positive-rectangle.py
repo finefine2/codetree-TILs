@@ -10,7 +10,7 @@ check = [[0] * m for _ in range(n)]
 
 for i in range(n):
     for j in range(m):
-        if arr[i][j] >= 0:
+        if arr[i][j] > 0:
             check[i][j] = 1
 
 for i in range(n):
