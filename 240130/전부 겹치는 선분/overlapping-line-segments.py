@@ -6,14 +6,14 @@ for _ in range(N):
 
 check = [0] * 101 
 for x1,x2 in lines: 
-    for i in range(x1,x2): 
+    for i in range(x1,x2+1): 
         check[i] += 1 
 import sys 
-
+flag = False 
 for c in check: 
     if c == N: 
-        print("Yes") 
-        sys.exit()
-    else: 
-        print("No")
-        sys.exit()
+        flag = True 
+if flag: 
+    print("Yes") 
+else: 
+    print("No")
