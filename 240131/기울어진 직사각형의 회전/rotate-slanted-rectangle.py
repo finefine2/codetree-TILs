@@ -7,8 +7,8 @@ for i in range(n):
     arr.append(st)
 
 r, c, m1, m2, m3, m4, dir = map(int, input().split())
-# r -= 1
-# c -= 1
+r -= 1
+c -= 1
 tmp = copy.deepcopy(arr)
 
 if dir == 0:
@@ -27,7 +27,10 @@ for i in range(4):
         nx = r + dx[i]
         ny = c + dy[i]
 
-        tmp[nx-1][ny-1] = arr[r-1][c-1]
+        if nx < 0 or nx >= n or ny < 0 or ny >= n:
+            continue
+
+        tmp[nx][ny] = arr[r][c]
         r, c = nx, ny
 
 ans = copy.deepcopy(tmp)
