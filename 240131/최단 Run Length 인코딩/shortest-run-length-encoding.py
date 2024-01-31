@@ -34,10 +34,13 @@ def run(a):
 Min = 100
 st = ""
 l = len(a)
-for i in range(l):
-    a = a[-1] + a[:-1]
-    b = run(a)
-    if len(b) < Min:
-        Min = len(b)
+if l == 1:
+    Min = 2
+else:
+    for i in range(l):
+        a = a[-1] + a[:-1]
+        b = run(a)
+        if len(b) < Min:
+            Min = len(b)
 
 print(Min)
