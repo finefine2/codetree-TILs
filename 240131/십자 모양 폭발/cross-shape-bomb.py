@@ -37,19 +37,40 @@ for i in range(4):
 
 # print()
 
-for i in range(n-1, 0, -1):
-    for j in range(n):
+# for j in range(n):
+#     empty_cnt = 0
+#     for i in range(n-1, 0, -1):
+#         if arr2[i][j] == 0:
+#             empty_cnt += 1
+#         else:
+#             arr2[i+empty_cnt][j] = arr2[i][j]
+#             if empty_cnt > 0:
+#                 arr2[i][j] = 0
+
+# 중력 부분 수정
+for j in range(n):
+    for i in range(n-1, 0, -1):
         if arr2[i][j] == 0:
-            k = i
-            tmp = 0
-            while True:
-                if k == 0:
-                    break
-                arr2[k][j], arr2[k-1][j] = arr2[k-1][j], arr2[k][j]
-                # tmp = arr2[k][j]
-                # arr2[k][j] = arr2[k-1][j]
-                # arr2[k-1][j] = tmp
+            k = i - 1
+            while k >= 0 and arr2[k][j] == 0:
                 k -= 1
+            if k >= 0:
+                arr2[i][j] = arr2[k][j]
+                arr2[k][j] = 0
+
+# for j in range(n):
+#     for i in range(n-1, 0, -1):
+#         if arr2[i][j] == 0:
+#             k = i
+#             tmp = 0
+#             while k > 0 and arr2[k][j] == 0:
+#                 # if k == 0:
+#                 #     break
+#                 arr2[k][j], arr2[k-1][j] = arr2[k-1][j], arr2[k][j]
+#                 # tmp = arr2[k][j]
+#                 # arr2[k][j] = arr2[k-1][j]
+#                 # arr2[k-1][j] = tmp
+#                 k -= 1
 
 for i in range(n):
     for j in range(n):
