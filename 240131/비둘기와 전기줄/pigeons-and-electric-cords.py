@@ -11,5 +11,5 @@ for p in pige:
     else: 
         if check[p[0]] != p[1]: 
             ans += 1 
-            check[p[0]] = [1]
+            check[p[0]] = p[1]
 print(ans)
