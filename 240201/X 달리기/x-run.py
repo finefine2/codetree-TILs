@@ -13,9 +13,9 @@ while True:
 
     if dist == X: 
         break 
-    if dist <= x - (v+1) * (v+2) / 2: 
+    if dist <= X - (v+1) * (v+2) / 2: 
         v +=  1
-    elif dist <= x - (v+1) * v / 2: 
+    elif dist <= X - (v+1) * v / 2: 
         continue
     else: 
         v -= 1 
