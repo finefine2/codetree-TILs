@@ -5,23 +5,16 @@ for i in range(n):
     tmp = list(map(int, input().split()))
     arr.append(tmp)
 
-# def gravity():
-#     for j in range(n):
-#         col = []
-#         for i in range(n):
-#             if arr[i][j] != 0:
-#                 col.append(arr[i][j])
-#                 arr[i][j] = 0
-#         for i in range(n - len(col), n):
-#             arr[i][j] = col[i - (n - len(col))]
-
 def gravity():
     for j in range(n):
-        empty = n - 1
-        for i in range(n - 1, -1, -1):
+        col = []
+        for i in range(n):
             if arr[i][j] != 0:
-                arr[empty][j], arr[i][j] = arr[i][j], arr[empty][j]
-                empty -= 1
+                col.append(arr[i][j])
+                arr[i][j] = 0
+        for i in range(n - len(col), n):
+            arr[i][j] = col[i - (n - len(col))]
+
 
 new_arr = [[0] * n for _ in range(n)]
 def rotate():
@@ -67,10 +60,11 @@ for _ in range(k):
     rotate()
 
 
-ans = 0
-for i in range(n):
-    for j in range(n):
-        if arr[i][j] != 0:
-            ans += 1
+# ans = 0
+# for i in range(n):
+#     for j in range(n):
+#         if arr[i][j] != 0:
+#             ans += 1
+ans = sum(arr[i][j] != 0 for i in range(n) for j in range(n))
 
 print(ans)
