@@ -41,7 +41,7 @@ while True:
     same = []  # 제거할 폭탄의 인덱스를 저장하는 리스트
     while i < len(arr):
         cnt = 1
-        while i + count < len(arr) and arr[i] == arr[i + cnt]:
+        while i + cnt < len(arr) and arr[i] == arr[i + cnt]:
             cnt += 1
         
         if cnt >= m:
