@@ -31,7 +31,7 @@ elif st == "L":
                     arr[i][k] = arr[i][k+1]
                     arr[i][k+1] = 0
         check = False
-        for j in range(2):
+        for j in range(3):
             if arr[i][j] == arr[i][j+1] and not check:
                 arr[i][j] = arr[i][j] + arr[i][j+1]
                 arr[i][j+1] = 0
