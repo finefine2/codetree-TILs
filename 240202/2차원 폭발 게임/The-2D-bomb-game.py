@@ -16,12 +16,10 @@ def gravity():
             arr[i][j] = col[i - (n - len(col))]
 
 
-new_arr = [[0] * n for _ in range(n)]
 def rotate():
     global arr
-    for i in range(n):
-        for j in range(n):
-            new_arr[i][j] = 0
+    new_arr = [[0] * n for _ in range(n)]
+
     
     for i in range(n):
         for j in range(n):
