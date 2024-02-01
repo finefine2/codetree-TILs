@@ -1,19 +1,14 @@
-n = int(input())
+N = int(input())
+people = [0] + list(input().split()) 
+ans = 0 
 
-arr = list(map(str, input().split()))
-
-ans = 0
-for i in range(n):
-    x = chr(ord('A') + i)
-
-    idx = 0
-    for j in range(n):
-        if arr[j] == x:
-            idx = j
-            break
-    
-    for j in range(idx - 1, i - 1, -1):
-        arr[j], arr[j+1] = arr[j+1], arr[j]
-        ans += 1
-
+for i in range(1,N+1): 
+    x = chr(ord("A") + i - 1) 
+    idx = 0 
+    for j in range(1,N+1): 
+        if people[j] == x: 
+            idx = j 
+    for j in range(idx-1,i-1,-1): 
+        people[j], people[j+1] = people[j+1],people[j] 
+        ans += 1 
 print(ans)
