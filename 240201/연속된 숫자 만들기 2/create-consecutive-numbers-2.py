@@ -1,4 +1,4 @@
-nums = list(map(int,input().split()) 
+nums = list(map(int,input().split())) 
 nums.sort() 
 '''
 A 가 BC 사이로 
