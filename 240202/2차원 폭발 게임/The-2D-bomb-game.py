@@ -15,20 +15,23 @@ def gravity():
         for i in range(n - len(col), n):
             arr[i][j] = col[i - (n - len(col))]
 
-new_arr = [[0] * n for _ in range(n)]
+# new_arr = [[0] * n for _ in range(n)]
+# def rotate():
+#     global arr
+#     for i in range(n):
+#         for j in range(n):
+#             new_arr[i][j] = 0
+    
+#     for i in range(n):
+#         for j in range(n):
+#             new_arr[i][j] = arr[j][n - 1 - i]
+    
+#     for i in range(n):
+#         for j in range(n):
+#             arr[i][j] = new_arr[i][j]
 def rotate():
     global arr
-    for i in range(n):
-        for j in range(n):
-            new_arr[i][j] = 0
-    
-    for i in range(n):
-        for j in range(n):
-            new_arr[i][j] = arr[j][n - 1 - i]
-    
-    for i in range(n):
-        for j in range(n):
-            arr[i][j] = new_arr[i][j]
+    arr = [list(row) for row in zip(*arr[::-1])]
 
 def explode():
     check = False
