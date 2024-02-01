@@ -18,11 +18,12 @@ if st == "R":
                 arr[i][j+1] = arr[i][j] + arr[i][j+1]
                 arr[i][j] = 0
                 check = True
-        for j in range(2, 0, -1):
-            if arr[i][j] == 0:
-                for k in range(j, 0, -1):
-                    arr[i][k] = arr[i][k-1]
-                    arr[i][k-1] = 0
+        for l in range(4):
+            for j in range(3, 0, -1):
+                if arr[i][j] == 0:
+                    for k in range(j, 0, -1):
+                        arr[i][k] = arr[i][k-1]
+                        arr[i][k-1] = 0
 elif st == "L":
     for i in range(4):
         for j in range(4):
