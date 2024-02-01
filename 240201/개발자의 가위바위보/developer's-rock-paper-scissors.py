@@ -1,33 +1,26 @@
-n = int(input())
+N = int(input()) 
+fights = [list(map(int,input().split())) for _ in range(N)] 
 
-arr = []
-for i in range(n):
-    a, b = map(int, input().split())
-    arr.append((a, b))
+ans = 0 
+win = 0 
+# 1 > 2 > 3 
+for a,b in fights: 
+    if a == 1 and b == 2: 
+        win += 1 
+    elif a == 2 and b == 3: 
+        win += 1 
+    elif a == 3 and b == 1: 
+        win += 1 
+ans = max(ans,win) 
 
-def find(num):
-    if num == 1:
-        return (1, 2, 3)
-    elif num == 2:
-        return (1, 3, 2)
-    elif num == 3:
-        return (2, 1, 3)
-    elif num == 4:
-        return (2, 3, 1)
-    elif num == 5:
-        return (3, 1, 2)
-    else:
-        return (3, 2, 1)
-
-ans = 0
-for k in range(6):
-    a, b, c = find(k)
-    cnt = 0
-    for x, y in arr:
-        if (x, y) in [(b, a), (c, b), (a, c)]:
-            cnt += 1
-        # (a, b), (b, c), (c, a)의 역순
-    
-    ans = max(cnt, ans)
-
+# 1 > 3 > 2 
+win = 0 
+for a,b in fights: 
+    if a == 1 and b == 3: 
+        win += 1 
+    elif a == 3 and b == 2: 
+        win += 1 
+    elif a == 2 and b == 1: 
+        win += 1 
+ans = max(ans,win) 
 print(ans)
