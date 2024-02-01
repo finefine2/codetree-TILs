@@ -4,4 +4,5 @@ case1 = abs(x-A) + abs(B-y)
 
 # A -> y -> x -> B 
 case2 = abs(y-A) + abs(x-B)
-print(min(case1,case2))
+case3 = abs(A-B) 
+print(min(case1,case2,case3))
