@@ -15,8 +15,8 @@ ans.append((r, c))
 while True:
     check = False
     for i in range(4):
-        if arr[r][c] <= arr[r + dx[i]][c + dy[i]]:
-            if 0<=r<n and 0<=c<n:
+        if 0<=r<n and 0<=c<n and 0<=r + dx[i]<n and 0<=c+dy[i]<n:
+            if arr[r][c] <= arr[r + dx[i]][c + dy[i]]:
                 r = r + dx[i]
                 c = c + dy[i]
                 check = True
