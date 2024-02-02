@@ -16,11 +16,12 @@ while True:
     check = False
     for i in range(4):
         if arr[r][c] <= arr[r + dx[i]][c + dy[i]]:
-            r = r + dx[i]
-            c = c + dy[i]
-            check = True
-            ans.append((r, c))
-            break
+            if 0<=r<n and 0<=c<n:
+                r = r + dx[i]
+                c = c + dy[i]
+                check = True
+                ans.append((r, c))
+                break
     if not check:
         break
 
