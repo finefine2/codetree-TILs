@@ -6,15 +6,15 @@ for i in range(n):
     tmp = list(map(int, input().split()))
     arr.append(tmp)
 
-def gravity():
+def gravity(arr2):
     for j in range(n):
         col = []
         for i in range(n):
-            if arr[i][j] != 0:
+            if arr2[i][j] != 0:
                 col.append(arr[i][j])
-                arr[i][j] = 0
+                arr2[i][j] = 0
         for i in range(n - len(col), n):
-            arr[i][j] = col[i - (n - len(col))]
+            arr2[i][j] = col[i - (n - len(col))]
 
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
@@ -35,7 +35,13 @@ for i in range(n):
     for j in range(n):
         arr2 = copy.deepcopy(arr)
         explode(arr2, i, j)
-        gravity()
+        
+        gravity(arr2)
+        # for i in range(n):
+        #     for j in range(n):
+        #         print(arr2[i][j], end = " ")
+        #     print()
+        # print()
 
         ans = 0
         for k in range(n):
