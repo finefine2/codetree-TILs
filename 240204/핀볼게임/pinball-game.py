@@ -45,7 +45,7 @@ def pinball(startx, starty, d):
             # 이런 식으로 두개의 경우에 이런 규칙을 쓸 수 있다.
             elif arr[x][y] == 2:
                 if dirnum == 2 or dirnum == 0:
-                    dirnm = (dirnum + 3) % 4
+                    dirnum = (dirnum + 3) % 4
                 else:
                     dirnum = (dirnum + 1) % 4
         else:
