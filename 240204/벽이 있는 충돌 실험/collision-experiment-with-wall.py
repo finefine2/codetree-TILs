@@ -63,4 +63,4 @@ for _ in range(t):
             if arr[i][j] != 0:
                 cnt += 1
 
-print(cnt)
+    print(cnt)
