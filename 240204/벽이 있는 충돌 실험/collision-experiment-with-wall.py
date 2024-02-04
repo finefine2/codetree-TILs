@@ -20,7 +20,7 @@ for _ in range(t):
     dir = {'U': 0, 'D': 1, 'L': 2, 'R': 3}
     dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 
-    for _ in range(1000):
+    for _ in range(200):
         arr_tmp = [[0] * n for _ in range(n)]
         for i in range(n):
             for j in range(n):
