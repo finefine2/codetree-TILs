@@ -1,3 +1,67 @@
+n, m, t = map(int, input().split())
+arr = [[[] for _ in range(n)] for _ in range(n)]
+
+for num in range(1, m + 1):
+    r, c, d, w = input().split()
+    i, j, w = int(r) - 1, int(c) - 1, int(w)
+    arr[i][j] = [num, d, w]
+
+def isin(a,b):
+    return 0<=a<n and 0<=b<n
+
+dir = {'U': 0, 'D': 1, 'L': 2, 'R': 3}
+dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
+
+for _ in range(t):
+    arr_tmp = [[[] for _ in range(n)] for _ in range(n)]
+
+    for i in range(n):
+        for j in range(n):
+            if arr[i][j] != []:
+                dir_num = dir[arr[i][j][1]]
+
+                nx, ny = i + dx[dir_num], j + dy[dir_num]
+
+                # 나가면 방향 반대로 바꾸기
+                if not isin(nx, ny):
+                    d = arr[i][j][1]
+                    if d == "L":
+                        d = "R"
+                    elif d == "R":
+                        d = "L"
+                    elif d == "U":
+                        d = "D"
+                    else:
+                        d = "U"
+
+                    arr[i][j][1] = d
+                    nx, ny = i, j
+
+                # 비어있지 않을 경우 
+                if arr_tmp[nx][ny]:  
+                    arr[i][j][2] += arr_tmp[nx][ny][2]
+                    # 다음 오는 값을 더해주고
+                    if arr[i][j][0] < arr_tmp[nx][ny][0]:
+                        arr[i][j][0] = arr_tmp[nx][ny][0]
+                        arr[i][j][1] = arr_tmp[nx][ny][1]
+                    # [0]이 더 클 경우 갱신하고 [1]도 갱신해준다.
+                
+                arr_tmp[nx][ny] = arr[i][j]
+
+    arr = arr_tmp
+
+cnt = 0
+Max = 0
+for i in range(n):
+    for j in range(n):
+        if arr[i][j] != []:
+            cnt += 1
+            if arr[i][j][2] > Max:
+                Max = arr[i][j][2]
+
+print(cnt, Max)
+
+
 # n, m, t = map(int, input().split())
 
 # arr = [[[] for _ in range(n)] for _ in range(n)]
@@ -75,65 +139,71 @@
 
 # print(ans)
 
-n, m, t = map(int, input().split())
-
-# 구슬의 정보를 담을 리스트, 구슬 번호(i+1), 방향, 무게를 저장
-balls = []
-for i in range(m):
-    r, c, d, w = input().split()
-    r, c, w = int(r)-1, int(c)-1, int(w)
-    balls.append([r, c, d, w, i+1])  # 위치, 방향, 무게, 번호
-
-dir = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
-def isin(a, b):
-    return 0<=a<n and 0<=b<n
-
-for _ in range(t):
-    new_positions = {}
-
-    for ball in balls:
-        r, c, d, w, num = ball
-        dr, dc = dir[d]
-        nr, nc = r + dr, c + dc
-
-        if not isin(nr,nc):
-            if d == 'U': d = 'D'
-            elif d == 'D': d = 'U'
-            elif d == 'L': d = 'R'
-            elif d == 'R': d = 'L'
-
-            nr, nc = r + dir[d][0], c + dir[d][1]
-
-        ball[0], ball[1], ball[2] = nr, nc, d  # 위치와 방향 업데이트
-
-        key = (nr, nc)
-        if key not in new_positions:
-            new_positions[key] = []
-
-        new_positions[key].append([nr, nc, d, w, num])
-
-    # 충돌 처리
-    balls = []
-    for pos in new_positions:
-        if len(new_positions[pos]) > 1:
-
-            # 충돌하여 합쳐지는 구슬 처리
-            sum_biz = 0
-            for ball in new_positions[pos]:
-                sum_biz += ball[3]
-
-            max_num = max(new_positions[pos], key=lambda x: x[4])
-            # 가장 큰 번호를 가진 구슬 찾기
-
-            balls.append([pos[0], pos[1], max_num[2], sum_biz, max_num[4]])
-        else:
-            balls.append(new_positions[pos][0])
-            # 1개 이하일 경우 추가해준다.
 
 
-if balls:
-    ans = max(balls, key=lambda x: x[3])[3]
-else:
-    ans = 0
 
-print(len(balls), ans)
+
+
+# n, m, t = map(int, input().split())
+
+# # 구슬의 정보를 담을 리스트, 구슬 번호(i+1), 방향, 무게를 저장
+# balls = []
+# for i in range(m):
+#     r, c, d, w = input().split()
+#     r, c, w = int(r)-1, int(c)-1, int(w)
+#     balls.append([r, c, d, w, i+1])  # 위치, 방향, 무게, 번호
+
+# dir = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
+# def isin(a, b):
+#     return 0<=a<n and 0<=b<n
+
+# for _ in range(t):
+#     # 구슬 위치 업데이트
+#     new_positions = {}
+
+#     for ball in balls:
+#         r, c, d, w, num = ball
+#         dr, dc = dir[d]
+#         nr, nc = r + dr, c + dc
+
+#         if not isin(nr,nc):
+#             if d == 'U': d = 'D'
+#             elif d == 'D': d = 'U'
+#             elif d == 'L': d = 'R'
+#             elif d == 'R': d = 'L'
+
+#             nr, nc = r + dir[d][0], c + dir[d][1]
+
+#         ball[0], ball[1], ball[2] = nr, nc, d  # 위치와 방향 업데이트
+
+#         key = (nr, nc)
+#         if key not in new_positions:
+#             new_positions[key] = []
+
+#         new_positions[key].append([nr, nc, d, w, num])
+
+#     # 충돌 처리
+#     balls = []
+#     for pos in new_positions:
+#         if len(new_positions[pos]) > 1:
+
+#             # 충돌하여 합쳐지는 구슬 처리
+#             sum_biz = 0
+#             for ball in new_positions[pos]:
+#                 sum_biz += ball[3]
+
+#             max_num = max(new_positions[pos], key=lambda x: x[4])
+#             # 가장 큰 번호를 가진 구슬 찾기
+
+#             balls.append([pos[0], pos[1], max_num[2], sum_biz, max_num[4]])
+#         else:
+#             balls.append(new_positions[pos][0])
+#             # 1개 이하일 경우 추가해준다.
+
+
+# if balls:
+#     ans = max(balls, key=lambda x: x[3])[3]
+# else:
+#     ans = 0
+
+# print(len(balls), ans)
