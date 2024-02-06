@@ -22,18 +22,29 @@ c > a and c > b
 '''
 def check_max(x,y,z): 
     # 3 개 같음
+    # a b c 모두 
     if x == y and y == z and z == x: 
         return 1 
     # 2개 같음 
-    elif x == y and x != z: 
+    # a b 올라감 
+    elif x == y and x > z: 
         return 2 
-    elif x == z and x != y: 
+    # a c 
+    elif x == z and x > y: 
         return 3 
-    elif y == z and y != x: 
+    # b c
+    elif y == z and y > x: 
         return 4 
     # 1개만 젤 큼 
-    else: 
+    # a 
+    elif x > y and x > z: 
         return 5 
+    # b 
+    elif y > z and y > x: 
+        return 6     
+    # c
+    elif z > x and z > y: 
+        return 7 
 ans = [1] + [0] * N 
 for i,s in enumerate(scores): 
     if s[0] == "A": 
