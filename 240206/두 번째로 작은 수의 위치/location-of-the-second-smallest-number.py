@@ -3,29 +3,28 @@
 진행을 하면 예외없이 비교적 깔끔하게 문제를 해결할 수 있게 됩니다. 
 주어진 조건 하에서 일어날 수 있는 상황들을 모두 나열하여 정리하는 연습을 많이 해보는 것이 아주 중요
 '''
+import sys 
 N = int(input()) 
 nums = list(map(int,input().split())) 
-new_nums = nums 
+new_nums = sorted(nums) 
+# 2번째로 작은 수가 존재 시 true 
+isExist = False 
+low2 = 0 
+for elem in new_nums: 
+    if elem != new_nums[0]: 
+        low2 = elem 
+        isExist = True 
+        break 
+# 2번째로 작은 숫자가 존재하지 않을 때 
+if isExist == False: 
+    print(-1)
+    sys.exit() 
 
-new_nums.sort() 
-
-# 먼저 가장 작은 수를 뽑아야 한다 
-min_num = min(new_nums) 
-tmp = [] 
-for n in new_nums: 
-    if n == min_num: 
-        continue 
-    tmp.append(n) 
-
-second_num = min(tmp) 
-
-cnt = []
-ans = -1  
-for i,n in enumerate(new_nums): 
-    if n == second_num: 
-        cnt.append(i+1) 
-
-if len(cnt) != 1: 
-    print(-1) 
-elif len(cnt) == 1: 
-    print(cnt[0])
+ansidx = -1 
+for idx, elem in enumerate(new_nums): 
+    if elem == low2: 
+        if ansidx != -1: 
+            print(-1) 
+            sys.exit() 
+        ansidx = idx 
+print(ansidx + 1)
