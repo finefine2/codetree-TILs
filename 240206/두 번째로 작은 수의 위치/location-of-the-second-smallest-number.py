@@ -23,9 +23,9 @@ cnt = []
 ans = -1  
 for i,n in enumerate(new_nums): 
     if n == second_num: 
-        cnt.append(i) 
+        cnt.append(i+1) 
 
 if len(cnt) != 1: 
     print(-1) 
-else: 
+elif len(cnt) == 1: 
     print(cnt[0])
