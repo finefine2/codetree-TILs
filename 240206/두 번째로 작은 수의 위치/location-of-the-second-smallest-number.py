@@ -28,4 +28,4 @@ for i,n in enumerate(new_nums):
 if len(cnt) != 1: 
     print(-1) 
 else: 
-    print(cnt[0] + 1)
+    print(cnt[0])
