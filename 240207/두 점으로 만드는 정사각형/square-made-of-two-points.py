@@ -6,4 +6,4 @@ max_x = max(x2,a2)
 min_y = min(y1,b1)
 max_y = max(y2,b2)
 
-print((max_x-min_x) * (max_y-min_y))
+print(pow((max_x-min_x) * (max_y-min_y),2))
