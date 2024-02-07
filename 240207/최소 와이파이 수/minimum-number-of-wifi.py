@@ -1,4 +1,4 @@
-N,M = map(int,input()) 
+N,M = map(int,input().split()) 
 nums = list(map(int,input().split())) 
 cnt, i = 0,0 
 while i < N: 
