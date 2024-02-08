@@ -2,7 +2,7 @@ n = int(input())
 
 arr = []
 
-three = ['4', '5', '6']
+three = [4, 5, 6]
 
 
 
@@ -25,9 +25,9 @@ def find(arr):
 
 def choose(num):
     if num == n:
-        # for k in arr:
-        #     print(k)
-        print(''.join(arr))
+        for k in arr:
+            print(k, end = "")
+        # print(''.join(arr))
         quit()
     
     for i in range(3):
