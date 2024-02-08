@@ -20,4 +20,4 @@ def choose(num):
         arr.pop()
         check[i] = False
 
-choose(0,1)
+choose(0)
