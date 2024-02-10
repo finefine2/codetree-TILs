@@ -10,7 +10,7 @@ ans = sys.maxsize
 check = [0] * (n+1)
 def choose(num, start, total):
     global ans
-    if num == n+1:
+    if num == n:
         ans = min(ans, total + arr[start][0])
         return
 
@@ -20,5 +20,5 @@ def choose(num, start, total):
             choose(num + 1, i, total + arr[start][i])
             check[i] = 0
 
-choose(1, 0, 0)
+choose(0, 0, 0)
 print(ans)
