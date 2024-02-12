@@ -31,6 +31,7 @@ def DFS(x, y, k):
 
 block = []
 explode = []
+ans = 0
 for k in range(1, 101):
     check = [[0] * n for _ in range(n)]
     for i in range(n):
@@ -41,13 +42,7 @@ for k in range(1, 101):
                 if num >= 2:
                     block.append(num)
                 if num >= 4:
-                    explode.append(num)
+                    ans += 1
     
-if len(explode) == 0:
-    print(0, max(block))
-elif len(block) == 0:
-    print(len(explode), 1)
-elif len(explode) == 0 and len(block) == 0:
-    print(0, 1)
-else:  
-    print(len(explode), max(block))
+
+print(ans, max(block))
