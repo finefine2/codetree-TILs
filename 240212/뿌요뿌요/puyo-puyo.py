@@ -88,4 +88,4 @@ for i in range(n):
 if blocks:
     print(ans, max(blocks))
 else:
-    print(ans, 0)  # 수정된 부분: 블록이 없는 경우에 대한 처리
+    print(ans, 1)
