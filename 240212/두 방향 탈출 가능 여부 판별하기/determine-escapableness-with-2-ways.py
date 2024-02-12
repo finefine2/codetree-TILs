@@ -1,3 +1,4 @@
+import sys
 n, m = map(int, input().split())
 
 arr = []
@@ -24,17 +25,20 @@ ans = 0
 check[0][0] = 1
 
 def move(x, y):
+
+    if x == n-1 and y == m-1:
+        ans = 1
+        print(1)
+        sys.exit(0)
+
     for i in range(2):
         nx = x + dx[i]
         ny = y + dy[i]
 
         if ismove(nx, ny):
-            if nx == n-1 and ny == m-1:
-                ans = 1
-                return
             check[nx][ny] = 1
             move(nx, ny)
             
 
 move(0, 0)
-print(ans)
+print(0)
