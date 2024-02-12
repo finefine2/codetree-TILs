@@ -12,7 +12,6 @@ dy = [1,-1,0,0]
 def isin(a, b):
     return 0<=a<n and 0<=b<n
 
-check = [[0] * n for _ in range(n)]
 def BFS():
     global num
     while q:
@@ -27,9 +26,11 @@ def BFS():
                 num += 1
                 q.append((nx, ny))
 
-num = 0
+num = 1
 for i in range(k):
     r, c = map(int, input().split())
+    check = [[0] * n for _ in range(n)]
+
     q = deque()
     q.append((r-1, c-1))
     BFS()
