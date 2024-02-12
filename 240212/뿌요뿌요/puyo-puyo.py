@@ -30,7 +30,6 @@ def DFS(x, y, k):
             DFS(nx, ny, k)
 
 block = []
-explode = []
 ans = 0
 for k in range(1, 101):
     check = [[0] * n for _ in range(n)]
