@@ -31,6 +31,7 @@ def DFS(x, y, k):
 
 block = []
 ans = 0
+flag = False
 for k in range(1, 101):
     check = [[0] * n for _ in range(n)]
     for i in range(n):
@@ -40,11 +41,12 @@ for k in range(1, 101):
                 DFS(i, j, k)
                 if num >= 2:
                     block.append(num)
+                    flag = True
                 if num >= 4:
                     ans += 1
     
 
-if len(block) == 0:
+if not flag:
     print(ans, 0)
 else:
     print(ans, max(block))
