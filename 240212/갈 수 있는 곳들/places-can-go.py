@@ -26,13 +26,17 @@ def BFS():
                 num += 1
                 q.append((nx, ny))
 
-num = 1
+check = [[0] * n for _ in range(n)]
+
+num = 0
 for i in range(k):
     r, c = map(int, input().split())
-    check = [[0] * n for _ in range(n)]
-
     q = deque()
-    q.append((r-1, c-1))
+    if arr[r-1][c-1] == 0 and not check[r-1][c-1]:
+        num += 1
+        check[r-1][c-1] = 1
+        q.append((r-1, c-1))
+
     BFS()
 
 if n == 1:
