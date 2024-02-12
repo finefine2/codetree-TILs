@@ -44,4 +44,7 @@ for k in range(1, 101):
                     ans += 1
     
 
-print(ans, max(block))
+if len(block) == 0:
+    print(ans, 0)
+else:
+    print(ans, max(block))
