@@ -34,4 +34,10 @@ for i in range(k):
     q.append((r-1, c-1))
     BFS()
 
-print(num)
+if n == 1:
+    if arr[0][0] == 1:
+        print(0)
+    else:
+        print(1)
+else:
+    print(num)
