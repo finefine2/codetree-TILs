@@ -47,6 +47,6 @@ for k in range(1, 101):
     
 
 if not flag:
-    print(ans, 0)
+    print(ans, 1)
 else:
     print(ans, max(block))
