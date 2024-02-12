@@ -36,7 +36,7 @@ for i in range(n):
             Max = arr[i][j]
 
 MaxArea = 0
-MaxK = 0
+MaxK = 1
 for k in range(1, Max + 1):
     area = []
     check = [[0] * m for _ in range(n)]
