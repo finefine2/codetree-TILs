@@ -15,7 +15,7 @@ def isin(a, b):
 def ismove(a, b):
     if not isin(a, b):
         return False
-    if check[a][b] or arr[a][b] == 1:
+    if check[a][b] or arr[a][b] == 0:
         return False
     
     return True
