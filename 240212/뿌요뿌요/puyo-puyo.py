@@ -43,4 +43,7 @@ for k in range(1, 101):
                 if num >= 4:
                     explode.append(num)
     
-print(len(explode), max(block))
+if len(explode) == 0:
+    print(0, max(block))
+else:  
+    print(len(explode), max(block))
