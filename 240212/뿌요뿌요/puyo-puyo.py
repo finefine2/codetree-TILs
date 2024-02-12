@@ -20,6 +20,7 @@ dy = [1,-1,0,0]
 
 def DFS(x, y, k):
     global num
+    
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
@@ -39,14 +40,13 @@ for k in range(1, 101):
             if not check[i][j]:
                 num = 0
                 DFS(i, j, k)
-                if num >= 2:
-                    block.append(num)
-                    flag = True
+                block.append(num)
+                flag = True
                 if num >= 4:
                     ans += 1
     
 
-if not flag:
+if not block:
     print(ans, 1)
 else:
     print(ans, max(block))
