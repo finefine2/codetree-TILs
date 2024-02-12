@@ -45,5 +45,9 @@ for k in range(1, 101):
     
 if len(explode) == 0:
     print(0, max(block))
+elif len(block) == 0:
+    print(len(explode), 1)
+elif len(explode) == 0 and len(block) == 0:
+    print(0, 1)
 else:  
     print(len(explode), max(block))
