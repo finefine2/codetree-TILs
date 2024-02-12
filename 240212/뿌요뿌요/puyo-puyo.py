@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(2500)
+
 n = int(input())
 
 arr = []
