@@ -32,7 +32,8 @@ BFS()
 
 if r1 == r2 and c1 == c2:
     print(0)
-elif check[r2][c2] == 0:
-    print(-1)
-else:
-    print(check[r2][c2])
+if isin(r2, c2):
+    if check[r2][c2] == 0:
+        print(-1)
+    else:
+        print(check[r2][c2])
