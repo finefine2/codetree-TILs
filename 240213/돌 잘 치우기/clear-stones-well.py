@@ -52,14 +52,23 @@ for stone in rock_remove:
     for stone_x, stone_y in stone:
         remove_arr[stone_x][stone_y] = 0
     
-    for i in range(n):
-        for j in range(n):
-            num = 0
-            q = deque()
-            if not check[i][j] and remove_arr[i][j] == 0:
-                check[i][j] = 0
-                q.append((i, j))
-                BFS(remove_arr)
-                ans = max(ans, num)
+    for k in start:
+        num = 0
+        q = deque()
+        if not check[k[0]][k[1]] and remove_arr[k[0]][k[1]] == 0:
+            check[k[0]][k[1]] = 0
+            q.append((k[0], k[1]))
+            BFS(remove_arr)
+            ans = max(ans, num)
+
+    # for i in range(n):
+    #     for j in range(n):
+    #         num = 0
+    #         q = deque()
+    #         if not check[i][j] and remove_arr[i][j] == 0:
+    #             check[i][j] = 0
+    #             q.append((i, j))
+    #             BFS(remove_arr)
+    #             ans = max(ans, num)
 
 print(ans)
