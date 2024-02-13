@@ -7,7 +7,7 @@ for i in range(n):
     arr.append(tmp)
 
 r, c = map(int, input().split())
-
+tmpr, tmpc = r, c
 r -= 1
 c -= 1
 
@@ -50,4 +50,7 @@ for _ in range(k):
 
     r, c = Maxi, Maxj
 
-print(r+1, c+1)
+if r == 101 and c == 101:
+    print(tmpr, tmpc)
+else:
+    print(r+1, c+1)
