@@ -30,7 +30,8 @@ if isin(r1, c1):
 
 BFS()
 
-if check[r2][c2] == 0:
-    print(-1)
-else:
-    print(check[r2][c2])
+if isin(r2, c2):
+    if check[r2][c2] == 0:
+        print(-1)
+    else:
+        print(check[r2][c2])
