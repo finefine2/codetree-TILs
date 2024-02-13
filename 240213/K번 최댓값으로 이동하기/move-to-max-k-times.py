@@ -44,7 +44,6 @@ for _ in range(k):
     Maxi = 101
     Maxj = 101
 
-    check[r][c] = 1
     q.append((r, c))
     BFS(arr[r][c])
 
