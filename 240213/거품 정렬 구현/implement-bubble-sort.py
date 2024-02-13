@@ -1,4 +1,5 @@
 N = int(input()) 
 nums = list(map(int,input().split())) 
-
-print(sorted(nums))
+nums.sort()
+for n in nums: 
+    print(n,end=" ")
