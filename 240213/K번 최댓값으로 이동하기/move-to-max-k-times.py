@@ -29,7 +29,7 @@ def BFS(num):
             if isin(nx, ny) and not check[nx][ny] and arr[nx][ny] < num:
                 check[nx][ny] = 1
                 flag = True
-                if arr[nx][ny] >= Max or (arr[nx][ny] == Max and nx <= Maxi) or (arr[nx][ny] == Max and nx == Maxi and ny <= Maxj):
+                if arr[nx][ny] > Max or (arr[nx][ny] == Max and nx < Maxi) or (arr[nx][ny] == Max and nx == Maxi and ny < Maxj):
                     Max = arr[nx][ny]
                     Maxi = nx
                     Maxj = ny
@@ -60,6 +60,8 @@ while k:
 
     if flag:
         r, c = Maxi, Maxj
+    else:
+        break
     k -= 1
 
 if r == 101 and c == 101:
