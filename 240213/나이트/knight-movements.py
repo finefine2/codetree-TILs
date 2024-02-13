@@ -24,8 +24,9 @@ def BFS():
                 q.append((nx, ny))
 
 q = deque()
-check[r1][c1] = 0
-q.append((r1, c1))
+if isin(r1, c1):
+    check[r1][c1] = 0
+    q.append((r1, c1))
 
 BFS()
 
