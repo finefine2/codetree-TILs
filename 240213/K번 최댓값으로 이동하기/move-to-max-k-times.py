@@ -27,25 +27,33 @@ def BFS(num):
 
             if isin(nx, ny) and not check[nx][ny] and arr[nx][ny] < num:
                 check[nx][ny] = 1
-                if arr[nx][ny] >= Max:
+                if arr[nx][ny] > Max or (arr[nx][ny] == Max and nx < Maxi) or (arr[nx][ny] == Max and nx == Maxi and ny < Maxj):
                     Max = arr[nx][ny]
-                    if Maxi >= nx:
-                        Maxi = nx
-                        if Maxj >= ny:
-                            Maxj = ny
+                    Maxi = nx
+                    Maxj = ny
+                # if arr[nx][ny] >= Max:
+                #     Max = arr[nx][ny]
+                #     if Maxi > nx:
+                #         Maxi = nx
+                #         Maxj = ny
+                #     elif Maxi == nx:
+                #         if Maxj >= ny:
+                #             Maxi = nx
+                #             Maxj = ny
                 q.append((nx, ny))
 
 
 for _ in range(k):
     q = deque()
-    check = [[0] * (n+1) for _ in range(n+1)]
+    check = [[0] * (n) for _ in range(n)]
 
     Max = 0
     Maxi = 101
     Maxj = 101
 
-    q.append((r, c))
-    BFS(arr[r][c])
+    if isin(r, c):
+        q.append((r, c))
+        BFS(arr[r][c])
 
     r, c = Maxi, Maxj
 
