@@ -23,9 +23,10 @@ def BFS():
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if isin(nx, ny) and not check[nx][ny] and arr[nx][ny] == 1:
-                check[nx][ny] = check[x][y] + 1
-                q.append((nx, ny))
+            if isin(nx, ny):
+                if not check[nx][ny] and arr[nx][ny] == 1:
+                    check[nx][ny] = check[x][y] + 1
+                    q.append((nx, ny))
 
 q = deque()
 check = [[0] * n for _ in range(n)]
