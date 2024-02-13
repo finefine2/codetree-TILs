@@ -18,6 +18,7 @@ dy = [1,-1,0,0]
 
 def BFS(num):
     global Max, Maxi, Maxj
+    global flag
     while q:
         x, y = q.popleft()
 
@@ -27,7 +28,8 @@ def BFS(num):
 
             if isin(nx, ny) and not check[nx][ny] and arr[nx][ny] < num:
                 check[nx][ny] = 1
-                if arr[nx][ny] > Max or (arr[nx][ny] == Max and nx < Maxi) or (arr[nx][ny] == Max and nx == Maxi and ny < Maxj):
+                flag = True
+                if arr[nx][ny] >= Max or (arr[nx][ny] == Max and nx <= Maxi) or (arr[nx][ny] == Max and nx == Maxi and ny <= Maxj):
                     Max = arr[nx][ny]
                     Maxi = nx
                     Maxj = ny
@@ -42,11 +44,12 @@ def BFS(num):
                 #             Maxj = ny
                 q.append((nx, ny))
 
+    
 
-for _ in range(k):
+while k:
     q = deque()
     check = [[0] * (n) for _ in range(n)]
-
+    flag = False
     Max = 0
     Maxi = 101
     Maxj = 101
@@ -55,7 +58,9 @@ for _ in range(k):
         q.append((r, c))
         BFS(arr[r][c])
 
-    r, c = Maxi, Maxj
+    if flag:
+        r, c = Maxi, Maxj
+    k -= 1
 
 if r == 101 and c == 101:
     print(tmpr, tmpc)
