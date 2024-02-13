@@ -10,6 +10,7 @@ def isin(a, b):
     return 0<=a<n and 0<=b<n
 
 check = [[0] * n for _ in range(n)]
+knight = [[-1] * n for _ in range(n)]
 
 def BFS():
     while q:
@@ -20,20 +21,31 @@ def BFS():
             ny = y + dy[i]
 
             if isin(nx, ny) and not check[nx][ny]:
-                check[nx][ny] = check[x][y] + 1
+                knight[nx][ny] = knight[x][y] + 1
+                check[nx][ny] = 1
                 q.append((nx, ny))
 
 q = deque()
-if isin(r1, c1):
-    check[r1][c1] = 0
-    q.append((r1, c1))
+r1 -= 1
+r2 -= 1
+c1 -= 1
+c2 -= 1
+
+knight[r1][c1] = 0
+q.append((r1, c1))
 
 BFS()
 
-if r1 == r2 and c1 == c2:
-    print(0)
-if isin(r2, c2):
-    if check[r2][c2] == 0:
-        print(-1)
-    else:
-        print(check[r2][c2])
+if knight[r2][c2] == -1:
+    print(-1)
+else:
+    print(knight[r2][c2])
+
+# if r1 == r2 and c1 == c2:
+#     print(0)
+
+# print(r2, c2)
+# if knight[r2][c2] == -1:
+#     print(-1)
+# else:
+#     print(knight[r2][c2])
