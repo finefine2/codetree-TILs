@@ -7,8 +7,8 @@ for i in range(n):
     arr.append(tmp)
 
 
-dx = [0,0,1,-1]
-dy = [1,-1,0,0]
+# dx = [0,0,1,-1]
+# dy = [1,-1,0,0]
 
 def isin(a, b):
     return 0<=a<n and 0<=b<n
@@ -21,6 +21,9 @@ def DFS(x, y, dist):
     if dp[x][y]:
         return dp[x][y]
 
+    dx = [1, 0, -1, 0]
+    dy = [0, 1, 0, -1]
+    
     Max = 0
     
     for i in range(4):
