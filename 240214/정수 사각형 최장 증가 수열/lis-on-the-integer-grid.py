@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(250001)
 # from collections import deque
 n = int(input())
 
