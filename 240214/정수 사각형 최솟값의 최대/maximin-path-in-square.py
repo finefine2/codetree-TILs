@@ -16,6 +16,7 @@ for i in range(1, n):
 for i in range(1, n):
     for j in range(1, n):
         dp[i][j] = min(max(dp[i][j-1], dp[i-1][j]), arr[i][j])
+# 두개의 오른쪽으로 온, 밑으로 온 최솟값들 중에 더 큰 값을 가져와서 min으로 비교한다.
 
 # for i in range(n):
 #     for j in range(n):
