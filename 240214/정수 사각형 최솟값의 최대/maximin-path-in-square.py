@@ -8,9 +8,10 @@ for i in range(n):
 
 dp[0][0] = arr[0][0]
 
-for i in range(n):
-    dp[0][i] = arr[0][i]
-    dp[i][0] = arr[i][0]
+for i in range(1, n):
+    dp[0][i] = min(dp[0][i-1], arr[0][i])
+    dp[i][0] = min(dp[i-1][0], arr[i][0])
+
 
 for i in range(0, n-1):
     for j in range(0, n-1):
