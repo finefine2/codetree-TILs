@@ -13,9 +13,14 @@ for i in range(1, n):
     dp[i][0] = min(dp[i-1][0], arr[i][0])
 
 
-for i in range(0, n-1):
-    for j in range(0, n-1):
-        dp[i+1][j+1] = max(min(dp[i+1][j], arr[i][j]), min(dp[i][j+1], arr[i][j]))
+for i in range(0, n):
+    for j in range(0, n):
+        if i == n-1 and j == n-1:
+            dp[i][j] = max(min(dp[i][j-1], arr[i][j]), min(dp[i-1][j], arr[i][j]))
+        elif i == n-1 or j == n-1:
+            continue
+        else:
+            dp[i+1][j+1] = max(min(dp[i+1][j], arr[i][j]), min(dp[i][j+1], arr[i][j]))
 
 # for i in range(n):
 #     for j in range(n):
