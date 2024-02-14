@@ -60,11 +60,13 @@ for i in range(n):
         if not dp[i][j]:
             DFS(i, j, 1)
 
-for i in range(n):
-    for j in range(n):
-        ans = max(ans, dp[i][j])
+print(max(map(max, dp))+1)
 
-print(ans + 1)
+# for i in range(n):
+#     for j in range(n):
+#         ans = max(ans, dp[i][j])
+
+# print(ans + 1)
 
         
 # from collections import deque
