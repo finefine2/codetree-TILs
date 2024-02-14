@@ -22,8 +22,6 @@ for j in range(1, n):
     dpMax[0][j] = max(dpMax[0][j-1], arr[0][j])
 
 
-
-
 # 최대값을 최소로 만들기
 # 최소값을 최대로 만들기
 # for i in range(1, n):
@@ -36,8 +34,20 @@ for j in range(1, n):
 
 for i in range(1, n):
     for j in range(1, n):
-        dpMin[i][j] = min(max(dpMin[i-1][j], dpMin[i][j-1]), arr[i][j])
+        dpMin[i][j] = min(min(dpMin[i-1][j], dpMin[i][j-1]), arr[i][j])
         dpMax[i][j] = max(min(dpMax[i-1][j], dpMax[i][j-1]), arr[i][j])
 
 
 print(abs(dpMax[n-1][n-1] - dpMin[n-1][n-1]))
+
+# for i in range(n):
+#     for j in range(n):
+#         print(dpMax[i][j], end = " ")
+#     print()
+
+# print()
+
+# for i in range(n):
+#     for j in range(n):
+#         print(dpMin[i][j], end = " ")
+#     print()
