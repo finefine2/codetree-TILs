@@ -18,9 +18,9 @@ for i in range(1, n):
         s2, e2, p2 = arr[j][0], arr[j][1], arr[j][2]
 
         if e2 < s1:   # 안겹칠때는 원래의 dp에 cost를 더해준다.
-            dp[i] = max(dp[i], dp[j] + p2)
+            dp[i] = max(dp[i], dp[j] + p1)
         else:         # 겹치는 경우에는 원래 dp에 새로 p2를 넣어 비교해준다.
-            dp[i] = max(dp[i], p2)
+            dp[i] = max(dp[i], p1)
 
 ans = max(dp)
 print(ans)
