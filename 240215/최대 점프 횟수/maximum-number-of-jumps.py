@@ -6,6 +6,8 @@ dp = [0] * 1001
 
 for i in range(n):
     for j in range(i):
+        if dp[j] == 0:
+            continue
         if j + arr[j] <= arr[i]:
             dp[i] = max(dp[i], dp[j] + 1)
 
