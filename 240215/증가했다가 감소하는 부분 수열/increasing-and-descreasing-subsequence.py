@@ -22,7 +22,7 @@ for i in range(n-1, -1, -1):
 
 ans = 0
 for i in range(n):
-    ans = max(ans, up[i] + down[i] + 1)
+    ans = max(ans, up[i] + down[i] - 1)
 
 print(ans)
 
