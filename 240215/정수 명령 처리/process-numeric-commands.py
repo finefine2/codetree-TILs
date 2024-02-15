@@ -18,7 +18,7 @@ class Stack:
 N = int(input()) 
 s = Stack() 
 
-for _ in range(n):
+for _ in range(N):
     command = input()
     
     if command.startswith("push"):
