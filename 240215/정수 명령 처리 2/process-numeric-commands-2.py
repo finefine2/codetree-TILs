@@ -22,7 +22,7 @@ N = int(input())
 q = Queue() 
 
 for _ in range(N): 
-    command = list(input().split()) 
+    command = list(map(str,input().split()))
     if command[0] == 'push': 
         q.push(int(command[1]))
     elif command[0] == 'empty': 
