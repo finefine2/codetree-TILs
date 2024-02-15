@@ -2,8 +2,8 @@ n = int(input())
 
 arr = list(map(int, input().split()))
 
-up = [0] * 1001
-down = [0] * 1001
+up = [1] * 1001
+down = [1] * 1001
 
 up[0] = 1
 down[-1] = 1
@@ -22,7 +22,7 @@ for i in range(n-1, -1, -1):
 
 ans = 0
 for i in range(n):
-    ans = max(ans, up[i] + down[i])
+    ans = max(ans, up[i] + down[i] + 1)
 
 print(ans)
 
