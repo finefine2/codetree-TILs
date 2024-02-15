@@ -7,6 +7,7 @@ for i in range(n):
 
 dp = [[0] * m for _ in range(n)]
 
+dp[0][0] = 1
 for i in range(n):
     for j in range(m):
         for k in range(i):
@@ -19,4 +20,4 @@ for i in range(n):
     for j in range(m): 
         ans = max(ans, dp[i][j])
 
-print(ans + 1)
+print(ans)
