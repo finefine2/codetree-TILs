@@ -19,7 +19,7 @@ for _ in range(N):
             print(1) 
         else: 
             print(0) 
-    elif command[0] == "front" 
+    elif command[0] == "front":
         print(q[0]) 
     else: 
         print(q[-1])
