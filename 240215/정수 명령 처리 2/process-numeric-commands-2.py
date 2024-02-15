@@ -26,7 +26,7 @@ for _ in range(N):
     if command[0] == 'push': 
         q.push(int(command[1]))
     elif command[0] == 'empty': 
-        if q.empty: 
+        if q.empty(): 
             print(1)
         else: 
             print(0) 
