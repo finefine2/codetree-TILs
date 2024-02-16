@@ -5,9 +5,10 @@ arr = [0] + list(map(int, input().split()))
 Max = sum(arr)
 dp = [0] * (Max + 1)
 
-for i in range(1, n+1):
-    for j in range(Max, -1, -1):
-        if j - arr[i] >= 0:
+dp[0] = True
+for i in range(n):
+    for j in range(Max, 0, -1):
+        if j - arr[i] >= 0 and dp[j - arr[i]]:
             dp[j] = True
 
 
