@@ -27,4 +27,7 @@ for i in range(m, s + 1):
         Min = dp[i]
     # print(dp[i], end = " ")
 
-print(Min)
+if Min == MAX:
+    print(-1)
+else:
+    print(Min)
