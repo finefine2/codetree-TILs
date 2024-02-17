@@ -4,10 +4,10 @@ arr = [0] + list(map(int, input().split()))
 
 import sys
 MIN = -sys.maxsize
-dp = [[MIN] * (k+1) for _ in range(n+1)]
+dp = [[0] * (k+1) for _ in range(n+1)]
 
 ans = MIN
-dp[0][0] = 0
+# dp[0][0] = 0
 for i in range(1, n+1):
     if arr[i] < 0:
         for j in range(1, k+1):
