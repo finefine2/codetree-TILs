@@ -17,11 +17,14 @@ for i in range(n):
         if i < n and arr1[i+1] < arr2[j+1]:
             dp[i+1][j] = max(dp[i+1][j], dp[i][j])
         # 첫번째가 더 작을 경우에는 dp가 i+1로 간다.
+        # 첫번째는 사실 알 필요가 없어서 더하지 않고 i+1로 넘어간다.
 
         if j < n and arr1[i+1] > arr2[j+1]:
             dp[i][j+1] = max(dp[i][j+1], dp[i][j] + arr2[j+1])
         # 두번째가 더 작은 경우에는 뒤에 arr2[j+1]을 추가한다.
+        # 두번째 값을 구해야 하므로 arr2만 더해준다.
 
+        # 같은 경우는 둘다 그냥 넘어간다.
         dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j])
 
 ans = 0
