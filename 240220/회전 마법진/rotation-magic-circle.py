@@ -23,11 +23,13 @@ for i in range(n):
         now = (int(a[i+1]) + j) % 10
         want = int(b[i+1])
 
+        # 반시계 방향으로 회전하고 갱신
         turn = (want - now + 10) % 10
         next = (turn + j) % 10
 
         dp[i+1][next] = min(dp[i+1][next], dp[i][j] + turn)
 
+        # 시게 방향으로 회전하고 갱신
         turn = (now - want + 10) % 10
         next = j
 
