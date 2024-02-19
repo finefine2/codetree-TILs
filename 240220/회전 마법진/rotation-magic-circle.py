@@ -23,14 +23,16 @@ for i in range(n):
         now = (int(a[i+1]) + j) % 10
         want = int(b[i+1])
 
-        turn = (abs(want - now)) % 10
+        turn = (want - now + 10) % 10
         next = (turn + j) % 10
 
         dp[i+1][next] = min(dp[i+1][next], dp[i][j] + turn)
 
-        turn = (abs(now - want)) % 10
+        turn = (now - want + 10) % 10
         next = j
 
         dp[i+1][next] = min(dp[i+1][next], dp[i][j] + turn)
+
+
 
 print(min(dp[n]))
