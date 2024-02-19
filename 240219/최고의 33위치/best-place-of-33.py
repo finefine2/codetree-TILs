@@ -14,6 +14,6 @@ for r in range(N):
     for c in range(N): 
         if r + 2 >= N or c + 2 > = N: 
             continue 
-        num = count(r,c,r+2,c+2): 
+        num = count(r,c,r+2,c+2)
         max_num = max(max_num,num) 
 print(max_num)
