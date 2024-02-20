@@ -32,4 +32,10 @@ for i in range(3, lena + 1):
         else:
             dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
 
-print(dp[lena][lenb])
+if lena == 1 and lenb == 1:
+    if ai[0] == bi[0]:
+        print(1)
+    else:
+        print(0)
+else:
+    print(dp[lena][lenb])
