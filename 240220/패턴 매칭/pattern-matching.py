@@ -21,7 +21,7 @@ for j in range(pp):
         if not check[i][j]:
             continue
         
-        if j != ss - 1 and p[j+2] == '*':
+        if j != pp - 1 and p[j+2] == '*':
             check[i][j+2] = 1
 
             for k in range(i+1, ss + 1):
