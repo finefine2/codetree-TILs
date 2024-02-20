@@ -19,6 +19,6 @@ for i in range(1, aa + 1):
         if a[i] == b[j]:
             dp[i][j] = dp[i-1][j-1]
         else:
-            dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + 1
+            dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
 
-print(dp[aa - 1][bb - 1])
+print(dp[aa][bb])
