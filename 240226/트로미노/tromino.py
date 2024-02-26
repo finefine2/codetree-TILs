@@ -45,22 +45,33 @@ def count6(r,c):
 
 for i in range(N-1): 
     for j in range(N-1): 
-        ans = max(count1(i,j),ans) 
+        if count1(i,j) > ans: 
+            ans = count1(i,j) 
+         
 for i in range(N-1): 
     for j in range(N-1): 
-        ans = max(count2(i,j),ans) 
+        if count2(i,j) > ans: 
+            ans = count2(i,j)
+         
 for i in range(N-1): 
     for j in range(N-1): 
-        ans = max(count3(i,j),ans) 
+        if count3(i,j) > ans: 
+            ans = count3(i,j)
+
 for i in range(N-1): 
     for j in range(N-1): 
-        ans = max(count4(i,j),ans) 
+        if count4(i,j) > ans: 
+            ans = count4(i,j) 
+
 for i in range(N-3): 
     for j in range(N): 
-        ans = max(count6(i,j),ans) 
+        if count6(i,j) > ans: 
+            ans = count6(i,j)
+
 for i in range(N): 
     for j in range(N-3): 
-        ans = max(conut5(i,j),ans) 
+        if count5(i,j) > ans: 
+            ans = count5(i,j) 
 print(ans) 
 # for b in blocks: 
 #     row_end = len(b) 
