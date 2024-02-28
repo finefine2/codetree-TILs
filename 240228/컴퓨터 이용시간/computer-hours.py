@@ -18,7 +18,7 @@ for i, (a, b) in enumerate(arr):
 
 point.sort()
 
-num = [0] * (n+1)
+num = [0] * (n)
 for x, v, idx in point:
     if v == 1:
         cnt = heapq.heappop(computer)
