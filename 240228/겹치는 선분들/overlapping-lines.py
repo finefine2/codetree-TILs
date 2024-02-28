@@ -23,15 +23,27 @@ for a, b in arr:
 
 point.sort()
 
+# ans = 0
+# s = 0
+# for i, (x, v) in enumerate(point):
+#     if s >= k:
+#         prev, prev_v = point[i-1]
+#         ans += x - prev_v
+    
+#     # k 이상일 경우에 ans를 더해준다. 전에거를 가져와서
+    
+#     s += v 
+
+# print(ans)
+
 ans = 0
 s = 0
-for i, (x, v) in enumerate(point):
-    if s >= k:
-        prev, prev_v = point[i-1]
-        ans += x - prev_v
-    
-    # k 이상일 경우에 ans를 더해준다. 전에거를 가져와서
-    
+prev = None  # 이전 위치를 기억하기 위한 변수 추가
+for i in range(len(point)):
+    x, v = point[i]
+    if prev is not None and s >= k:
+        ans += x - prev  # 선분의 개수가 K 이상이면 길이를 더합니다.
     s += v 
+    prev = x
 
 print(ans)
