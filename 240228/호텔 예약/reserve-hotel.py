@@ -6,26 +6,18 @@ for i in range(n):
     arr.append((s, e))
 
 point = []
-for i, (s, e) in enumerate(arr):
-    point.append((s, 1, i))
-    point.append((e, -1, i))
+for (s, e) in arr:
+    point.append((s, 1))
+    point.append((e, -1))
 
-point.sort()
+point.sort(key = lambda x : (x[0], -x[1]))
 
-ans = []
-s = set()
-start = 0
-for x, v, idx in point:
-    if v == 1:
-        if not s:
-            start = x
 
-        s.add(idx)
-    else:
-        s.remove(idx)
 
-        if not s:
-            end = x
-            ans.append(end - start)
+ans = 0
+s = 0
+for x, v in point:
+    s += v
+    ans = max(ans, s)
 
-print(len(ans))
+print(ans)
