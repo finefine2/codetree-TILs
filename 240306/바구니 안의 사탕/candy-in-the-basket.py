@@ -28,25 +28,55 @@
 # print(ans)
 
 
-n, k = map(int, input().split())
 
-arr = [0] * 1000001
+
+# def max_candies(n, k, arr):
+
+#     arr.sort(key=lambda x: x[1])
+
+#     left, right = 0, 0
+#     current_sum = arr[0][0]  # 현재 윈도우의 사탕 합
+#     max_sum = current_sum  # 최대 사탕 합
+
+#     while right < n:
+#         # 윈도우의 오른쪽을 확장할 수 있는 경우
+#         if right + 1 < n and arr[right + 1][1] - arr[left][1] <= 2 * k:
+#             right += 1
+#             current_sum += arr[right][0]
+#             max_sum = max(max_sum, current_sum)
+#         # 윈도우의 왼쪽을 줄여야 하는 경우
+#         else:
+#             current_sum -= arr[left][0]
+#             left += 1
+#             if left > right and left < n:  # 왼쪽이 오른쪽을 넘어선 경우
+#                 right = left
+#                 current_sum = arr[left][0]
+
+#     return max_sum
+
+# n, k = map(int, input().split())
+# arr = [list(map(int, input().split())) for _ in range(n)]
+
+# print(max_candies(n, k, arr))
+
+n, k = map(int, input().split())
+candies = []
 for _ in range(n):
     candy, basket = map(int, input().split())
-    arr[basket] += candy  
+    candies.append((basket, candy))
 
-s = [0] * 1000001
-for i in range(1, 1000001):
-    s[i] = s[i-1] + arr[i]
+candies.sort()
 
-ans = 0
+max_candies = 0
+current_candies = 0
+left = 0
 
-for i in range(1000001):
-    left = max(0, i-k)  # 범위 밖으로 나가지 않게
-    right = min(1000000, i+k)  # 범위 밖으로 나가지 않게
-    if left == 0:
-        ans = max(ans, s[right])
-    else:
-        ans = max(ans, s[right] - s[left-1])
+for right in range(n):
+    # 현재 바구니와 비교할 바구니의 위치 차이가 K 이내인 동안 사탕 수를 더함
+    while candies[right][0] - candies[left][0] > 2*k:
+        current_candies -= candies[left][1]
+        left += 1
+    current_candies += candies[right][1]
+    max_candies = max(max_candies, current_candies)
 
-print(ans)
+print(max_candies)
