@@ -9,7 +9,7 @@ right = n-1
 
 ans = abs(arr[left] + arr[right])
 
-while left <= right:
+while left < right:
     s = arr[left] + arr[right]
 
     if abs(s) < ans:
