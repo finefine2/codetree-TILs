@@ -6,12 +6,14 @@ fire = list(map(int, input().split()))
 station = list(map(int, input().split()))
 
 ans = -1
+fire.sort()
+station.sort()
 
-for fire_location in fire:
-    Min = sys.maxsize
-    for station_location in station:
-        dist = abs(fire_location - station_location)
-        Min = min(Min, dist)
-    ans = max(ans, Min)
+right = 0
+for left in range(n):
+    while right < m - 1 and abs(fire[left] - station[right]) >= abs(fire[left] - station[right+1]):
+        right += 1
+    
+    ans = max(ans, abs(fire[left] - station[right]))
 
 print(ans)
