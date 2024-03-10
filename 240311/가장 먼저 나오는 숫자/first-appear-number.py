@@ -11,12 +11,12 @@ def find(arr, num):
     while left <= right:
         mid = (left + right) // 2
 
-        if arr[mid] < num:
-            left = mid + 1
-        elif arr[mid] >= num:
+        if arr[mid] >= num:
             right = mid - 1
             Min = min(Min, mid)
-        
+        else:
+            left = mid + 1
+
     return Min
 
 for k in que:
