@@ -3,9 +3,9 @@ n, m = map(int, input().split())
 arr = [0] + list(map(int, input().split()))
 que = list(map(int, input().split()))
 
-def find(arr, num):
+def find(num):
     left = 1
-    right = len(arr)
+    right = n
     Min = n + 1
 
     while left <= right:
@@ -20,7 +20,7 @@ def find(arr, num):
     return Min
 
 for k in que:
-    if find(arr, k) <= n and arr[find(arr, k)] == k:
-        print(find(arr, k))
+    if find(k) <= n and arr[find(k)] == k:
+        print(find(k))
     else:
         print(-1)
