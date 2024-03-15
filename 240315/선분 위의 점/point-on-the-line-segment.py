@@ -8,7 +8,7 @@ def lower_bound(arr, num):
     idx = n
     while left <= right:
         mid = (left + right) // 2
-        if arr[mid] <= num:
+        if arr[mid] < num:
             left = mid + 1
         else:
             right = mid - 1
