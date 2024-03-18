@@ -6,7 +6,7 @@ for i in range(n):
     arr.append(a)
 
 left = 1
-right = min(arr)
+right = max(arr)
 ans = 0
 
 while left <= right:
