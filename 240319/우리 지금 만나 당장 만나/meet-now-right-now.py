@@ -17,7 +17,7 @@ def find(t):
     return Max <= Min
 
 
-left = 1
+left = 0
 right = 1000000000
 ans = 1000000000
 
