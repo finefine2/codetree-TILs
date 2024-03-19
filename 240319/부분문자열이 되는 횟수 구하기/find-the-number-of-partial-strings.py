@@ -2,7 +2,7 @@ a = input()
 b = input()
 arr = list(map(int, input().split()))
 
-ans = 0
+ans = -1
 n = len(a)
 m = len(b)
 check = [0] * n
