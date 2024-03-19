@@ -48,7 +48,7 @@
 #                 # 전체 칸의 수 n**2에 반 이상이 되면은 True
 #     return False
 
-# left = 0
+# left = 
 # right = 1000000
 # Min = 1000000
 
@@ -64,48 +64,55 @@
 # print(Min)
 
 
+from sys import stdin
+n = int(stdin.readline())
+base_2d = [list(map(int, stdin.readline().split())) for _ in range(n)]
+visited = [[False]*n for _ in range(n)]
+
+def in_range(i, j):
+    return 0<=i<n and 0<=j<n
+
 from collections import deque
+def bfs(i, j, D):
+    #처음 상태 초기화!
+    visited = [[False]*n for _ in range(n)]
 
-def bfs(start, arr, n, mid):
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-    queue = deque([start])
-    visited = set([start])
-    count = 1  
+    q = deque()
+    q.append((i,j))
+    visited[i][j] = True
 
-    while queue:
-        x, y = queue.popleft()
-        for dx, dy in directions:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < n and 0 <= ny < n and (nx, ny) not in visited:
-                if abs(arr[nx][ny] - arr[x][y]) <= mid:
-                    queue.append((nx, ny))
-                    visited.add((nx, ny))
-                    count += 1
-    return count
+    dx, dy =[0,0,-1,1], [-1,1,0,0]
+    
+    total = 1
 
-def can_paint_half(arr, n, mid):
-    half = (n * n + 1) // 2
+    while q:
+        x, y = q.popleft()
+        for dxs, dys in zip(dx, dy):
+            next_x, next_y = x+dxs, y+dys
+            if in_range(next_x, next_y) and not visited[next_x][next_y] and abs(base_2d[x][y]-base_2d[next_x][next_y])<=D: #범위안이고 방문을 아직 안한 경우이며 현재 값보다 D이하로 차이나야함!
+                q.append((next_x, next_y))
+                total += 1
+                visited[next_x][next_y] = True
+    return total
+
+def check(D):
+    ans = 0
     for i in range(n):
         for j in range(n):
-            if bfs((i, j), arr, n, mid) >= half:
-                return True
+            if not visited[i][j]:
+                ans = max(ans, bfs(i,j,D))
+                if ans >= (n*n+1)//2:
+                    return True #반올림 처리!
     return False
 
-def find_min_d(arr, n):
-    left, right = 0, max(max(row) for row in arr) - min(min(row) for row in arr)
-    answer = right
-
-    while left <= right:
-        mid = (left + right) // 2
-        if can_paint_half(arr, n, mid):
-            answer = mid
-            right = mid - 1
-        else:
-            left = mid + 1
-
-    return answer
-
-n = int(input())
-arr = [list(map(int, input().split())) for _ in range(n)]
-
-print(find_min_d(arr, n))
+left = 1
+right = 1000000
+min_value = 1000000
+while left <= right:
+    mid = (left+right)//2
+    if check(mid):
+        min_value = min(min_value, mid)
+        right = mid-1
+    else:
+        left = mid+1
+print(min_value)
