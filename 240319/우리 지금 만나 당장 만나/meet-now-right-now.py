@@ -22,13 +22,13 @@ right = 1000000000
 ans = 1000000000
 
 
-while left <= right:
-    mid = (left + right) // 2
+for _ in range(100):
+    mid = (left + right) / 2
 
     if find(mid):
         ans = min(ans, mid)
-        right = mid - 1
+        right = mid
     else:
-        left = mid + 1
+        left = mid
     
 print(f"{ans:.4f}")
