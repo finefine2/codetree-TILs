@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(10000)
+
 n, m = map(int, input().split())
 
 arr = []
