@@ -8,7 +8,7 @@ for i in range(n):
 arr.sort(key=lambda x: x[1])
 
 ans = 1
-end = 0
+end = -1
 for i in range(len(arr)-1):
     if end <= arr[i+1][0]:
         ans += 1
