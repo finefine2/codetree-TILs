@@ -1,12 +1,13 @@
 n = int(input())
 
-ans = 0
+ans = 100000
 
-ans += (n // 5)
-n -= (n // 5) * 5
+for i in range(100001):
+    rem = n - 5 * i
+    if rem >= 0 and rem % 2 == 0:
+        ans = min(ans, i + (rem // 2))
 
-if n % 2 != 0:
-    print(-1)
-else:
-    ans += (n // 2)
-    print(ans)
+if ans == 100000:
+    ans = -1
+
+print(ans)
