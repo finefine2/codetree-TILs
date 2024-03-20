@@ -1,22 +1,21 @@
+import heapq
 n = int(input())
 
 arr = list(map(int, input().split()))
 
 arr.sort()
-
 ans = 0
-while len(arr) > 1:
-    num = 0
-    ans += arr[0]
-    num += arr[0]
-    arr.pop(0)
+q = []
 
-    ans += arr[0]
-    num += arr[0]
-    arr.pop(0)
+for k in arr:
+    heapq.heappush(q, k)
 
-    arr.append(num)
-    arr.sort()
-    # print(ans)
+while len(q) > 1:
+    x1 = heapq.heappop(q)
+    x2 = heapq.heappop(q)
+
+    ans += (x1 + x2)
+    heapq.heappush(q, x1 + x2)
+
 
 print(ans)
