@@ -9,7 +9,7 @@ b_card = set(b)
 
 a = []
 for num in range(1, 2 * n + 1):
-    if num not in b_set:
+    if num not in b_card:
         a.append(num)
 
 a.sort()
