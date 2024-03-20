@@ -22,9 +22,9 @@ def DFS(x, y, low, high):
         return
     
     check[x][y] = True
-    for dir in range(4):
-        nx = x + dx[dir]
-        ny = y + dy[dir]
+    for dxs, dys in zip(dx, dy):
+        nx = x + dxs
+        ny = y + dys
 
         if isin(nx, ny) and arr[nx][ny] >= low and arr[nx][ny] <= high:
             DFS(nx, ny, low, high)
