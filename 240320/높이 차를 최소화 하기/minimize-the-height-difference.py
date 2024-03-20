@@ -29,12 +29,14 @@ def DFS(x, y, low, high):
         if isin(nx, ny) and arr[nx][ny] >= low and arr[nx][ny] <= high:
             DFS(nx, ny, low, high)
 
+def clear():
+    for i in range(n):
+            for j in range(m):
+                check[i][j] = 0
 
 def find(mid):
     for low in range(1, 501):
-        for i in range(n):
-            for j in range(m):
-                check[i][j] = 0
+        clear()
         
         high = low + mid
 
