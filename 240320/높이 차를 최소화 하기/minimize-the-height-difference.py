@@ -70,40 +70,39 @@
 from collections import deque
 
 n, m = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(n)]
+arr = [list(map(int, input().split())) for _ in range(n)]
 
-def is_valid(x, y, min_height, max_height):
-    return 0 <= x < n and 0 <= y < m and min_height <= grid[x][y] <= max_height
-
-def bfs(min_diff):
-    for offset in range(500 - min_diff + 1):
-        min_height = max(1, grid[0][0] - offset)
-        max_height = min_height + min_diff
-        if not is_valid(0, 0, min_height, max_height):
-            continue
-        visited = [[False] * m for _ in range(n)]
-        queue = deque([(0, 0)])
-        visited[0][0] = True
-        while queue:
-            x, y = queue.popleft()
-            if x == n-1 and y == m-1:
-                return True
-            for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-                nx, ny = x + dx, y + dy
-                if is_valid(nx, ny, min_height, max_height) and not visited[nx][ny]:
+# 주어진 높이 범위 내에서 이동이 가능한지 확인하는 BFS 함수
+def bfs(min_height, max_height):
+    if arr[0][0] < min_height or arr[0][0] > max_height:
+        return False
+    visited = [[False]*m for _ in range(n)]
+    queue = deque([(0, 0)])
+    visited[0][0] = True
+    while queue:
+        x, y = queue.popleft()
+        if x == n-1 and y == m-1:
+            return True
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < n and 0 <= ny < m and not visited[nx][ny]:
+                if min_height <= arr[nx][ny] <= max_height:
                     visited[nx][ny] = True
                     queue.append((nx, ny))
     return False
 
-left, right = 0, 499
-answer = 500
+# 이진 탐색으로 최소 높이 차를 찾는 과정
+def binary_search():
+    ans = float('inf')
+    for min_height in range(1, 501):
+        left, right = 0, 500 - min_height
+        while left <= right:
+            mid = (left + right) // 2
+            if bfs(min_height, min_height + mid):
+                ans = min(ans, mid)
+                right = mid - 1
+            else:
+                left = mid + 1
+    return ans
 
-while left <= right:
-    mid = (left + right) // 2
-    if bfs(mid):
-        answer = mid
-        right = mid - 1
-    else:
-        left = mid + 1
-
-print(answer)
+print(binary_search())
