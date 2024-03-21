@@ -30,10 +30,10 @@
 
 
 def max_pairs(C, N, red_stones, black_stones):
-    red_stones.sort()  #
-    black_stones.sort(key=lambda x: x[1])  
+    red_stones.sort()  # 빨간 돌을 오름차순으로 정렬
+    black_stones.sort(key=lambda x: x[0])  # 검정 돌을 A 값에 대해 오름차순으로 정렬
     pairs = 0
-    j = 0  
+    j = 0  # 검정 돌의 인덱스
     for red in red_stones:
         while j < N and black_stones[j][1] < red:  # 현재 검정 돌이 빨간 돌과 매칭되지 않는 경우 건너뛰기
             j += 1
@@ -42,10 +42,8 @@ def max_pairs(C, N, red_stones, black_stones):
             j += 1  # 다음 검정 돌을 확인하기 위해 인덱스 증가
     return pairs
 
-# 입력 받기
 C, N = map(int, input().split())
 red_stones = [int(input()) for _ in range(C)]
 black_stones = [tuple(map(int, input().split())) for _ in range(N)]
 
-# 최대 쌍 개수 출력
 print(max_pairs(C, N, red_stones, black_stones))
