@@ -46,17 +46,3 @@ for r in range(N):
         mid[r][c] = tmp[r][c] 
 for m in mid: 
     print(*m)
-# for m in mid: 
-#     print(*m)
-# tmp 배열을 만들어서 0이 아닌 건 다 이동시킨다 
-# def move(arr): 
-#     tmp = copy.deepcopy(arr) 
-#     # BLANK = 0 
-#     # end_of_arr = len(tmp) 
-#     for j in range(len(tmp)): 
-#         for i in range(len(tmp)-1): 
-#             # if tmp[i+1][j] == 0 and tmp[i][j] != 0:
-#             #     tmp[i+1][j], tmp[i][j] = tmp[i][j], tmp[i+1][j]
-#             if tmp[i+1][j] == 0: 
-#                 mid = tmp[i+1][j]
-#     return tmp
