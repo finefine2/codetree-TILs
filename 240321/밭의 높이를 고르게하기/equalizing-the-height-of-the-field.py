@@ -4,11 +4,9 @@ arr = list(map(int, input().split()))
 
 import sys
 ans = sys.maxsize
-for i in range(n):
+for i in range(n - t + 1):
     s = 0
     for j in range(i, i+t):
-        if j >= n:
-            break
         s += abs(arr[j] - h)
     
     ans = min(ans, s)
