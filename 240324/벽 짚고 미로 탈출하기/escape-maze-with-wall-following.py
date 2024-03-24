@@ -46,7 +46,7 @@ while in_range(start_r, start_c):
         t += 1
     
     # 만약 처음의 방향과 위치도 같을 경우 불가능하므로 time을 -1로 하고 break
-    if dir == 0 and start_c == fr and start_c == fc:
+    if dir == 0 and start_r == fr and start_c == fc:
         t = -1
         break
     
