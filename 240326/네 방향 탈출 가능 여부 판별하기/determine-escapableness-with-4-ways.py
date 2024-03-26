@@ -11,7 +11,7 @@ def can_go(r,c):
     if visited[r][c] or board[r][c] == 0: 
         return False 
     return True 
-import deque
+from collections import deque
 
 q = deque()
 def bfs(): 
