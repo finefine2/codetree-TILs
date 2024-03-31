@@ -13,9 +13,7 @@ def in_range(r,c):
 def can_go(r,c): 
     if in_range(r,c) and not visited[r][c] and board[r][c] == 0:
         return True
-cnt = 0 
 def bfs():
-    global cnt 
     drs,dcs = [0,1,0,-1],[1,0,-1,0] 
 
     while q: 
@@ -25,12 +23,17 @@ def bfs():
             new_r, new_c = r + dr, c + dc 
             if can_go(new_r,new_c): 
                 visited[new_r][new_c] = True 
-                cnt += 1 
-                r,c = new_r, new_c
+                q.append((new_r,new_c))
 
 for _ in range(K): 
     r,c = map(int,input().split())
-    r -= 1 
-    c -= 1
-    bfs()
+    q.append((r-1,c-1)) 
+    visited[r-1][c-1] = True 
+cnt = 0 
+bfs() 
+
+for i in range(N): 
+    for j in range(N): 
+        if visited[i][j] == True: 
+            cnt += 1 
 print(cnt)
