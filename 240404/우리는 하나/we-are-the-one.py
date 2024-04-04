@@ -1,5 +1,4 @@
 from collections import deque 
-from itertools import combinations 
 
 N, K, U, D = map(int,input().split())
 board = [] 
@@ -10,8 +9,19 @@ for i in range(N):
     for j in range(N):
         points.append((i,j)) 
 
-start_points = combinations(points, K) 
-
+def combi(arr,n): 
+    res = [] 
+    if n > len(arr): 
+        return res 
+    if n == 1: 
+        for a in arr: 
+            res.append([a]) 
+    elif n > 1: 
+        for i in range(len(arr) - n + 1): 
+            for j in combi(arr[a+1:], n-1):
+                res.append([arr[a]] + j) 
+    return res 
+start_points = combi(points, K) 
 def in_range(r,c): 
     return 0 <= r < N and 0 <= c < N
 
