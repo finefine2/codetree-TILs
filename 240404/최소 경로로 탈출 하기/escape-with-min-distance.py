@@ -16,9 +16,9 @@ def can_go(r,c):
         return True
 
 def push(r,c,s): 
-    step[r][c] = s 
+    q.append((r,c))
     visited[r][c] = True
-    q.append((r,c)) 
+    step[r][c] = s 
 
 ans = INT_MAX
 q = deque() 
