@@ -10,19 +10,7 @@ for i in range(N):
     for j in range(N):
         points.append((i,j)) 
 
-def my_combi(arr,n): 
-    res = [] 
-    if n == 0: 
-        return [[]]
-    for i in range(len(arr)): 
-        elem = arr[i] 
-        for C in my_combi(arr[i+1:], n-1): 
-            res.append([elem] + C) 
-    return res 
-start_points = my_combi(points, K) 
-print(start_points)
-
-# start_points = combinations(points, K) 
+start_points = combinations(points, K) 
 
 def in_range(r,c): 
     return 0 <= r < N and 0 <= c < N
