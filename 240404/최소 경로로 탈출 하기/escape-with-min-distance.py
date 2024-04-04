@@ -1,5 +1,5 @@
 from collections import deque
-N,M =map(int,input().split())
+N,M = map(int,input().split())
 board = [list(map(int,input().split())) for _ in range(N)] 
 
 def in_range(r,c): 
@@ -15,7 +15,7 @@ def bfs():
         for dr,dc in zip(drs,dcs): 
             new_r, new_c = r + dr, c + dc
             if can_go(new_r,new_c): 
-                visited[new_r][new_c] = visited[new_r][new_c] + 1 
+                visited[new_r][new_c] = visited[r][c] + 1 
                 q.append((new_r,new_c)) 
 
 q = deque()
