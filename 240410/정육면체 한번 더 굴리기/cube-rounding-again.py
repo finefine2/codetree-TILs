@@ -73,7 +73,7 @@ def simulate():
     # 주사위 숫자가 
     if bottom > board[r][c]: 
         move_dir = (move_dir + 1) % 4 
-    elif board < board[r][c]: 
+    elif bottom < board[r][c]: 
         move_dir = (move_dir - 1) % 4
 
 for _ in range(M): 
