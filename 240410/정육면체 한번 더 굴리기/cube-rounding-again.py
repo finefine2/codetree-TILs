@@ -1,66 +1,81 @@
 from collections import deque 
-def getInput(): 
-    N,M = map(int,input().split())
-    board = [list(map(int,input().split())) for _ in range(N)] 
-    return N, M, board
 
-def move(n, board, dir, x,y, row, column): 
-    direction = [(0,1),(1,0),(0,-1),(-1,0)] 
-    nx,ny = x + direction[dir][0], y + direction[dir][1] 
-    if 0 > nx or n == nx or 0 > ny or n == ny: 
-        dir = (dir+2) % 4 
-        nx,ny = x + direction[dir][0], y + direction[dir][1] 
+FACE_NUM = 6
+OUT_OF_BOARD = (-1,-1) 
 
-    if dir == 0: 
-        row.rotate(1) 
-        column[0] = row[0] 
-        column[2] = row[2]
-    elif dir == 1: 
-        column.rotate(-1)
-        row[0] = column[0] 
-        row[2] = column[2] 
-    elif dir == 2: 
-        row.rotate(-1) 
-        column[0] = row[0] 
-        column[2] = row[2] 
-    elif dir == 3: 
-        column.rotate(1) 
-        row[0] = column[0] 
-        row[2] = column[2] 
-    if row[2] > board[nx][ny]: 
-        dir = (dir+1) % 4 
-    elif row[2] < board[nx][ny]: 
-        dir = (dir+3) % 4 
-    
-    return dir, nx, ny, row, column
+N,M = map(int,input().split()) 
+board = [list(map(int,input().split())) for _ in range(N)] 
 
-def score(n, board, dir, x,y): 
-    direction = [(0,1),(1,0),(0,-1),(-1,0)] 
-    start = board[x][y] 
-    q = deque([(x,y)]) 
-    llist = {(x,y)} 
-    count = 1 
+r,c = 0,0 
+move_dir = 0 
+
+drs, dcs = [0,1,0,-1], [1,0,-1,0] 
+up, front, right = 1,2,3
+q = deque() 
+visited = [[False for _ in range(N)] for _ in range(N)] 
+
+ans = 0 
+def in_range(r,c): 
+    return 0 <= r < N and 0 <= c < N 
+
+# 동일한 숫자에 대해서만 이동 
+def can_go(r,c,target_num): 
+    return in_range(r,c) and not visited[r][c] and board[r][c] == target_num
+
+def bfs(r,c,target_num): 
+    # initialize visited 
+    for i in range(N): 
+        for j in range(N): 
+            visited[i][j] = False
+    visited[r][c] = True 
+    q.append((r,c))
+    score = 0 
 
     while q: 
-        x,y = q.popleft() 
-        for i in range(4): 
-            nx,ny = x + direction[i][0], y + direction[i][1] 
-            if 0 <= nx < n and 0 <= ny < n and board[nx][ny] == start and (nx,ny) not in llist: 
-                count += 1 
-                q.append((nx,ny)) 
-                llist.add((nx,ny)) 
-    return start * count 
+        curr_r, curr_c = q.popleft() 
+        score += target_num
+        for dr, dc in zip(drs,dcs): 
+            new_r, new_c = curr_r + dr, curr_c + dc 
+            if can_go(new_r, new_c, target_num): 
+                q.append((new_r,new_c)) 
+                visited[new_r][new_c] = True 
+    return score 
 
-def main(): 
-    N,M, board = getInput() 
-    x,y = 0,0 
-    dir = 0 
-    row = deque([1,3,6,4]) 
-    column = deque([1,5,6,2]) 
-    ans = 0 
+def get_score(): 
+    return bfs(r,c,board[r][c]) 
+# 해당 방향으로 이동 시 다음 위치 구하기 
+# 불가능하면 out_of_board 를 리턴 
+def next_pos(): 
+    nr,nc = r + drs[move_dir], c + dcs[move_dir]
+    return (nr,nc) if in_range(nr,nc) else OUT_OF_BOARD
+def simulate(): 
+    global ans
+    global r,c, move_dir, up,front, right
+    nr,nc = next_pos() 
 
-    for _ in range(M): 
-        dir, x,y, row, column = move(N, board, dir, x,y, row, column)
-        ans += score(N, board, dir, x,y) 
-    print(ans) 
-main()
+    if (nr,nc) == OUT_OF_BOARD: 
+        move_dir = (move_dir + 2) if move_dir < 2 else (move_dir - 2)
+        nr,nc = next_pos() 
+    r,c = nr,nc 
+
+    ans += get_score() 
+
+    if move_dir == 0: 
+        up, front, right = 7 - right, front, up 
+    elif move_dir == 1: 
+        up, front, right = 7 - front, up, right
+    elif move_dir == 2: 
+        up, front, right = right, front, 7 - up 
+    else: 
+        up, front, right = front, 7 - up, right
+    # 주사위 바닥 숫자와 보드의 숫자를 비교 
+    bottom = 7 - up 
+    # 주사위 숫자가 
+    if bottom > board[r][c]: 
+        move_dir = (move_dir + 1) % 4 
+    elif board < board[r][c]: 
+        move_dir = (move_dir - 1) % 4
+
+for _ in range(M): 
+    simulate() 
+print(ans)
