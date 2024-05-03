@@ -1,14 +1,27 @@
-m1, d1, m2, d2 = map(int, input().split())
+arr = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-day = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+a, b, c, d = map(int, input().split())
 
+check = False
 ans = 0
-if m1 == m2:
-    ans = (d2 - d1)
+if a == c:
+   ans = (d - b)
+elif a > c:
+    for i in range(c, a):
+        b += arr[i]
+    # b += 1
+    ans = b - d
+    check = True
 else:
-    for i in range(m1, m2):
-        ans += month[i]
-    ans = (d2 - d1)
+    for i in range(a, c):
+        d += arr[i]
+    # d += 1
+    ans = d - b
 
-print(day[ans % 7])
+day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+day2 = ['Mon', 'Sun', 'Sat', 'Fri', 'Thu', 'Wed', 'Tue']
+# print(ans)
+if not check:
+    print(day[ans % 7])
+else:
+    print(day2[ans % 7])
