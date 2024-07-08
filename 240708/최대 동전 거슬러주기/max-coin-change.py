@@ -1,17 +1,20 @@
+import sys
+
 n, m = map(int, input().split())
 
 arr = [0] + list(map(int, input().split()))
 
-dp = [0] * 10001
+dp = [-sys.maxsize] * 10001
+dp[0] = 0
 
 for i in range(1, m + 1):
     for j in range(1, n + 1):
         if i - arr[j] >= 0:
-            if dp[i - arr[j]] == 0:
+            if dp[i - arr[j]] == -sys.maxsize:
                 continue
             dp[i] = max(dp[i - arr[j]] + 1, dp[i])
 
-if dp[m] == 0:
+if dp[m] == -sys.maxsize:
     print(-1)
 else:
     print(dp[m])
