@@ -10,4 +10,4 @@ for i, num in enumerate(arr):
         if j - (i + 1) >= 0:
             dp[j] = max(dp[j], dp[j - i - 1] + num)
 
-print(dp)
+print(max(dp))
