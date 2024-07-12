@@ -30,7 +30,6 @@
 
 
 
-
 n = int(input())
 
 arr =  [0] + list(map(int, input().split()))
@@ -56,8 +55,6 @@ for i in range(3, n+1):
         
         if j:
             dp[i][j] = max(dp[i][j], dp[i-1][j-1] + arr[i])
-
-        
 
 
         # if i >= 2:  # i에서 두칸 전
