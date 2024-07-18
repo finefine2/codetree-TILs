@@ -18,7 +18,8 @@ for i in range(1, n):
             # T가 나오는 경우 T의 개수를 늘려준다.
             dp[i+1][j][0] = (dp[i+1][j][0] + dp[i][j][k]) % MOD
             # G가 나오는 경우 k=0으로 다시 돌아간다.
-            dp[i+1][j][k+1] = (dp[i+1][j][k+1] + dp[i][j][k]) % MOD
+            if k + 1 < 1:
+                dp[i+1][j][k+1] = (dp[i+1][j][k+1] + dp[i][j][k]) % MOD
             # B가 나오는 경우 원래에서 k를 증가시켜 준다.
 
 ans = 0
