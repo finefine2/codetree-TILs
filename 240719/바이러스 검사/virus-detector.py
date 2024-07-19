@@ -6,8 +6,13 @@ P = list(map(int,input().split()))
 # m 팀원 검사인원 
 l, m = map(int,input().split()) 
 ans = 0 
-mid = 0 
+ 
 for p in P: 
-    mid = (p - l) % m 
-    ans += mid 
+    p -= l 
+    ans += 1 
+
+    if p % m == 0: 
+        ans += p // m 
+    else: 
+        ans += p // m + 1
 print(ans)
