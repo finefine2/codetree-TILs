@@ -10,9 +10,9 @@ ans = 0
 for p in P: 
     p -= l 
     ans += 1 
-
-    if p % m == 0: 
-        ans += p // m 
-    else: 
-        ans += p // m + 1
+    if p > 0: 
+        if p % m == 0: 
+            ans += p // m 
+        else: 
+            ans += p // m + 1
 print(ans)
