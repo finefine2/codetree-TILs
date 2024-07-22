@@ -1,18 +1,23 @@
-# R 식당 개수 
-# P 식당 별 사람 수 
-R = int(input()) 
-P = list(map(int,input().split())) 
-# l 리더 검사인원 
-# m 팀원 검사인원 
-l, m = map(int,input().split()) 
+N = int(input()) 
+
+rest = list(map(int,input().split())) 
+
+L, T = map(int,input().split()) 
+
+
 ans = 0 
- 
-for p in P: 
-    p -= l 
+
+# 먼저 팀장은 무조건 한명씩이라도 사용함 
+# 고객수는 레스토랑마다 존재함 
+for r in rest: 
+    # 오로지 한명 있는 팀장은 일단 제거 
+    r -= L
     ans += 1 
-    if p > 0: 
-        if p % m == 0: 
-            ans += p // m 
+
+    # 만약 식당에 손님수가 남았다는 가정 하에 
+    if r > 0:
+        if r % T == 0: 
+            ans += (r // T)
         else: 
-            ans += p // m + 1
+            ans += (r // T)  +1
 print(ans)
