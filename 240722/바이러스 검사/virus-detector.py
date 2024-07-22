@@ -17,7 +17,7 @@ for r in rest:
     # 만약 식당에 손님수가 남았다는 가정 하에 
     if r > 0:
         if r % T == 0: 
-            ans += (r // N) 
+            ans += (r // N) + 1
         else: 
-            ans += (r // N) + 1 
+            ans += (r // N)  
 print(ans)
