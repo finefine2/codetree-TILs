@@ -1,14 +1,14 @@
 n = int(input())
 
-a = []
+b = []
 for i in range(n):
     num = int(input())
-    a.append(num)
+    b.append(num)
 
-b = []
+a = []
 for i in range(1, 2 * n + 1):
-    if i not in a:
-        b.append(i)
+    if i not in b:
+        a.append(i)
 
 a.sort()
 b.sort()
