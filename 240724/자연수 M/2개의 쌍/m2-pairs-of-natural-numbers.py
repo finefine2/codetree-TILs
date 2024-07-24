@@ -35,3 +35,11 @@ while left <= right:
         right -= 1
 
 print(ans)
+
+# 이분탐색과 같이 arr를 sort한 뒤에 left, right를 통해서 제일 큰 값과 제일 작은 값부터 가운데까지 온다.
+
+# 각각의 개수에 따라서 진행하는 데 만약에 right의 개수가 더 많을 경우에는 right에서 그 당시의 left수만큼을 빼주고, left는 옮긴다. left의 경우도 마찬가지다
+
+# 이 과정을 진행하고 나서의 right_y와 left_y의 합을 구하면서 최대값을 구해주면 시간복잡도에 알맞게 구할 수 있다.
+
+# 정렬하는데 O(NlogN), 매칭하는데 O(N)
