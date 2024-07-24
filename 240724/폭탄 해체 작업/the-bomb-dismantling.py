@@ -2,7 +2,7 @@ import heapq
 n = int(input())
 
 arr = []
-for i in range(4):
+for i in range(n):
     a, b = map(int, input().split())
     arr.append((b, a))
     # 시간제한, 점수
