@@ -30,7 +30,7 @@ while q:
     
     # 최솟값에 해당하는 정점에 연결된 간선들을 기준으로 거리를 갱신
     for tar_idx, tar_dist in arr[min_idx]:
-        new_dist = dist[min_idx] + target_dist
+        new_dist = dist[min_idx] + tar_dist
         
         # 현재 위치에서 연결된 간선으로 가는 것이 더 작으면 
         # 값을 갱신하고 우선순위 큐에 새로운 정보를 넣는다.
