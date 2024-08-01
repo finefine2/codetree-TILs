@@ -10,9 +10,7 @@ for k in range(1, n-1):
     heapq.heappop(q)
     # heapify 해주면 간단
 
-    s = 0
-    for l in q:
-        s += l
+    s = sum(q)
 
     if len(q) != 0:
         ans = max(ans, s / len(q))
