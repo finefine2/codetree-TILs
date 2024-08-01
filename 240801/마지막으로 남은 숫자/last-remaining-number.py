@@ -15,4 +15,7 @@ while len(q) >= 2:
     if num1 != num2:
         heapq.heappush(q, -abs(num1 - num2))
 
-print(-heapq.heappop(q))
+if len(q) == 0:
+    print(-1)
+else:
+    print(-heapq.heappop(q))
