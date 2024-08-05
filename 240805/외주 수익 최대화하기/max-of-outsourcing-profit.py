@@ -1,22 +1,11 @@
-N = int(input()) 
-tasklist = [0] * N 
-for i in range(N): 
-    tasklist[i] = list(map(int,input().split())) 
+N = int(input())
+tasklist = [list(map(int, input().split())) for _ in range(N)]
 
-def dfs(day,income): 
-    global maxx 
+income = [0] * (N+1)
 
-    if day > N: 
-        return 
-    elif day == N: 
-        maxx = max(maxx,income) 
-        return 
-    dfs(day+1,income) 
-    dfs(day+tasklist[day][0],income+tasklist[day][1]) 
-def main(): 
-    global maxx 
-    global N, tasklist
-    maxx = -10 
-    dfs(0,0) 
-    print(maxx) 
-main()
+for i in range(N):
+    if i + tasklist[i][0] <= N: 
+        income[i + tasklist[i][0]] = max(income[i+tasklist[i][0]],income[i] + tasklist[i][1]) 
+    income[i+1] = max(income[i+1],income[i])
+    
+print(income[-1])
