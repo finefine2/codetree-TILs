@@ -1,42 +1,39 @@
-# 아침 조합을 구한다 
-# 저녁 조합을 구한다 
-# 둘 간의 차를 구한다 
-
 N = int(input()) 
-board = [list(map(int,input().split())) for _ in range(N)] 
+p = [list(map(int,input().split())) for _ in range(N)] 
 
+evening = [False for _ in range(N)] 
 
-def gen_combi(arr,n): 
-    result = []
+ans = 1e9
+# 아침 저녁 간 힘듦의 차이 계산 
+def calc(): 
+    morning_sum = sum([
+        p[i][j] 
+        for i in range(N) 
+        for j in range(N) 
+        if not evening[i] and not evening[j]
+    ])
+    evening_sum = sum([
+        p[i][j] 
+        for i in range(N) 
+        for j in range(N) 
+        if evening[i] and evening[j]
+    ])
+    return abs(morning_sum - evening_sum)
+def find_min(idx,cnt): 
+    global ans 
+    # 아침 저녁으로 n/2 개씩 일이 나눴을 때에만 
 
-    if n == 0: 
-        return [[]]
-
-    for i in range(0,len(arr)): 
-        elem = arr[i] 
-        for C in gen_combi(arr[i+1:], n-1): 
-            result.append([elem]+C) 
-    return result
-
-def calculate_ans(numbers, board): 
-    ans = 0 
-
-    for i in range(len(numbers)): 
-        for j in range(i+1,len(numbers)): 
-            ans += board[numbers[i]][numbers[j]] + board[numbers[j]][numbers[i]]
-
-    return ans 
-
-numbers = list(range(N))
-morning_numbers = gen_combi(numbers,N//2) 
-evening_numbers = [num for num in numbers if num not in morning_numbers]
-
-min_diff = 1e9 
-for morning_num in morning_numbers: 
-    evening_num = [num for num in numbers if num not in morning_num] 
+    if cnt == N // 2:
+        ans = min(ans,calc()) 
+        return 
     
-    morning_sum = calculate_ans(morning_num,board) 
-    evening_sum = calculate_ans(evening_num,board)
+    if idx == N: 
+        return 
+    
+    find_min(idx+1,cnt) 
 
-    min_diff = min(min_diff, abs(morning_sum-evening_sum))
-print(min_diff)
+    evening[idx] = True 
+    find_min(idx+1,cnt+1) 
+    evening[idx] = False
+find_min(0,0) 
+print(ans)
