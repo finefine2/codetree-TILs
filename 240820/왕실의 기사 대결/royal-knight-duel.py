@@ -13,8 +13,7 @@
 # 벽만나면 return
 # pset의 unit들 dir방향으로 한 칸 움직임 디버깅용으로 표기
 from collections import deque
-import sys
-sys.stdin = open("input.txt","r")
+
 
 # d 0 1 2 3
 # N E S W
