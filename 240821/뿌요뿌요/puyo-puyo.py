@@ -27,6 +27,6 @@ for r in range(N):
 
 bomb = 0
 for a in ans:
-    if a > 4:
+    if a >= 4:
         bomb += 1
 print(bomb, max(ans))
