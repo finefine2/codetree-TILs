@@ -1,39 +1,34 @@
-N = int(input())
-board = [list(map(int,input().split())) for _ in range(N)] 
-visited = [[False for _ in range(N)] for _ in range(N)] 
+N = int(input()) 
 
-num = 0 
-nums = []
+board = [list(map(int,input().split())) for _ in range(N)] 
+
+cnt = 0 
+people_nums = [] 
+
+visited = [[0] * N for _ in range(N)] 
 
 def in_range(r,c): 
-    return 0 <= r < N and 0 <= c < N 
-
-def can_go(r,c): 
-    if not in_range(r,c): 
-        return False
-    if visited[r][c] or board[r][c] == 0: 
-        return False
-    return True 
-
+    return 0<=r<N and 0<=c<N
 def dfs(r,c): 
-    global num 
-    drs,dcs = [0,1,0,-1], [1,0,-1,0] 
+    global cnt 
+    drs,dcs = [0,1,0,-1],[1,0,-1,0]
+
+    visited[r][c] = 1 
     for dr,dc in zip(drs,dcs): 
         nr,nc = r + dr, c + dc 
-        if can_go(nr,nc): 
-            visited[nr][nc] = True 
-            num += 1 
+        if in_range(nr,nc) and not visited[nr][nc] and board[nr][nc] == 1: 
+            visited[nr][nc] = 1 
+            cnt += 1 
             dfs(nr,nc) 
 
-for i in range(N): 
-    for j in range(N): 
-        if can_go(i,j): 
-            visited[i][j] = True 
-            num = 1 
-            dfs(i,j) 
-            nums.append(num) 
-
-nums.sort() 
-print(len(nums)) 
-for i in range(len(nums)): 
-    print(nums[i])
+for r in range(N): 
+    for c in range(N): 
+        if not visited[r][c] and board[r][c] == 1: 
+            cnt = 1 
+            visited[r][c] = 1 
+            dfs(r,c) 
+            people_nums.append(cnt) 
+people_nums.sort() 
+print(len(people_nums))
+for p in people_nums: 
+    print(p)
