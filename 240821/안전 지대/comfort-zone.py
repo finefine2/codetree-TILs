@@ -1,5 +1,5 @@
-from copy import deepcopy 
-
+import sys
+sys.setrecursionlimit(2500)
 N,M = tuple(map(int,input().split())) 
 board = [list(map(int,input().split())) for _ in range(N)] 
 visited = [[0] * M for _ in range(N)] 
