@@ -32,8 +32,8 @@ def push(nr,nc,new_step):
     visited[nr][nc] = 1
     steps[nr][nc] = new_step
 
-for pr,pc in people_pos:
-    print(pr,pc)
+# for pr,pc in people_pos:
+#     print(pr,pc)
 q = deque()
 def bfs():
     cnt = 10000
