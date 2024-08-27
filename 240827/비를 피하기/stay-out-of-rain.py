@@ -47,7 +47,7 @@ def bfs():
 for p in people_pos:
     initialize_visit()
     initialize_steps()
-    cnt = 10000
+    cnt = -1
     pr,pc = p
     q.append((pr,pc))
     visited[pr][pc] = 1
@@ -59,13 +59,12 @@ for p in people_pos:
     # print("###############")
     for er,ec in exits:
         if visited[er][ec]:
-            # print(f"did it reach? {steps[er][ec]}")
-            if steps[er][ec] > 0:
-                cnt = min(cnt,steps[er][ec])
-            else:
-                cnt = -1
+            # cnt = min(cnt,steps[er][ec])
+            cnt = steps[er][ec]
+            # else:
+            #     cnt = -1
         elif not visited[er][ec]:
-            cnt = -1
+            continue
     ans[pr][pc] = cnt
 
 for a in ans:
