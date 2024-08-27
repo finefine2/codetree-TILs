@@ -36,7 +36,6 @@ def push(nr,nc,new_step):
 #     print(pr,pc)
 q = deque()
 def bfs():
-    cnt = 10000
     drs,dcs = [1,0,-1,0],[0,1,0,-1]
     while q:
         r,c = q.popleft()
@@ -44,22 +43,21 @@ def bfs():
             nr,nc = r + dr, c + dc
             if in_range(nr,nc) and not visited[nr][nc] and board[nr][nc] != 1:
                 push(nr,nc,steps[r][c]+1)
+
+for p in people_pos:
+    initialize_visit()
+    initialize_steps()
+    cnt = 10000
+    pr,pc = p
+    q.append((pr,pc))
+    visited[pr][pc] = 1
+    bfs()
     for er,ec in exits:
         if steps[er][ec]:
             cnt = min(cnt,steps[er][ec])
         else:
             cnt = -1
-    return cnt
-
-for p in people_pos:
-    initialize_visit()
-    initialize_steps()
-    pr,pc = p
-    q.append((pr,pc))
-    visited[pr][pc] = 1
-    steps[pr][pc] = 1
-
-    ans[pr][pc] = bfs() - 1
+    ans[pr][pc] = cnt
 
 for a in ans:
     print(*a)
