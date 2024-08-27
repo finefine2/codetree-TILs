@@ -52,11 +52,18 @@ for p in people_pos:
     q.append((pr,pc))
     visited[pr][pc] = 1
     bfs()
+    # print("###############")
+    # print(f"starting positions are {pr,pc}")
+    # for s in steps:
+    #     print(*s)
+    # print("###############")
     for er,ec in exits:
-        if steps[er][ec]:
-            cnt = min(cnt,steps[er][ec])
-        else:
-            cnt = -1
+        if visited[er][ec]:
+            # print(f"did it reach? {steps[er][ec]}")
+            if steps[er][ec] > 0:
+                cnt = min(cnt,steps[er][ec])
+            else:
+                cnt = -1
     ans[pr][pc] = cnt
 
 for a in ans:
