@@ -62,11 +62,11 @@ for p in people_pos:
             # print(f"did it reach? {steps[er][ec]}")
             if steps[er][ec] > 0:
                 cnt = min(cnt,steps[er][ec])
-                ans[pr][pc] = cnt 
             else:
-                # cnt = -1
-                ans[pr][pc] = -1 
-    # ans[pr][pc] = cnt
+                cnt = -1
+        elif not visited[er][ec]:
+            cnt = -1
+    ans[pr][pc] = cnt
 
 for a in ans:
     print(*a)
