@@ -1,32 +1,34 @@
+def is_happy_sequence(sequence, m):
+    count = 1  # 연속된 원소의 개수를 세기 위한 변수
+    for i in range(1, len(sequence)):
+        if sequence[i] == sequence[i - 1]:
+            count += 1
+            if count >= m:  # 연속된 원소가 m개 이상이면 행복한 수열
+                return True
+        else:
+            count = 1  # 다른 원소가 나오면 카운트 초기화
+    return False
+
+def count_happy_sequences(grid, m):
+    n = len(grid)
+    happy_count = 0
+    
+    # 각 행 검사
+    for row in grid:
+        if is_happy_sequence(row, m):
+            happy_count += 1
+    
+    # 각 열 검사
+    for col in range(n):
+        column_sequence = [grid[row][col] for row in range(n)]
+        if is_happy_sequence(column_sequence, m):
+            happy_count += 1
+    
+    return happy_count
+
+# 입력 예시
 N,M = tuple(map(int,input().split()))
 board = [list(map(int,input().split())) for _ in range(N)]
-
-row_list = []
-for i in range(N):
-    row_list.append(board[i])
-
-for j in range(N):
-    mid = [] * N
-    for i in range(N):
-        mid.append(board[i][j])
-    row_list.append(mid)
-# 작위적이지만 어찌저찌 구함...
-# print(row_list)
-
-# 이제 해피함수 만들기
-# m개 이상 연속으로 같은 수열인지
-def check_happy(arr):
-    consec_cnt, max_cnt = 1,1
-    for i in range(1,N):
-        if arr[i-1] == arr[i]:
-            consec_cnt += 1
-        else:
-            consec_cnt = 1
-        max_cnt = max(max_cnt,consec_cnt)
-    return consec_cnt >= M
-
-cnt = 0
-for r in row_list:
-    if check_happy(r):
-        cnt += 1
-print(cnt)
+# 결과 출력
+result = count_happy_sequences(board, M)
+print(result)  # 행복한 수열의 총 개수 출력
