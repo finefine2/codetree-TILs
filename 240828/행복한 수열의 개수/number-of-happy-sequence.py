@@ -14,16 +14,19 @@ for j in range(N):
 # print(row_list)
 
 # 이제 해피함수 만들기
+# m개 이상 연속으로 같은 수열인지
 def check_happy(arr):
-    for i in range(N-M+1):
-        # print(i)
-        if arr[i] == arr[i+M-1]:
-            return True
-    return False
+    consec_cnt, max_cnt = 1,1
+    for i in range(1,N):
+        if arr[i-1] == arr[i]:
+            consec_cnt += 1
+        else:
+            consec_cnt = 1
+        max_cnt = max(max_cnt,consec_cnt)
+    return consec_cnt >= M
 
 cnt = 0
 for r in row_list:
     if check_happy(r):
         cnt += 1
-
 print(cnt)
