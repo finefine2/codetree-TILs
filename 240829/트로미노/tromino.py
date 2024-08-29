@@ -35,21 +35,17 @@ def calc_4():
 def calc_5():
     max_cnt = -1
     for i in range(N):
-        cnt = 0
         for j in range(M-2):
-            for k in range(3):
-                cnt += board[i][j+k]
+            cnt = board[i][j] + board[i][j+1] + board[i][j+2]
                 # print(f"current positions are {i},{j+k}")
             max_cnt = max(max_cnt,cnt)
     return max_cnt
 def calc_6():
     max_cnt = -1
     for j in range(M):
-        cnt = 0
         for i in range(N-2):
-            for k in range(3):
-                cnt += board[i+k][j]
-                # print(f"current postitions are {i+k},{j}")
+            cnt = board[i][j] + board[i+1][j] + board[i+2][j]
+            # print(f"current postitions are {i+k},{j}")
             max_cnt = max(max_cnt,cnt)
     return max_cnt
 
