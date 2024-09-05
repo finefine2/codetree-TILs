@@ -37,6 +37,8 @@ while True:
 
     if not moved:
         break
-    else:
-        cnt += 1
+
+cnt = sum(visited[i][j] 
+        for i in range(N)
+        for j in range(M))
 print(cnt)
