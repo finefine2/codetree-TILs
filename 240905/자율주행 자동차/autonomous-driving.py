@@ -26,6 +26,7 @@ def simulate():
     if board[nr][nc] == 1:
         return False
     else:
+        r,c = nr,nc
         return True
 
 
