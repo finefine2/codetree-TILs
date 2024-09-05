@@ -42,3 +42,5 @@ while True:
 ans = sum(visited[i][j]
           for i in range(N)
           for j in range(M))
+
+print(ans)
