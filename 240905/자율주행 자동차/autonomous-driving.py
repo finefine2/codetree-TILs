@@ -10,7 +10,7 @@ def in_range(r,c):
     return 0<=r<N and 0<=c<M
 
 def can_move(r,c):
-    return not visited[r][c] and board[r][c] == 0
+    return board[r][c] == 0
 def bfs():
     drs,dcs = [-1,0,1,0],[0,1,0,-1]
 
