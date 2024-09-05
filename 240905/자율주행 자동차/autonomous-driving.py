@@ -2,7 +2,7 @@ N,M = tuple(map(int,input().split()))
 r,c,d = tuple(map(int,input().split()))
 
 board = [list(map(int,input().split())) for _ in range(N)]
-visited = [[0] * N for _ in range(N)]
+visited = [[0] * M for _ in range(N)]
 
 def in_range(r,c):
     return 0<=r<N and 0<=c<M
@@ -39,6 +39,6 @@ while True:
         break
 
 cnt = sum(visited[i][j] 
-        for i in range(N)
-        for j in range(M))
+          for i in range(N)
+          for j in range(M))
 print(cnt)
