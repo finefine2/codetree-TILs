@@ -1,44 +1,32 @@
+from collections import deque
+
 N,M = tuple(map(int,input().split()))
 r,c,d = tuple(map(int,input().split()))
-
 board = [list(map(int,input().split())) for _ in range(N)]
 visited = [[0] * M for _ in range(N)]
+
 
 def in_range(r,c):
     return 0<=r<N and 0<=c<M
 
-cnt = 0
-def move():
-
-    global r,c,d,cnt
-    visited[r][c] = 1
-    # N E S W
+def can_move(r,c):
+    return not visited[r][c] and board[r][c] == 0
+def bfs():
     drs,dcs = [-1,0,1,0],[0,1,0,-1]
-    # 4 방향을 먼저 탐색한다
-    for i in range(4):
-        nd = (d-1) % 4
-        nr,nc = r + drs[nd], c + dcs[nd]
-        if in_range(nr,nc) and not visited[nr][nc] and board[nr][nc] == 0:
-            r,c = nr,nc
-            d = nd
-            return True
-        else:
-            d = nd
-    # 만약 불가능하다면 후진을 시도한다
-    nr,nc = r - drs[d], c - dcs[d]
-    if board[nr][nc] == 0:
-        r,c = nr,nc
-        return True
-    else:
-        return False
 
-while True:
-    moved = move()
+    while q:
+        r,c = q.popleft()
+        for dr,dc in zip(drs,dcs):
+            nr,nc = r + dr, c + dc
+            if in_range(nr,nc) and can_move(nr,nc):
+                visited[nr][nc] = 1
+                q.append((nr,nc))
 
-    if not moved:
-        break
-
-cnt = sum(visited[i][j] 
+q = deque()
+q.append((r,c))
+visited[r][c] = 1
+bfs()
+ans = sum(visited[i][j]
           for i in range(N)
           for j in range(M))
-print(cnt)
+print(ans)
