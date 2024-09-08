@@ -1,112 +1,123 @@
-import copy
+'''
+1. 활성화 시킬 위치 선정 (combinantions)
+2. BFS 진행
+3. 모두 다 퍼졌는지 확인
+
+주의:
+활성 바이러스가 비활성 바이러스가 있는 칸으로 가면 비활성 바이러스가 활성으로 변한다
+모든 빈 칸에 바이러스를 퍼뜨리는 최소 시간(비활성이 활성 될 필욘 없음)
+'''
+
 from collections import deque
 
-N,M = tuple(map(int,input().split()))
-# 0 virus, 1 wall, 2 hospital
-board = []
-clinics = []
-for i in range(N):
-    board.append(list(map(int,input().split())))
-    for j in range(N):
-        if board[i][j] == 2:
-            clinics.append([i,j])
 
-visited = [[-1] * N for _ in range(N)]
-# steps = [[-1] * N for _ in range(N)]
-new_board = copy.deepcopy(board)
-def initialize_visit():
-    for r in range(N):
-        for c in range(N):
-            visited[r][c] = 0
-def initialize_board():
-    for r in range(N):
-        for c in range(N):
-            board[r][c] = new_board[r][c]
-# def initialize_step():
-#     for r in range(N):
-#         for c in range(N):
-#             steps[r][c] = -1
-def in_range(r,c):
-    return 0<=r<N and 0<=c<N
-def can_move(r,c):
-    return in_range(r,c) and not visited[r][c] and board[r][c] != 1
-def push(r,c,num):
-    visited[r][c] = num+1
-    board[r][c] = 2
-    # steps[r][c] = new_step + 1
-    q.append((r,c))
-def bfs():
-    drs,dcs = [-1,1,0,0],[0,0,-1,1]
-    while q:
-        r,c = q.popleft()
-        num = visited[r][c]
-        for dr,dc in zip(drs,dcs):
-            nr,nc = r + dr, c + dc
-            if can_move(nr,nc):
-                push(nr,nc,num)
-def get_time():
-    max_ans = -1
-    for r in range(N):
-        for c in range(N):
-            if max_ans < visited[r][c]:
-                max_ans = visited[r][c]
-    return max_ans
-def count_virus():
-    ans = 0
-    for r in range(N):
-        for c in range(N):
-            if board[r][c] == 0:
-                ans += 1
-    if ans == 0:
-        return True
-    else:
-        return False
-
-def gen_combi(arr,n):
-    res = []
+# combination 생성기
+def gen_combi(arr, n):
+    result = []
     if n == 0:
         return [[]]
-    for i in range(len(arr)):
-        elem = arr[i]
-        for C in gen_combi(arr[i+1:],n-1):
-            res.append([elem]+C)
-    return res
-candidates = gen_combi(clinics,M)
-# print(candidates)
-ans = 10000
-# for i in range(len(candidates)):
-#     print(f"this turn is {i+1}")
-#     hos = candidates[i]
-#     for r,c in hos:
-#         print(r,c)
-for i in range(len(candidates)):
-    # 0. 초기화
-    initialize_visit()
-    initialize_board()
-    # initialize_step()
-    q = deque()
-    # 1. 병원을 선택한다
-    hos = candidates[i]
-    # 1-1. q에 append한다
-    # 1-2. 방문처리 한다
-    # 1-3. step 값들에 0을 추가해준다
-    for r,c in hos:
-        q.append((r,c))
-        visited[r][c] = 0
-    # 2. 선택된 병원들로부터 bfs처리를 한다
-    bfs()
 
-    # 3. 모든 바이러스가 제거됐다는 가정하에, 바이러스가 제거되는 시간을 계산한다
-        # 3-0. 최대 steps를 return한다
-        # 3-1. 최솟값을 계속해서 갱신한다
-        # 3-2. 만약 바이러스를 다 제거못한다면 -1을 내놓는다
-    if count_virus():
-        cnt = get_time()
-        if cnt < ans:
-            ans = cnt
-    else:
-        ans = -1
-if ans <= 0:
-    print(ans)
-else:
-    print(ans-1)
+    for i in range(0, len(arr)):
+        elem = arr[i]
+        for C in gen_combi(arr[i + 1:], n - 1):
+            result.append([elem] + C)
+    return result
+
+
+# 0은 빈 칸, 1은 벽, 2는 바이러스
+def bfs(board, act_virus, rm_room):
+    
+    # 방문 확인용 visited 생성: 전부 -1 선언
+    visited = [[-1 for _ in range(N)] for _ in range(N)]
+    
+    # 선택된 바이러스는 0으로 선언
+    # 선택되지 않은 바이러스(비활성화)는 -2로 선언
+    for dis_virus in virus_pos:
+        if dis_virus not in act_virus:
+            visited[dis_virus[0]][dis_virus[1]] = -2
+        else:
+            visited[dis_virus[0]][dis_virus[1]] = 0
+    
+    
+    # (1, 2, 3, 4, 5)
+    # (1, 2, 3), (1, 2, 4)
+    # deque([1,2,3])
+    que = deque(act_virus)
+    # 총 걸린 시간
+    total_time = 0
+    
+    while que:
+        # cnt += 1
+        # for _ in range(len(que)):
+            
+        y, x = que.popleft()
+
+        # 제거할 방이 0이 되었을 경우 반환
+        if rm_room == 0:
+            return total_time
+        
+        for dy, dx in direct_list:
+            ny = y + dy
+            nx = x + dx
+            
+            # (ny, nx)가 board의 범위를 넘지않고, 
+            # 빈공간 혹은 비활성 바이러스일 경우 탐색 진행
+            if N > ny >= 0 and N > nx >= 0 and board[ny][nx] != 1:
+                
+                # 빈공간일 경우
+                # que에 집어넣고 total_time의 값 선정
+                # 제거해야할 방 갯수 줄임
+                if visited[ny][nx] == -1:
+                    visited[ny][nx] = visited[y][x] + 1
+                    que.append([ny, nx])
+                    total_time = visited[ny][nx]
+                    rm_room -= 1
+                
+                # 비활성 바이러스일 경우
+                # 활성 바이러스로 변경
+                # rm_room은 줄이지 않고 que에만 넣음
+                elif visited[ny][nx] == -2:
+                    visited[ny][nx] = visited[y][x] + 1
+                    que.append([ny, nx])
+    
+    # 제거할 rm이 남아있지만 더이상 제거 불가
+    # 답이 없다는 의미로 초기값(가장큰값) 반환
+    return 0xffff
+
+
+N, M = map(int, input().split())
+board_list = []
+# 바이러스 위치 찾기
+virus_pos = []
+# 빈방의 수(제거할 대상) 찾기
+rm_cnt = 0
+# 방향
+direct_list = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+# 가장 큰 값 세팅
+answer = 0xffff 
+
+for i in range(N):
+    row = []
+    for j, val in enumerate(map(int, input().split())):
+        row.append(val)
+        
+        if val == 2:
+            virus_pos.append([i, j])
+        elif val == 0:
+            rm_cnt += 1
+            
+    board_list.append(row)
+    
+
+# 처음에 제거할 대상이 없다면 0 출력
+if rm_cnt == 0:
+    print(0)
+else:        
+    # combination을 통해 선정된 바이러스를 bfs로 전환
+    # min을 통해 가장 작은 값을 찾음
+    for virus_combi in gen_combi(virus_pos, M):
+        act_time = bfs(board_list, virus_combi, rm_cnt)
+        answer = min(answer, act_time)
+
+    # 답이 초기 값을 경우 -1 출력
+    print(answer if 0xffff > answer else -1)
