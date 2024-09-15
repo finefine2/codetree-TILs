@@ -1,90 +1,77 @@
-#방향: 상 우 하 좌
-di = [-1, 0, 1, 0]
-dj = [ 0, 1, 0,-1]
-
-N, M, Q = map(int, input().split())
-# 벽으로 둘러싸서, 범위체크 안하고, 범위밖으로 밀리지 않게 처리
-arr = [[2]*(N+2)]+[[2]+list(map(int, input().split()))+[2] for _ in range(N)]+[[2]*(N+2)]
-units = {}
-# v = [[0]*(N+2) for _ in range(N+2)] # 디버거로 동작확인용
-init_k = [0]*(M+1)
-for m in range(1, M+1):
-    si,sj,h,w,k=map(int, input().split())
-    units[m]=[si,sj,h,w,k]
-    init_k[m]=k                 # 초기 체력 저장(ans 처리용)
-    # for i in range(si,si+h):    # 디버그용(제출시 삭제 가능)
-    #     v[i][sj:sj+w]=[m]*w
-
-def push_unit(start, dr):       # s를 밀고, 연쇄처리..
-    q = []                      # push 후보를 저장
-    pset = set()                # 이동 기사번호 저장
-    damage = [0]*(M+1)          # 각 유닛별 데미지 누적
-
-    q.append(start)             # 초기데이터 append
-    pset.add(start)
-
-    while q:
-        cur = q.pop(0)          # q에서 데이터 한개 꺼냄
-        ci,cj,h,w,k = units[cur]
-
-        # 명령받은 방향진행, 벽이아니면, 겹치는 다른조각이면 => 큐에 삽입
-        ni,nj=ci+di[dr], cj+dj[dr]
-        for i in range(ni, ni+h):
-            for j in range(nj, nj+w):
-                if arr[i][j]==2:    # 벽!! => 모두 취소
-                    return
-                if arr[i][j]==1:    # 함정인 경우
-                    damage[cur]+=1  # 데미지 누적
-
-        # 겹치는 다른 유닛있는 경우 큐에 추가(모든 유닛 체크)
-        for idx in units:
-            if idx in pset: continue    # 이미 움직일 대상이면 체크할 필요없음
-
-            ti,tj,th,tw,tk=units[idx]
-            # 겹치는 경우
-            if ni<=ti+th-1 and ni+h-1>=ti and tj<=nj+w-1 and nj<=tj+tw-1:
-                q.append(idx)
-                pset.add(idx)
-
-            # 겹치지 않는 경우 (이 반대가 확실히 겹치는지 따져보고 사용해야 함)
-            # if ni>ti+th-1 or ni+h-1<ti or nj+w-1<tj or nj>tj+tw-1:
-            #     pass
-            # else:
-            #     q.append(idx)
-            #     pset.add(idx)
-
-            # 상 우 하 좌 (닿는 경우.. 복잡함)
-            # if ((ni==ti+th-1 or ni+h-1==ti) and (tj<=nj<tj+tw or tj<=nj+w-1<tj+tw or nj<=tj<nj+w or nj<=tj+tw-1<nj+w)) or \
-            #         ((nj==tj+tw-1 or nj+w-1==tj) and (ti<=ni<ti+th or ti<=ni+h-1<ti+th or ni<=ti<ni+h or ni<=ti+th-1<ni+h)):
-            #     q.append(idx)
-            #     pset.add(idx)
-
-    # 명령 받은 기사는 데미지 입지 않음
-    damage[start]=0
-
-    # for idx in pset:
-    #     si,sj,h,w,k = units[idx]
-    #     for i in range(si, si + h):
-    #         v[i][sj:sj + w] = [0] * w  # 기존위치 지우기
-
-    # 이동, 데미지가 체력이상이면 삭제처리
-    for idx in pset:
-        si,sj,h,w,k = units[idx]
-
-        if k<=damage[idx]:  # 체력보다 더 큰 데미지면 삭제
-            units.pop(idx)
-        else:
-            ni,nj=si+di[dr], sj+dj[dr]
-            units[idx]=[ni,nj,h,w,k-damage[idx]]
-            # for i in range(ni,ni+h):
-            #     v[i][nj:nj+w]=[idx]*w     # 이동위치에 표시
-
-for _ in range(Q):  # 명령 입력받고 처리(있는 유닛만 처리)
-    idx, dr = map(int, input().split())
-    if idx in units:
-        push_unit(idx, dr)      # 명령받은 기사(연쇄적으로 밀기: 벽이 없는 경우)
+INF = -10000
+N, M, K, C = map(int, input().split())
+C = -(C+1)                      # 제초제는 음수처리(C+1년 후에 사라짐)
+arr = [[INF]*(N+2)]+[[INF]+list(map(int, input().split()))+[INF] for _ in range(N)]+[[INF]*(N+2)]
+for i in range(1, N + 1):
+    for j in range(1, N + 1):
+        if arr[i][j]==-1:
+            arr[i][j]=INF       # 건물(벽)을 영구적인 제초제 저리(나무 못자라고, 제초제 못 뻗어감)
 
 ans = 0
-for idx in units:
-    ans += init_k[idx]-units[idx][4]
+for _ in range(M):              # M년동안 진행
+    # [0] 1년의 시작 (제초제 감소)
+    for i in range(1,N+1):
+        for j in range(1,N+1):
+            if arr[i][j]<0:     # 제초제가 뿌려져 있다면 감소 (건물은 -10000 이므로 절대 0 되지 않음)
+                arr[i][j]+=1
+
+    # [1] 인접한 네칸 중 나무있는 칸 수만큼 동시에 성장
+    narr = [x[:] for x in arr]
+    for i in range(1,N+1):
+        for j in range(1,N+1):
+            if arr[i][j]>0:     # 나무가 있다면, 인접 나무수만큼 성장
+                for ni,nj in ((i-1,j),(i+1,j),(i,j-1),(i,j+1)):
+                    if arr[ni][nj]>0:
+                        narr[i][j]+=1
+    arr=narr
+
+    # [2] 인접한 빈칸에 번식(나무수//빈칸수 => 동시)
+    narr = [x[:] for x in arr]
+    for i in range(1,N+1):
+        for j in range(1,N+1):
+            if arr[i][j]>0:     # 내가 나무면 번식
+                tlst = []       # 빈칸 좌표 저장
+                for ni,nj in ((i-1,j),(i+1,j),(i,j-1),(i,j+1)):
+                    if arr[ni][nj]==0:
+                        tlst.append((ni,nj))
+                if len(tlst)>0: # 빈칸이 있는 경우 => 번식
+                    d = arr[i][j]//len(tlst)
+                    for ti,tj in tlst:
+                        narr[ti][tj]+=d
+    arr=narr
+
+    # [3-1] 가장 많이 박멸되는 칸을 찾기
+    mx, mx_i, mx_j = 0, 0, 0
+    for i in range(1,N+1):
+        for j in range(1,N+1):
+            if arr[i][j]>0:     # 나무 있는 칸에 뿌려야 제초제 확산됨
+                cnt = arr[i][j] # 내 자리(중심) 포함
+                for di,dj in ((-1,-1),(-1,1),(1,-1),(1,1)):
+                    for mul in range(1,K+1):    # 뻗어가면서 처리
+                        ni,nj=i+di*mul, j+dj*mul
+                        if arr[ni][nj]<=0:      # 빈땅, 제초제, 건물
+                            break               # 그 방향은 그만!
+                        else:                   # 나무 있는 경우
+                            cnt+=arr[ni][nj]
+                # 최대값이면 갱신
+                if mx < cnt:
+                    mx, mx_i, mx_j = cnt, i, j
+    if mx==0:   # 0이라면 나무가 한 그루도 없는것! => break
+        break
+    ans+=mx
+
+    # [3-2] 제초제 살표
+    # 전파되는 도중 벽이 있거나 나무가 아얘 없는 칸이 있는 경우,
+    # 그 칸 까지는 제초제가 뿌려지며 그 이후의 칸으로는 제초제가 전파되지 않습니다
+    arr[mx_i][mx_j]=C       # 중앙자리에 제초제 뿌림
+    for di, dj in ((-1, -1), (-1, 1), (1, -1), (1, 1)):
+        for mul in range(1, K + 1):  # 뻗어가면서 처리
+            ni, nj = mx_i + di * mul, mx_j + dj * mul
+            # 벽(건물)에 제초제 뿌리면 건물이 시간지나면 빈땅이됨!!!
+            if arr[ni][nj]<=0:      # 뻗어가는것이 종료되는 조건: 빈땅, 제초제뿌려진 빈땅, 벽(건물)을 제외!!
+                if C<=arr[ni][nj]:  # 제초제 뿌리는 조건
+                    arr[ni][nj] = C # 뿌리고
+                break
+            else:                   # 나무면
+                arr[ni][nj] = C
 print(ans)
