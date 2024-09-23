@@ -8,12 +8,12 @@ e_r -= 1
 e_c -= 1
 
 
-def find_square(arr):
+def find_square(board):
     # [1] 비상구와 모든 사람간의 가장 짧은 가로 혹은 세로거리 구하기
     mn = N
     for r in range(N):
         for c in range(N):
-            if -11 < arr[r][c] <0:
+            if -11 < board[r][c] <0:
                 mn = min(mn,max(abs(e_r-r),abs(e_c-c)))
     # [2] (0,0) 부터 순회하면서 길이 L인 정사각형에 비상구와 사람이 있나 체크
     # 가능한 모든 시작위치
@@ -24,12 +24,12 @@ def find_square(arr):
                     for c in range(sc,sc+mn+1):
                         if -11 < board[r][c] < 0:
                             return sr,sc,mn+1
-                        
-def find_exit(arr): 
-    for r in range(N): 
-        for c in range(N): 
-            if arr[r][c] == -11: 
-                return r,c 
+
+def find_exit(board):
+    for r in range(N):
+        for c in range(N):
+            if board[r][c] == -11:
+                return r,c
 ans = 0
 cnt = M
 drs,dcs = [-1,1,0,0],[0,0,-1,1]
