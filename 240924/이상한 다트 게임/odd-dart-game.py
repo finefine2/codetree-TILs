@@ -21,7 +21,7 @@ def bfs(sr,sc):
                 cnt += 1
     # 인접한 같은값 없는것이므로.. 원상복구!
     if cnt == 1:
-        v[si][sj] = 0
+        v[sr][sc] = 0
 N, M, T = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(N)]
 
