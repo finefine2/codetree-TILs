@@ -1,11 +1,12 @@
 M, S = map(int, input().split())
+si,sj = map(int, input().split())
+si,sj = si-1,sj-1
 fish = []
 for _ in range(M):
     i,j,dr = map(int, input().split())
     # [0]:i, [1]:j, [2]:dr, [3]:cnt: 군집크기
     fish.append([i-1,j-1,dr-1,1])
-si,sj = map(int, input().split())
-si,sj = si-1,sj-1
+
 v = [[0]*4 for _ in range(4)]   # 물고기 냄새 표시
 boundary = set([(i,j) for j in range(4) for i in range(4)])
 
