@@ -1,86 +1,92 @@
-from collections import deque
+from collections import deque 
 
-N, M = tuple(map(int, input().split()))
-board = [[-1] * (N + 2)] + [[-1] + list(map(int, input().split())) + [-1] for _ in range(N)] + [[-1] * (N + 2)]
-EMPTY = M + 1
-ans = 0
+RED = 0 
+ROCK = -1 
+EMPTY = M+1 
+EMPTY_BUNDLE = (-1,-1,-1,-1) 
 
-def bfs():
-    v = [[0] * (N + 2) for _ in range(N + 2)]
-    mx_group = set()
-    mx_rcnt = float('inf')  # 빨간색 폭탄 수를 최소화하기 위해 초기값을 무한대로 설정
-    drs, dcs = [-1, 1, 0, 0], [0, 0, -1, 1]
-    
-    for sr in range(N + 1, 0, -1):
-        for sc in range(1, N + 1):
-            if v[sr][sc] == 0 and 0 < board[sr][sc] <= M:
-                q = deque()
-                group = set()
-                r_cnt = 0
-                color_count = {}
-                
-                q.append((sr, sc))
-                group.add((sr, sc))
-                v[sr][sc] = 1
-                color = board[sr][sc]
-                color_count[color] = color_count.get(color, 0) + 1
+N,M = tuple(map(int,input().split())) 
+board = [list(map(int,input().split())) for _ in range(N)] 
 
-                while q:
-                    cr, cc = q.popleft()
-                    for dr, dc in zip(drs, dcs):
-                        nr, nc = cr + dr, cc + dc
-                        if v[nr][nc] == 0 and (nr, nc) not in group and (board[nr][nc] == color or board[nr][nc] == 0):
-                            q.append((nr, nc))
-                            group.add((nr, nc))
-                            v[nr][nc] = 1
-                            if board[nr][nc] == 0:
-                                r_cnt += 1
-                            else:
-                                color_count[board[nr][nc]] = color_count.get(board[nr][nc], 0) + 1
+q = deque() 
+visited = [[0] * N for _ in range(N)] 
+ans = 0 
 
-                # 폭탄 묶음 조건 확인
-                if len(group) >= 2:
-                    if (len(color_count) == 1 and color not in color_count) or (len(color_count) > 2):
-                        continue  # 빨간색 폭탄만 있거나 2개 이상의 색깔이 있는 경우 제외
+def in_range(r,c): 
+    return 0<=r<N and 0<=c<N 
 
-                    # 폭탄 묶음 선택 우선순위
-                    if len(mx_group) < len(group) or (len(mx_group) == len(group) and mx_rcnt > r_cnt):
-                        mx_group, mx_rcnt = group, r_cnt
-                    elif len(mx_group) == len(group) and mx_rcnt == r_cnt:
-                        # 기준점 선택
-                        max_row = max((r for r, c in group if board[r][c] != 0), default=-1)
-                        min_col = min((c for r, c in group if board[r][c] != 0 and r == max_row), default=float('inf'))
-                        if max_row > -1 and (max_row, min_col) < (max((r for r, c in mx_group if board[r][c] != 0), default=-1), min((c for r, c in mx_group if board[r][c] != 0 and r == max((r for r, c in mx_group if board[r][c] != 0), default=-1)), default=float('inf')))):
-                            mx_group = group
+def can_go(r,c,color): 
+    return in_range(r,c) and not visited[r][c] and (board[r][c] == color or board[r][c] == RED) 
 
-    return mx_group
+def bfs(sr,sc,color): 
+    # initialize visited 
+    for r in range(N): 
+        for c in range(N): 
+            visited[r][c] = 0 
+    visited[sr][sc] = 1 
+    q.append((sr,sc)) 
 
-def gravity():
-    for sc in range(1, N + 1):
-        cr = N
-        for sr in range(N, 0, -1):
-            if board[sr][sc] != EMPTY:
-                if sr != cr:
-                    board[cr][sc] = board[sr][sc]
-                    board[sr][sc] = EMPTY
+    drs,dcs = [0,1,0,-1],[1,0,-1,0] 
+    while q: 
+        cr,cc = q.popleft() 
+        for dr,dc in zip(drs,dcs): 
+            nr,nc = cr + dr, cc + dc 
+            if can_go(nr,nc,color): 
+                q.append((nr,nc)) 
+                visited[nr][nc] = 1 
+def get_bundle(sr,sc): 
+    bfs(sr,sc,board[sr][sc]) 
+
+    bomb_cnt,red_cnt = 0,0 
+    standard = (-1,-1) 
+    for r in range(N): 
+        for c in range(N): 
+            if not visited[r][c]: 
+                continue 
+            bomb_cnt += 1 
+            if board[r][c] == RED: 
+                red_cnt += 1 
+            elif (r,-c) > standard: 
+                standard = (r,-c) 
+    std_r,std_c = standard
+    return (bomb_cnt,-red_cnt,std_r,std_c) 
+
+def find_best_bundle(): 
+    best_bundle = EMPTY_BUNDLE
+    for r in range(N): 
+        for c in range(N): 
+            if board[r][c] >= 1: 
+                bundle = get_bundle(r,c) 
+                if bundle > best_bundle: 
+                    best_bundle = bundle
+    return best_bundle
+
+def remove(): 
+    for r in range(N): 
+        for c in range(N): 
+            if visited[r][c]: 
+                board[r][c] = EMPTY 
+
+def gravity(): 
+    for sr in range(0,N-1): 
+        for sc in range(N): 
+            cr,cc = sr,sc 
+            while in_range(cr,cc) and 0<=board[cr][cc]<=M and board[cr+1][cc] == EMPTY: 
+                board[cr][cc],board[cr+1][cc] = board[cr+1][cc], board[cr][cc] 
                 cr -= 1
 
-def counter_rotate(arr):
-    narr = [x[:] for x in arr]
-    for r in range(len(arr)):
-        for c in range(len(arr[0])):
-            narr[r][c] = arr[c][len(arr) - r - 1]
-    return narr
-
-while True:
-    bomb_group = bfs()
-    if len(bomb_group) == 0:
-        break
-    ans += len(bomb_group) ** 2
-    for br, bc in bomb_group:
-        board[br][bc] = EMPTY
+def clean(r,c): 
+    bfs(r,c,board[r][c]) 
+    remove() 
     gravity()
-    board = counter_rotate(board)
-    gravity()
-
+ans = 0 
+while True: 
+    best_bundle = find_best_bundle() 
+    bomb_cnt,_,r,c = best_bundle
+    if best_bundle == EMPTY_BUNDLE or bomb_cnt <= 1: 
+        break 
+    ans += bomb_cnt ** 2 
+    clean(r,-c) 
+    board = list(map(list,zip(*board)))[::-1] 
+    gravity() 
 print(ans)
