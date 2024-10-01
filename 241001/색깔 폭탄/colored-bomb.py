@@ -1,11 +1,10 @@
 from collections import deque 
 
+N,M = tuple(map(int,input().split())) 
 RED = 0 
 ROCK = -1 
 EMPTY = M+1 
 EMPTY_BUNDLE = (-1,-1,-1,-1) 
-
-N,M = tuple(map(int,input().split())) 
 board = [list(map(int,input().split())) for _ in range(N)] 
 
 q = deque() 
