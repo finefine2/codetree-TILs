@@ -37,12 +37,12 @@ def in_range(r,c):
 
 def bfs(v,arr,r,c,clr):
     q = deque()
+    sset = set()
+    cnt = 0
+
     q.append((r,c))
     v[r][c] = 1
-    drs,dcs = [-1,1,0,0],[0,0,-1,1]
-
-    cnt = 0
-    sset = set()
+    drs,dcs = [1,0,-1,0],[0,1,0,-1]
     sset.add((r,c))
     cnt += 1
     while q:
@@ -77,8 +77,8 @@ for _ in range(K):
     max_cnt = 0
 
     for rot in range(1,4):
-        for sr in range(3):
-            for sc in range(3):
+        for sc in range(3):
+            for sr in range(3):
                 nboard = [x[:] for x in board]
                 for _ in range(rot):
                     nboard = rotate(sr,sc,nboard)
