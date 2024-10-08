@@ -8,18 +8,30 @@ def bfs():
     # 미방문 일반블럭에서 BFS 확산(가장 큰 크기=> .. )
     v = [[0]*(N+2) for _ in range(N+2)]
     mx_group = set()
-    mx_rcnt=-1
+    min_rcnt = N ** 2
+    best_r = -1
+    best_c = N + 1
+
+    def get_base_point(group):
+        base_row = -1
+        base_col = N+1
+        for (r,c) in group:
+            if arr[r][c] != 0:
+                if r > base_row or (r == base_row and c < base_col):
+                    base_row,base_col = r,c
+        return base_row,base_col
+
     for si in range(1,N+1):
         for sj in range(1,N+1):
             if v[si][sj]==0 and 0<arr[si][sj]<=M:   # 미방문 일반블럭
                 q = deque()
                 group=set()
+                r_cnt = 0
 
                 q.append((si,sj))
                 group.add((si,sj))
                 v[si][sj]=1
                 color=arr[si][sj]
-                r_cnt=0
 
                 while q:
                     ci,cj=q.popleft()
@@ -33,10 +45,14 @@ def bfs():
                                 r_cnt+=1
                             else:               # 일반블록
                                 v[ni][nj]=1
-
-                # 그룹개수 > 같으면 rcnt 큰값 > 행 > 열
-                if len(mx_group)<len(group) or (len(mx_group)==len(group) and mx_rcnt<=r_cnt):
-                    mx_group, mx_rcnt = group, r_cnt
+                group_size = len(group)
+                base_r,base_c = get_base_point(group)
+                if group_size > len(mx_group) or (group_size==len(mx_group) and r_cnt < min_rcnt) or (group_size == len(mx_group) and r_cnt == min_rcnt and (base_r > best_r or (base_r == best_r and base_c < best_c))):
+                # 그룹개수 > 같으면 rcnt 작은값 > 행은 클수록 > 열은 작을수록
+                    mx_group = group
+                    min_rcnt = r_cnt
+                    best_r = base_r
+                    best_c = base_c
     return mx_group
 
 def gravity():
