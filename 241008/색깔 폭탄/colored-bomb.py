@@ -9,9 +9,7 @@ def bfs():
     v = [[0]*(N+2) for _ in range(N+2)]
     mx_group = set()
     min_rcnt = N ** 2
-    best_r = -1
-    best_c = N + 1
-
+    tlst = []
     def get_base_point(group):
         base_row = -1
         base_col = N+1
@@ -47,12 +45,12 @@ def bfs():
                                 v[ni][nj]=1
                 group_size = len(group)
                 base_r,base_c = get_base_point(group)
-                if group_size > len(mx_group) or (group_size==len(mx_group) and r_cnt < min_rcnt) or (group_size == len(mx_group) and r_cnt == min_rcnt and (base_r > best_r or (base_r == best_r and base_c < best_c))):
-                # 그룹개수 > 같으면 rcnt 작은값 > 행은 클수록 > 열은 작을수록
-                    mx_group = group
-                    min_rcnt = r_cnt
-                    best_r = base_r
-                    best_c = base_c
+                tlst.append((group_size,r_cnt,base_r,base_c,group))
+                # 그룹 개수 클수록, rcnt 작을수록, 행은 클수록, 열은 작을수록
+                if len(tlst) > 0:
+                    tlst.sort(key = lambda x: (-x[0],x[1],-x[2],x[3]))
+                    mx_group = tlst[0][-1]
+
     return mx_group
 
 def gravity():
