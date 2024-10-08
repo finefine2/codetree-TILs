@@ -1,66 +1,67 @@
-from collections import deque
+from collections import deque 
 
-N,M  = tuple(map(int,input().split()))
-board = [list(map(int,input().split())) for _ in range(N)]
-
+N,M = tuple(map(int,input().split())) 
+board = [[-1] * (N+2)] + [[-1] + list(map(int,input().split())) + [-1] for _ in range(N)] + [[-1] * (N+2)] 
 EMPTY = M+1
-RED = 0
-def in_range(r,c):
-    return 0<=r<N and 0<=c<N
-def bfs(sr,sc):
-    q = deque()
-    q.append((sr,sc))
-    v = [[0] * N for _ in range(N)]
-    v[sr][sc] = 1
-    tmp,tmp_red,tmp_list = 1,0,[(sr,sc)]
-    drs,dcs = [-1,1,0,0],[0,0,-1,1]
-    while q:
-        cr,cc = q.popleft()
-        for dr,dc in zip(drs,dcs):
-            nr,nc = cr + dr, cc + dc
-            if in_range(nr,nc) and not v[nr][nc] and (board[nr][nc] == board[cr][cc] or board[nr][nc] == RED):
-                q.append((nr,nc))
-                v[nr][nc] = 1
-                tmp += 1
-                tmp_list.append((nr,nc))
-                if board[nr][nc] == RED:
-                    tmp_red += 1
-    return tmp, tmp_red, tmp_list
-def gravity():
-    for sr in range(N-1):
-        for sc in range(N):
-            cr,cc = sr,sc
-            while in_range(cr,cc) and 0<=board[cr][cc]<=M and board[cr+1][cc]==EMPTY:
-                board[cr][cc],board[cr+1][cc] = board[cr+1][cc],board[cr][cc]
-                cr -= 1
-ans = 0
-while True:
 
-    max_cnt, min_red, bomb_list = 0,N**2,[]
-    # 행이 크고 열은 작다
-    for r in range(N-1,-1,-1):
-        for c in range(N):
-            if 0 < board[r][c] <= M:
-                tmp,tmp_red,tmp_list = bfs(r,c)
-                # 크기가 가장 큰 폭탄묶음
-                if tmp > max_cnt:
-                    max_cnt = tmp
-                    min_red = tmp_red
-                    bomb_list = tmp_list
-                # 빨간 폭탄이 가장 적게 포함
-                elif tmp == max_cnt:
-                    if tmp_red < min_red:
-                        min_red = tmp_red
-                        bomb_list = tmp_list
+ans = 0 
 
-    if max_cnt < 2:
-        break
-    ans += max_cnt ** 2
-    # 폭탄 제거
-    for br,bc in bomb_list:
-        board[br][bc] = EMPTY
-    gravity()
-    # counter clockwise rotation
-    board = list(map(list,zip(*board)))[::-1]
-    gravity()
+def gravity(): 
+    for sr in range(1,N): 
+        for sc in range(1,N+1): 
+            cr,cc = sr,sc 
+            while 0<=board[cr][cc]<=M and board[cr+1][cc] == EMPTY: 
+                board[cr][cc],board[cr+1][cc] = board[cr+1][cc],board[cr][cc] 
+                cr -= 1 
+def get_base(group): 
+    base_r,base_c = -1, N+1
+    for (r,c) in group: 
+        if r > base_r or (r==base_r and c < base_c): 
+            base_r,base_c = r,c 
+    return base_r, base_c
+def bfs(): 
+    v = [[0] * (N+2) for _ in range(N+2)] 
+    tlst = [] 
+    max_group = set() 
+    drs,dcs = [-1,0,1,0],[0,1,0,-1] 
+    for sr in range(1,N+1): 
+        for sc in range(1,N+1): 
+            if v[sr][sc] == 0 and 0<board[sr][sc]<=M: # 미방문 일반블럭 
+                q = deque() 
+                group = set() 
+                r_cnt = 0 
+
+                q.append((sr,sc)) 
+                group.add((sr,sc)) 
+                color = board[sr][sc]
+                v[sr][sc] = 1 
+                while q: 
+                    cr,cc = q.popleft() 
+                    for dr,dc in zip(drs,dcs): 
+                        nr,nc = cr + dr, cc + dc 
+                        if v[nr][nc] == 0 and (nr,nc) not in group and (board[nr][nc] == color or board[nr][nc] == 0): 
+                            q.append((nr,nc)) 
+                            group.add((nr,nc)) 
+                            if board[nr][nc] == 0: 
+                                r_cnt += 1 
+                            elif 0<board[nr][nc]<=M: 
+                                v[nr][nc] = 1 
+                base_r, base_c = get_base(group) 
+                tlst.append((len(group),r_cnt,base_r,base_c,group))
+                if len(tlst) > 0: 
+                    tlst.sort(key=lambda x:(-x[0],x[1],-x[2],x[3]))
+                    max_group = tlst[0][-1] 
+    return max_group
+while True: 
+    bomb_group = bfs() 
+    if len(bomb_group) < 2: 
+        break 
+
+    ans += len(bomb_group) ** 2 
+
+    for br,bc in bomb_group: 
+        board[br][bc] = EMPTY 
+    gravity() 
+    board = list(map(list,zip(*board)))[::-1] 
+    gravity() 
 print(ans)
