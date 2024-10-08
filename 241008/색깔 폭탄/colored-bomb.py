@@ -44,7 +44,7 @@ def bfs():
                             group.add((nr,nc)) 
                             if board[nr][nc] == 0: 
                                 r_cnt += 1 
-                            elif 0<board[nr][nc]<=M: 
+                            else: 
                                 v[nr][nc] = 1 
                 base_r, base_c = get_base(group) 
                 tlst.append((len(group),r_cnt,base_r,base_c,group))
