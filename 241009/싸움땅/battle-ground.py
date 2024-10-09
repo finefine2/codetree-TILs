@@ -22,7 +22,7 @@ def leave(num,cr,cc,cd,cp,cg,cs):
     for k in range(4): 
         nr,nc = cr + drs[(cd+k)%4], cc + dcs[(cd+k)%4]
         if in_range(nr,nc) and board[nr][nc] == 0: 
-            if len(guns[nr][nc]): 
+            if len(guns[nr][nc]) > 0: 
                 cg = max(guns[nr][nc]) 
                 guns[nr][nc].remove(cg) 
             board[nr][nc] = num 
@@ -52,8 +52,8 @@ for _ in range(K):
                 if mx > cg: 
                     if cg > 0:
                         guns[nr][nc].append(cg) 
-                cg = mx 
-                guns[nr][nc].remove(mx) 
+                    cg = mx 
+                    guns[nr][nc].remove(mx) 
             board[nr][nc] = i
             players[i] = [nr,nc,cd,cp,cg,cs]
         # 2-2 플레이어가 존재한다 
