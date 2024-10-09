@@ -76,7 +76,7 @@ def remove():
 def decrease(): 
     for r in range(N): 
         for c in range(N): 
-            if split[r][c] > 0: 
+            if spray[r][c] > 0: 
                 spray[r][c] -= 1
 for i in range(M): 
     grow() 
