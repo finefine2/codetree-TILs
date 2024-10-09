@@ -64,14 +64,15 @@ for _ in range(K):
             # 싸움을 시작한다 
             # 내가 이기는 경우 
             if cp + cg > ep + eg or (cp + cg == ep + eg and cp > ep): 
+                cs += (cp+cg) - (ep+eg)
                 leave(enemy,nr,nc,ed,ep,0,es) 
-                cs += (cp+cg) - (ep+eg) 
                 if eg > cg: 
                     if cg > 0: 
                         guns[nr][nc].append(cg) 
-                    else: 
-                        guns[nr][nc].append(eg) 
                     cg = eg 
+                else: 
+                    if eg > 0: 
+                        guns[nr][nc].append(eg)   
                 board[nr][nc] = i 
                 players[i] = [nr,nc,cd,cp,cg,cs] 
             # 상대가 이기는 경우
@@ -81,9 +82,10 @@ for _ in range(K):
                 if cg > eg: 
                     if eg > 0: 
                         guns[nr][nc].append(eg) 
-                    else: 
-                        guns[nr][nc].append(cg) 
                     eg = cg 
+                else: 
+                    if cg > 0: 
+                        guns[nr][nc].append(cg) 
                 board[nr][nc] = enemy
                 players[enemy] = [nr,nc,ed,ep,eg,es] 
 for p in players: 
