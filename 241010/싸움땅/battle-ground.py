@@ -22,7 +22,7 @@ drs, dcs = [-1,0,1,0],[0,1,0,-1]
 
 def leave(num,cr,cc,cd,cp,cg,cs):
     for k in range(4): # 현재 방향부터 90도씩 빈칸 찾기 (최소한 내가 온 칸은 비어있음)
-        nr,nc = cr + (cd+k) % 4, cc + (cd+k) % 4
+        nr,nc = cr + drs[(cd+k) % 4], cc + dcs[(cd+k) % 4]
         if in_range(nr,nc) and board[nr][nc] == 0:
             # 총이 있다면 가장 강한 총을 획득
             if len(guns[nr][nc]) > 0:
