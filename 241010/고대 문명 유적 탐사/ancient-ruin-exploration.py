@@ -56,8 +56,8 @@ for _ in range(K):
     # 1 탐사 진행 
     mx_cnt = 0 
     for rot in range(1,4): # 회전수 -> 열 -> 행 (작은순) 
-        for sr in range(3): 
-            for sc in range(3): 
+        for sc in range(3): 
+            for sr in range(3): 
                 # rot 횟수만큼 90 도 시계방향 회전 nboard 
                 nboard = [x[:] for x in board] 
                 for _ in range(rot): 
