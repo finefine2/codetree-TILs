@@ -51,8 +51,8 @@ for _ in range(K): # K 라운드 동안 경기 진행
                 if mx > cg: # 더 강한 총이면 교체
                     if cg > 0: # 내가 만약 총을 들고 있다면?
                         guns[nr][nc].append(cg) # 내 총은 바닥에 반납
-                guns[nr][nc].remove(mx)
-                cg = mx
+                    guns[nr][nc].remove(mx)
+                    cg = mx
             board[nr][nc] = i # 위치 이동
             players[i] = [nr,nc,cd,cp,cg,cs] # 정보 업데이트
 
