@@ -71,8 +71,8 @@ for _ in range(K):
     if mx_cnt == 0: 
         break 
     # 2 연쇄획득 
-    cnt = 0 
     board = mboard
+    cnt = 0 
     while True: 
         t = count_clear(board,1) 
         if t == 0: #연쇄획득 종료 -> 다음 턴으로  
