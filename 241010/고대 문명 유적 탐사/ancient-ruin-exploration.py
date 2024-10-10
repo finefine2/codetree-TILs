@@ -36,8 +36,8 @@ def bfs(board,v,sr,sc,clr):
 def count_clear(board,clr): # clr = 1인 경우 3개 이상의 값들을 0으로 clear 
     v = [[0] * 5 for _ in range(5)] 
     cnt = 0 
-    for r in range(5): 
-        for c in range(5): # 미방문의 경우 같은 값이면 fill
+    for r in range(len(board)): 
+        for c in range(len(board[0])): # 미방문의 경우 같은 값이면 fill
             if v[r][c] == 0: 
                 # 같은 값이면, 3개 이상인 경우 
                 t = bfs(board,v,r,c,clr) 
