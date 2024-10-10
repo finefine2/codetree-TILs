@@ -28,9 +28,9 @@ def leave(num,cr,cc,cd,cp,cg,cs):
             if len(guns[nr][nc]) > 0:
                 cg = max(guns[nr][nc])
                 guns[nr][nc].remove(cg)
-        players[num] = [nr,nc,(cd+k)%4,cp,cg,cs]# 내 정보들을 갱신한 후 리턴
-        board[nr][nc] = num
-        return
+            players[num] = [nr,nc,(cd+k)%4,cp,cg,cs]# 내 정보들을 갱신한 후 리턴
+            board[nr][nc] = num
+            return
 def in_range(r,c):
     return 0<=r<N and 0<=c<N
 for _ in range(K): # K 라운드 동안 경기 진행
