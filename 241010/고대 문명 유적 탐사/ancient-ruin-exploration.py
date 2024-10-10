@@ -18,7 +18,7 @@ def bfs(board,v,sr,sc,clr):
     while q: 
         cr,cc = q.popleft() 
         # 4방향 미방문 범위내 조건: 같은 값 
-        for dr,dc in ((-1,0),(1,0),(0,-1),(0,1)): 
+        for dr,dc in ((1,0),(0,1),(-1,0),(0,-1)): 
             nr,nc = cr + dr, cc + dc 
             if 0<=nr<5 and 0<=nc<5 and v[nr][nc] == 0 and board[cr][cc] == board[nr][nc]: 
                 q.append((nr,nc)) 
