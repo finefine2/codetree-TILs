@@ -7,7 +7,7 @@ for _ in range(M):
     r,c = tuple(map(int,input().split()))
     r -= 1
     c -= 1
-    board[r][c] = -1 # 사람을 -1로 처리 (같은 위치에 여러명 있을 수 있음)
+    board[r][c] -= 1 # 사람을 -1로 처리 (같은 위치에 여러명 있을 수 있음)
 
 er,ec = tuple(map(int,input().split()))
 er -= 1
