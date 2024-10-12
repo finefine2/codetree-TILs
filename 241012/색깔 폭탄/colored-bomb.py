@@ -7,8 +7,9 @@ board = [[-1] * (N+2)] + [[-1] + list(map(int,input().split())) + [-1] for _ in 
 def get_base(group):
     base_r, base_c = -1, N+1
     for (r,c) in group:
-        if base_r < r or (base_r == r and base_c > c):
-            base_r,base_c = r,c
+        if board[r][c] != 0: 
+            if base_r < r or (base_r == r and base_c > c):
+                base_r,base_c = r,c
     return base_r,base_c
 ans = 0
 # 가장 큰 폭탄묶음을 찾아야한다
