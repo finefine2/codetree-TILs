@@ -1,86 +1,102 @@
-def rotate(board,sr,sc): 
-    nboard = [x[:] for x in board] 
-    for r in range(3): 
-        for c in range(3): 
-            nboard[sr+r][sc+c] = board[sr+3-c-1][sc+r] 
-    return nboard
+def rotate(board, start_r, start_c): 
+    new_board = [x[:] for x in board]
+    for r in range(3):
+        for c in range(3):
+            new_board[start_r+r][start_c+c] = board[start_r+3-c-1][start_c+r] 
+    return new_board
 
-from collections import deque 
+def bfs(board, visited, start_r, start_c, clear_mode):
+    from collections import deque
+    
+    # 시작 위치의 값이 0이면 즉시 반환
+    if board[start_r][start_c] == 0:
+        return 0
+        
+    q = deque([(start_r, start_c)])
+    connected = {(start_r, start_c)}
+    visited[start_r][start_c] = 1
+    target = board[start_r][start_c]
+    
+    while q:
+        curr_r, curr_c = q.popleft()
+        for dr, dc in ((-1,0), (1,0), (0,-1), (0,1)):
+            next_r, next_c = curr_r + dr, curr_c + dc
+            if (0 <= next_r < 5 and 0 <= next_c < 5 and 
+                visited[next_r][next_c] == 0 and 
+                board[next_r][next_c] == target):
+                q.append((next_r, next_c))
+                connected.add((next_r, next_c))
+                visited[next_r][next_c] = 1
 
-def bfs(board,v,sr,sc,clr): 
-    q = deque() 
-    sset = set() 
-    cnt = 0 
+    if len(connected) >= 3:
+        if clear_mode:
+            for r, c in connected:
+                board[r][c] = 0
+        return len(connected)
+    return 0
 
-    q.append((sr,sc)) 
-    v[sr][sc] = 1 
-
-    sset.add((sr,sc)) 
-    cnt += 1 
-
-    while q: 
-        cr,cc = q.popleft() 
-        for dr,dc in ((-1,0),(1,0),(0,-1),(0,1)): 
-            nr,nc = cr + dr, cc + dc 
-            if 0<=nr<5 and 0<=nc<5 and v[nr][nc] == 0 and board[cr][cc] == board[nr][nc]: 
-                q.append((nr,nc)) 
-                v[nr][nc] = 1 
-                sset.add((nr,nc)) 
-                cnt += 1 
-    if cnt >= 3: 
-        if clr == 1: 
-            for r,c in sset: 
-                board[r][c] = 0 
-        return cnt 
-    else: 
-        return 0 
-
-def count_clear(board,clr): 
-    v = [[0] * 5 for _ in range(5)] 
-    cnt = 0 
-    for r in range(5): 
-        for c in range(5): 
-            if v[r][c] == 0: 
-                t = bfs(board,v,r,c,clr) 
-                cnt += t 
-    return cnt 
-
-K,M = map(int,input().split()) 
-board = [list(map(int,input().split())) for _ in range(5)] 
-treasures = list(map(int,input().split())) 
-ans = [] 
-
-for _ in range(K): 
-    #[1] start exploration 
-    mx_cnt = 0 
-    for rot in range(1,4): # rotation -> c -> r 
-        for sc in range(3): 
-            for sr in range(3): 
-                nboard = [x[:] for x in board]
-                for _ in range(rot): 
-                    nboard = rotate(nboard,sr,sc) 
+def count_clear(board, clear_mode): 
+    visited = [[0] * 5 for _ in range(5)]
+    total_count = 0
+    
+    for r in range(5):
+        for c in range(5):
+            if visited[r][c] == 0:
+                count = bfs(board, visited, r, c, clear_mode) 
+                total_count += count
                 
-                # count treasures 
-                t = count_clear(nboard,0) 
-                if mx_cnt < t: 
-                    mx_cnt = t 
-                    mboard = nboard
-    # break condition 
-    if mx_cnt == 0: 
-        break 
+    return total_count
 
-    #[2] continual gain 
-    cnt = 0
-    board = mboard
-    while True: 
-        t = count_clear(board,1) 
-        if t == 0: 
-            break 
-        cnt += t 
+def solve():
+    # 입력 받기
+    K, M = map(int, input().split())
+    board = [list(map(int, input().split())) for _ in range(5)]
+    treasures = list(map(int, input().split()))
+    results = []
 
-        for c in range(5): 
-            for r in range(4,-1,-1): 
-                if board[r][c] == 0: 
-                    board[r][c] = treasures.pop(0) 
-    ans.append(cnt) 
-print(*ans) 
+    # K번의 턴 진행
+    for _ in range(K):
+        # [1] 최적의 회전 찾기
+        max_count = 0
+        best_board = None
+        
+        for rotation in range(1, 4):  # 회전 횟수
+            for start_c in range(3):  # 시작 열
+                for start_r in range(3):  # 시작 행
+                    temp_board = [x[:] for x in board]
+                    for _ in range(rotation):
+                        temp_board = rotate(temp_board, start_r, start_c)
+                    
+                    # 현재 상태에서 얻을 수 있는 점수 계산
+                    count = count_clear(temp_board, 0)
+                    if max_count < count:
+                        max_count = count
+                        best_board = [x[:] for x in temp_board]
+        
+        # 더 이상 제거할 수 있는 블록이 없으면 종료
+        if max_count == 0:
+            break
+
+        # [2] 연쇄 제거 진행
+        board = best_board
+        chain_count = 0
+        
+        while True:
+            count = count_clear(board, 1)  # 블록 제거
+            if count == 0:
+                break
+            chain_count += count
+
+            # 빈 공간 채우기
+            for c in range(5):
+                for r in range(4, -1, -1):
+                    if board[r][c] == 0:
+                        board[r][c] = treasures.pop(0)
+        
+        results.append(chain_count)
+    
+    # 결과 출력
+    print(*results)
+
+# 메인 실행
+solve()
