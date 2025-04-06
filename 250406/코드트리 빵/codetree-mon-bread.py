@@ -50,7 +50,7 @@ def solve():
 
         for cr,cc,m in q:   
             if arrived[m] == 0: 
-                nr,nc = find(store[m][0],store[m][1],set(((cr-1,cc),(cr+1,cc),(cr,cc-1),(cr,cc+1)))): 
+                nr,nc = find(store[m][0],store[m][1],set(((cr-1,cc),(cr+1,cc),(cr,cc-1),(cr,cc+1))))
                 if (nr,nc) == store[m]: 
                     arrived[m] = time 
                     alst.append((nr,nc)) 
