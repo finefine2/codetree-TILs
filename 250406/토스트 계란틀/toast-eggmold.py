@@ -1,56 +1,60 @@
-N,L,R = map(int,input().split()) 
+from collections import deque
 
-board = [list(map(int,input().split())) for _ in range(N)]
-def in_range(r,c): 
-    return 0<=r<N and 0<=c<N 
+def solution(N, L, R, board):
+    def can_move(val1, val2):
+        diff = abs(val1 - val2)
+        return L <= diff <= R
+    
+    def bfs(sr, sc, visited, day_changed):
+        q = deque([(sr, sc)])
+        visited[sr][sc] = day_changed
+        total = board[sr][sc]
+        count = 1
+        positions = [(sr, sc)]
+        
+        while q:
+            r, c = q.popleft()
+            cur_val = board[r][c]
+            
+            # 4방향 탐색을 미리 정의
+            for nr, nc in ((r-1,c), (r+1,c), (r,c-1), (r,c+1)):
+                if (0 <= nr < N and 0 <= nc < N and 
+                    visited[nr][nc] != day_changed and
+                    can_move(cur_val, board[nr][nc])):
+                    visited[nr][nc] = day_changed
+                    q.append((nr, nc))
+                    total += board[nr][nc]
+                    count += 1
+                    positions.append((nr, nc))
+        
+        # 인구 이동이 있는 경우만 처리
+        if count > 1:
+            avg = total // count
+            for r, c in positions:
+                board[r][c] = avg
+            return True
+        return False
 
-def can_move(r1,c1,r2,c2): 
-    diff = abs(board[r1][c1] - board[r2][c2]) 
-    return L<=diff<=R 
-from collections import deque 
+    visited = [[0] * N for _ in range(N)]
+    days = 0
+    
+    while True:
+        day_changed = days + 1
+        moved = False
+        
+        # 최적화된 좌표 순회
+        for r in range(N):
+            for c in range(N):
+                if visited[r][c] != day_changed:
+                    if bfs(r, c, visited, day_changed):
+                        moved = True
+        
+        if not moved:
+            return days
+        days += 1
 
-# 이동횟수 구하기 
-def bfs(sr,sc,v): 
-    q = deque() 
-    v[sr][sc] = 1 
+# 입력 처리
+N, L, R = map(int, input().split())
+board = [list(map(int, input().split())) for _ in range(N)]
 
-    tlst = [(sr,sc)] 
-    q.append((sr,sc)) 
-    total = board[sr][sc] 
-
-    while q: 
-        cr,cc = q.popleft() 
-
-        for dr,dc in ((-1,0),(1,0),(0,1),(0,-1)): 
-            nr,nc = cr + dr, cc + dc 
-            if in_range(nr,nc) and can_move(cr,cc,nr,nc) and visited[nr][nc] == 0: 
-                q.append((nr,nc)) 
-                total += board[nr][nc] 
-                tlst.append((nr,nc)) 
-                v[nr][nc] = 1 
-
-    if len(tlst) > 1: 
-        avg =  total // len(tlst) 
-        group = tlst 
-        return avg, group 
-    else: 
-        return None 
-
-cnt = 0 
-while True: 
-    visited = [[0] * N for _ in range(N)] 
-    changes = [] 
-    for r in range(N): 
-        for c in range(N): 
-            if not visited[r][c]: 
-                ans = bfs(r,c,visited) 
-                if ans: 
-                    changes.append(ans) 
-    if not changes: 
-        break 
-
-    for avg, group in changes: 
-        for r,c in group: 
-            board[r][c] = avg   
-    cnt += 1 
-print(cnt) 
+print(solution(N, L, R, board))
