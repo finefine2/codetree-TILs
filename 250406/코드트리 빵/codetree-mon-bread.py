@@ -34,9 +34,9 @@ def find(sr,sc,dests): # 시작좌표에서 목적지 좌표들 중 최단거리
                     if v[nr][nc] == 0 and board[nr][nc] == 0: 
                         nq.append((nr,nc)) 
                         v[nr][nc] = v[cr][cc] + 1 
-            if len(tlst) > 0: 
-                tlst.sort() 
-                return tlst[0] 
+        if len(tlst) > 0: 
+            tlst.sort() 
+            return tlst[0] 
         q = nq 
     return -1 
 def solve(): 
