@@ -1,68 +1,56 @@
-from collections import deque
+N,L,R = map(int,input().split()) 
 
-def process_eggs(n, l, r, eggs):
-    def valid_range(x, y):
-        return 0 <= x < n and 0 <= y < n
+board = [list(map(int,input().split())) for _ in range(N)]
+def in_range(r,c): 
+    return 0<=r<N and 0<=c<N 
 
-    def can_share(x1, y1, x2, y2):
-        diff = abs(eggs[x1][y1] - eggs[x2][y2])
-        return l <= diff <= r
+def can_move(r1,c1,r2,c2): 
+    diff = abs(board[r1][c1] - board[r2][c2]) 
+    return L<=diff<=R 
+from collections import deque 
 
-    def bfs(start_x, start_y, visited):
-        q = deque([(start_x, start_y)])
-        group = [(start_x, start_y)]
-        visited[start_x][start_y] = True
-        total = eggs[start_x][start_y]
-        
-        dx = [-1, 1, 0, 0]
-        dy = [0, 0, -1, 1]
-        
-        while q:
-            x, y = q.popleft()
-            for i in range(4):
-                nx, ny = x + dx[i], y + dy[i]
-                if valid_range(nx, ny) and not visited[nx][ny]:
-                    if can_share(x, y, nx, ny):
-                        visited[nx][ny] = True
-                        q.append((nx, ny))
-                        group.append((nx, ny))
-                        total += eggs[nx][ny]
-        
-        # 그룹이 형성되면 평균값으로 업데이트
-        if len(group) > 1:
-            avg = total // len(group)
-            return group, avg
-        return None
+# 이동횟수 구하기 
+def bfs(sr,sc,v): 
+    q = deque() 
+    v[sr][sc] = 1 
 
-    time = 0
-    while True:
-        visited = [[False] * n for _ in range(n)]
-        changes = []
-        
-        # 모든 위치에서 BFS 시도
-        for i in range(n):
-            for j in range(n):
-                if not visited[i][j]:
-                    result = bfs(i, j, visited)
-                    if result:
-                        changes.append(result)
-        
-        # 더 이상 변화가 없으면 종료
-        if not changes:
-            break
-            
-        # 모든 변화를 동시에 적용
-        for group, avg in changes:
-            for x, y in group:
-                eggs[x][y] = avg
-                
-        time += 1
-    
-    return time
+    tlst = [(sr,sc)] 
+    q.append((sr,sc)) 
+    total = board[sr][sc] 
 
-# 입력 처리
-n, l, r = map(int, input().split())
-eggs = [list(map(int, input().split())) for _ in range(n)]
+    while q: 
+        cr,cc = q.popleft() 
 
-# 결과 출력
-print(process_eggs(n, l, r, eggs))
+        for dr,dc in ((-1,0),(1,0),(0,1),(0,-1)): 
+            nr,nc = cr + dr, cc + dc 
+            if in_range(nr,nc) and can_move(cr,cc,nr,nc) and visited[nr][nc] == 0: 
+                q.append((nr,nc)) 
+                total += board[nr][nc] 
+                tlst.append((nr,nc)) 
+                v[nr][nc] = 1 
+
+    if len(tlst) > 1: 
+        avg =  total // len(tlst) 
+        group = tlst 
+        return avg, group 
+    else: 
+        return None 
+
+cnt = 0 
+while True: 
+    visited = [[0] * N for _ in range(N)] 
+    changes = [] 
+    for r in range(N): 
+        for c in range(N): 
+            if not visited[r][c]: 
+                ans = bfs(r,c,visited) 
+                if ans: 
+                    changes.append(ans) 
+    if not changes: 
+        break 
+
+    for avg, group in changes: 
+        for r,c in group: 
+            board[r][c] = avg   
+    cnt += 1 
+print(cnt) 
