@@ -1,115 +1,103 @@
-class GameSimulator:
-    def __init__(self, N, M, K):
-        self.N = N
-        self.M = M
-        self.K = K
-        self.board = [[0] * N for _ in range(N)]
-        self.guns = [[[] for _ in range(N)] for _ in range(N)]
-        self.players = {}
-        self.drs, self.dcs = [-1,0,1,0], [0,1,0,-1]
-        self.opp = {0:2, 1:3, 2:0, 3:1}
+# 시뮬레이션 시키는대로
+N,M,K = tuple(map(int,input().split()))
+board = [list(map(int,input().split())) for _ in range(N)]
+guns = [[[] for _ in range(N)] for _ in range(N)]
+for r in range(N):
+    for c in range(N):
+        if board[r][c] > 0:
+            guns[r][c].append(board[r][c])
 
-    def initialize_board(self):
-        # 총 정보 초기화
-        initial_board = [list(map(int,input().split())) for _ in range(self.N)]
-        for r in range(self.N):
-            for c in range(self.N):
-                if initial_board[r][c] > 0:
-                    self.guns[r][c].append(initial_board[r][c])
+board = [[0] * N for _ in range(N)]
+# r,c,dir,power,gun,score
+players = {}
+for m in range(1,M+1):
+    r,c,d,p = tuple(map(int,input().split()))
+    players[m] = [r-1,c-1,d,p,0,0]
+    board[r-1][c-1] = m
 
-    def initialize_players(self):
-        # 플레이어 정보 초기화
-        for m in range(1, self.M+1):
-            r,c,d,p = map(int,input().split())
-            self.players[m] = [r-1,c-1,d,p,0,0]  # r,c,dir,power,gun,score
-            self.board[r-1][c-1] = m
+opp = {0:2,1:3,2:0,3:1}
+drs,dcs = [-1,0,1,0],[0,1,0,-1]
+def in_range(r,c):
+    return 0<=r<N and 0<=c<N
+def leave(num,cr,cc,cd,cp,cg,cs):
+    for k in range(4): # 현재방향부터 시계방향 90도씩 빈칸 찾기
+        nr,nc = cr + drs[(cd+k)%4], cc + dcs[(cd+k)%4]
+        if in_range(nr,nc) and board[nr][nc] == 0:
+            # 총이 있다면 가장 강한 총 획득
+            if len(guns[nr][nc])>0:
+                cg = max(guns[nr][nc])
+                guns[nr][nc].remove(cg)
+            board[nr][nc] = num # 정보 갱신 후 리턴
+            players[num] = [nr,nc,(cd+k)%4,cp,cg,cs]
+            return
 
-    def in_range(self, r, c):
-        return 0 <= r < self.N and 0 <= c < self.N
+for _ in range(K): # k round
+    # 1 ~ m player
+    for i in players:
+        # [1] 한 칸 이동 (격자 벗어나면 반대)
+        cr,cc,cd,cp,cg,cs = players[i]
+        nr,nc = cr + drs[cd], cc + dcs[cd]
+        if not in_range(nr,nc):
+            cd =opp[cd]
+            nr,nc = cr + drs[cd], cc + dcs[cd]
+        board[cr][cc] = 0 # 이전 위치 제거
 
-    def leave_position(self, num, cr, cc, cd, cp, cg, cs):
-        # 패배한 플레이어의 이동
-        for k in range(4):
-            nr, nc = cr + self.drs[(cd+k)%4], cc + self.dcs[(cd+k)%4]
-            if self.in_range(nr,nc) and self.board[nr][nc] == 0:
-                if self.guns[nr][nc]:
-                    cg = max(self.guns[nr][nc])
-                    self.guns[nr][nc].remove(cg)
-                self.board[nr][nc] = num
-                self.players[num] = [nr,nc,(cd+k)%4,cp,cg,cs]
-                return
+        # [2-1] 이동한 위치가 빈칸 -> 강한 총 획득
+        if board[nr][nc] == 0:
+            if len(guns[nr][nc]) > 0: # 총이 존재하면
+                mx = max(guns[nr][nc])
+                if mx > cg: # 더 강한 총이면 교체
+                    if cg > 0: # 총이 있는 경우
+                        guns[nr][nc].append(cg) # 내 총은 바닥에 반납
+                    guns[nr][nc].remove(mx)
+                    cg = mx
+            board[nr][nc] = i # 위치이동
+            players[i] = [nr,nc,cd,cp,cg,cs] # 정보갱신
+        # [2-2] 빈칸이 아닌 경우
+        else:
+            enemy = board[nr][nc] # 상대방 번호 확인
+            er,ec,ed,ep,eg,es = players[enemy]
+            # 승리한 경우의 총 처리 부분
+            if cp + cg > ep + eg or (cp + cg == ep + eg and cp > ep):  # 내가 이기는 경우
+                cs += (cp + cg) - (ep + eg)  # 공격력 차이만큼 점수 획득
+                leave(enemy, nr, nc, ed, ep, 0, es)  # 상대방은 총을 두고 떠남
 
-    def simulate_round(self):
-        for i in self.players:
-            # 현재 플레이어 정보
-            cr,cc,cd,cp,cg,cs = self.players[i]
-            
-            # 이동
-            nr,nc = cr + self.drs[cd], cc + self.dcs[cd]
-            if not self.in_range(nr,nc):
-                cd = self.opp[cd]
-                nr,nc = cr + self.drs[cd], cc + self.dcs[cd]
-            self.board[cr][cc] = 0
+                # 현재 가지고 있는 총을 땅에 내려놓음
+                if cg > 0:
+                    guns[nr][nc].append(cg)
+                # 패배한 플레이어의 총도 땅에 내려놓음
+                if eg > 0:
+                    guns[nr][nc].append(eg)
 
-            # 빈 칸으로 이동
-            if self.board[nr][nc] == 0:
-                if self.guns[nr][nc]:
-                    mx = max(self.guns[nr][nc])
-                    if mx > cg:
-                        if cg > 0:
-                            self.guns[nr][nc].append(cg)
-                        self.guns[nr][nc].remove(mx)
-                        cg = mx
-                self.board[nr][nc] = i
-                self.players[i] = [nr,nc,cd,cp,cg,cs]
-
-            # 전투 발생
-            else:
-                enemy = self.board[nr][nc]
-                er,ec,ed,ep,eg,es = self.players[enemy]
-                
-                # 전투 승패 판정
-                if cp + cg > ep + eg or (cp+cg==ep+eg and cp>ep):
-                    # 승리
-                    cs += (cp+cg) - (ep+eg)
-                    self.leave_position(enemy,nr,nc,ed,ep,0,es)
-                    
-                    if cg < eg:
-                        if cg > 0:
-                            self.guns[nr][nc].append(cg)
-                        cg = eg
-                    else:
-                        if eg > 0:
-                            self.guns[nr][nc].append(eg)
-                    self.board[nr][nc] = i
-                    self.players[i] = [nr,nc,cd,cp,cg,cs]
+                # 땅에 있는 총들 중 가장 강한 총을 획득
+                if guns[nr][nc]:
+                    cg = max(guns[nr][nc])
+                    guns[nr][nc].remove(cg)
                 else:
-                    # 패배
-                    es += (ep+eg) - (cp+cg)
-                    self.leave_position(i,nr,nc,cd,cp,0,cs)
-                    
-                    if eg < cg:
-                        if eg > 0:
-                            self.guns[nr][nc].append(eg)
-                        eg = cg
-                    else:
-                        if cg > 0:
-                            self.guns[nr][nc].append(cg)
-                    self.board[nr][nc] = enemy
-                    self.players[enemy] = [nr,nc,ed,ep,eg,es]
+                    cg = 0
 
-    def get_scores(self):
-        return " ".join(str(self.players[i][5]) for i in range(1, self.M+1))
+                board[nr][nc] = i
+                players[i] = [nr, nc, cd, cp, cg, cs]
 
-def main():
-    N,M,K = map(int,input().split())
-    game = GameSimulator(N, M, K)
-    game.initialize_board()
-    game.initialize_players()
-    
-    for _ in range(K):
-        game.simulate_round()
-    
-    print(game.get_scores())
+            else:  # 내가 지는 경우
+                es += (ep + eg) - (cp + cg)
+                leave(i, nr, nc, cd, cp, 0, cs)  # 내가 총 놓고 떠남
 
-main()
+                # 현재 가지고 있는 총을 땅에 내려놓음
+                if eg > 0:
+                    guns[nr][nc].append(eg)
+                # 패배한 플레이어의 총도 땅에 내려놓음
+                if cg > 0:
+                    guns[nr][nc].append(cg)
+
+                # 땅에 있는 총들 중 가장 강한 총을 획득
+                if guns[nr][nc]:
+                    eg = max(guns[nr][nc])
+                    guns[nr][nc].remove(eg)
+                else:
+                    eg = 0
+
+                board[nr][nc] = enemy
+                players[enemy] = [nr, nc, ed, ep, eg, es]
+for i in players:
+    print(players[i][5],end=" ")
