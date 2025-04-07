@@ -15,11 +15,9 @@ def rotate(board,sr,sc):
 from collections import deque
 def bfs(board,v,sr,sc,clr):
     q = deque()
-    sset = set()
 
     q.append((sr,sc))
     v[sr][sc] = 1
-    sset.add((sr,sc))
 
     connected = {(sr,sc)}
     while q:
