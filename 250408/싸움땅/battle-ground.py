@@ -19,14 +19,13 @@ def in_range(r,c):
     return 0<=r<N and 0<=c<N
 def leave(num,cr,cc,cd,cp,cg,cs):
     for k in range(4):
-        cd = (cd+k) % 4
-        nr,nc = cr + drs[cd], cc + dcs[cd]
+        nr,nc = cr + drs[(cd+k)%4], cc + dcs[(cd+k)%4]
         if in_range(nr,nc) and board[nr][nc] == 0:
             if len(guns[nr][nc]) > 0:
                 cg = max(guns[nr][nc])
                 guns[nr][nc].remove(cg)
             board[nr][nc] = num
-            players[num] = [nr,nc,cd,cp,cg,cs]
+            players[num] = [nr,nc,(cd+k)%4,cp,cg,cs]
             return
 for _ in range(K):
     for p in players:
