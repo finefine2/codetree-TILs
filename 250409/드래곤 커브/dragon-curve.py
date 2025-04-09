@@ -1,27 +1,28 @@
+dir = [(0,1),(-1,0),(0,-1),(1,0)]  # 각각 동북서남
+
 N = int(input())
-arr = [[0]*101 for _ in range(101)]
+graph = [[0]*101 for _ in range(101)]
+for _ in range(N):
+    x, y, d, g = map(int, input().split())  # 각각 좌표, 시작방향, 세대 수
+    graph[x][y] += 1
+    todo = [d]
+    x = x+dir[d][0]
+    y = y+dir[d][1]
+    graph[x][y] += 1
+    todo = [(d+1)%4]  # 이쪽의 turn까지 0세대 처리
 
-di = [0,-1,0,1]
-dj = [1,0,-1,0]
-for _ in range(N):                      # 드래곤커브 개수만큼 입력 받기
-    sj,si,dr,g = map(int, input().split())
-    lst = [(si,sj)]                     #시작위치 저장
-    lst.append((si+di[dr], sj+dj[dr]))  # 0세대 위치 저장
-    for _ in range(g):                  # 세대 회수만큼 뻗어감
-        # lst의 끝 좌표 기준으로 90도 회전
-        ei,ej = lst[-1]
-        for i in range(len(lst)-2, -1, -1):
-            ci,cj = lst[i]
-            lst.append((ei-(ej-cj), ej+(ei-ci)))
-
-    # arr에 드래곤커브 표시
-    for i,j in lst:
-        arr[i][j]=1
-
-# 2*2 네칸이 모두 1인 경우 찾기
-ans = 0
+    for _ in range(g):  # 여기는 1세대부터 처리
+        for i in range(len(todo)):
+            x = x+dir[todo[i]][0]
+            y = y+dir[todo[i]][1]
+            graph[x][y] += 1
+        todo = todo[::-1]+todo
+        for i in range(len(todo)//2):
+            todo[i] += 1
+            todo[i] %= 4
+cnt = 0
 for i in range(100):
     for j in range(100):
-        if arr[i][j]==arr[i][j+1]==arr[i+1][j]==arr[i+1][j+1]==1:
-            ans+=1
-print(ans)
+        if graph[i][j] and graph[i+1][j] and graph[i][j+1] and graph[i+1][j+1]:
+            cnt += 1
+print(cnt)
