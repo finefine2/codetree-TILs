@@ -56,12 +56,12 @@ def bfs(sr,sc,er,ec):
     return -1
 
 
-while True:
+for _ in range(M): 
     # 출발지를 찾아본다
     sr,sc,dist = bfs_find(cr,cc)
     # 만약 모두를 데려다주지 못하면 break
     if dist == -1 or dist > C:
-        C = -1 
+        C = -1
         break
     # 데려다줄 수 잇따면?
     # 출발지에서 목적지까지의 최단거리를 계산한다
