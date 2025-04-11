@@ -48,6 +48,7 @@ def bfs():
                     mx_group = tlst[0][-1]
     return mx_group
 def gravity(): 
+    global board
     nboard = [x[:] for x in board] 
 
     for r in range(1,N): 
