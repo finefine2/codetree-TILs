@@ -8,26 +8,22 @@ for _ in range(M):
 er,ec = map(lambda x: int(x)-1,input().split())
 board[er][ec] = -11 
 
-def find_square(arr): 
-    # 정사각형 길이 찾기
-    # 출구와 모든 사람들 간 최단거리 구하기 
-    mn = N 
-    for r in range(N): 
-        for c in range(N): 
-            if -11 < arr[r][c] < 0:
-                mn = min(mn,max(abs(er-r),abs(ec-c)))
-    
-    # 
-    for sr in range(N-mn): 
-        for sc in range(N-mn): 
-            # 찾은 최소 사각형 내에 출구가 있따면
-            if sr <= er <= sr + mn and sc <= ec <= sc + mn:
-                # 사람도 있는지 확인해야지 
-                for r in range(sr,sr+mn+1): 
-                    for c in range(sc,sc+mn+1): 
-                        if -11 < arr[r][c] < 0: 
-                            return sr,sc,mn+1
-    
+def find_square(board):
+    # [1] 비상구와 모든 사람간 가장 짧은 가로 혹은 세로거리 구하기
+    L = N
+    for r in range(N):
+        for c in range(N):
+            if -11 < board[r][c] < 0: #사람인 경우
+                L = min(L,max(abs(er-r),abs(ec-c)))
+    # [2] 0,0부터 순회하면서 길이 L인 정사각형에 사람있는지 확인하기
+    for sr in range(N-L):
+        for sc in range(N-L):
+            if sr<=er<=sr+L and sc<=ec<=sc+L: # 비상구가 포함
+                for r in range(sr,sr+L+1):
+                    for c in range(sc,sc+L+1):
+                        if -11<board[r][c]<0: #사람의 경우 리턴
+                            return sr,sc,L+1
+
     
 def find_exit(board): 
     for r in range(N): 
