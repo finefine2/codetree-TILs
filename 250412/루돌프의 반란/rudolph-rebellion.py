@@ -27,6 +27,8 @@ def move_santa(num,cr,cc,dr,dc,mul):
     q = deque()
 
     q.append((num,cr,cc,mul))
+    board[cr][cc] = 0 
+    
     while q:
         cur,cr,cc,mul = q.popleft()
         nr,nc = cr + dr * mul, cc + dc * mul
@@ -34,15 +36,15 @@ def move_santa(num,cr,cc,dr,dc,mul):
             if board[nr][nc] == 0:
                 board[nr][nc] = cur
                 santas[cur] = (nr,nc)
-                return 
+                return
             elif board[nr][nc] > 0:
                 idx = board[nr][nc]
-                q.append((idx,nr,nc,1))
                 board[nr][nc] = cur
                 santas[cur] = (nr,nc)
+                q.append((idx,nr,nc,1))
 
-        elif not in_range(nr,nc):
-            alive[num] = 0
+        else:
+            alive[cur] = 0
             return
 
 for turn in range(1,M+1):
@@ -51,6 +53,7 @@ for turn in range(1,M+1):
     # rudolf 먼저 움직이고 그 이후에 1-p번 산타들이 순차적으로 이동
     # [1] 루돌프의 이동
 
+    tlst = []
     min_dist = 2 * (N**2)
     for idx in santas:
         # 탈락하지 않은 산타를 대상
@@ -60,11 +63,11 @@ for turn in range(1,M+1):
 
         if dist < min_dist:
             min_dist = dist
-            tlst = [(sr,sc,idx)]
+            tlst.append((sr,sc,idx))
         elif dist == min_dist:
             tlst.append((sr,sc,idx))
 
-    tlst.sort(reverse=True)
+    tlst.sort(key=lambda x:(-x[0],-x[1]))
     sr,sc,idx = tlst[0]
             # 목표 확인
         # 방향 찾기
@@ -113,7 +116,7 @@ for turn in range(1,M+1):
             board[sr][sc] = 0
             board[nr][nc] = idx
             santas[idx] = (nr,nc)
-    for idx in santas:
+    for idx in range(1,P+1):
         if alive[idx] == 1:
             scores[idx] += 1
-print(*scores[1:],end=" ")
+print(*scores[1:])
