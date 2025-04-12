@@ -22,7 +22,8 @@ def find_square(arr):
     mn = 2 * N 
     for r in range(N): 
         for c in range(N):
-            mn = min(mn,max(abs(er-r),abs(ec-c)))
+            if -11 < board[r][c] < 0: 
+                mn = min(mn,max(abs(er-r),abs(ec-c)))
     
     # mn을 찾았으면 이제 참가자 한명 포함하는 정사각형 찾기 
     for sr in range(N-mn): 
@@ -71,8 +72,8 @@ for _ in range(K):
     # 참가자와 출구 찾는 가장 작은 정사각형 찾기 
     sr,sc,L = find_square(board) 
     nboard = [x[:] for x in board]
-    for sr in range(L):
-        for sc in range(L): 
+    for r in range(L):
+        for c in range(L): 
             nboard[sr+r][sc+c] = board[sr+L-c-1][sc+r] 
             if nboard[sr+r][sc+c] > 0: 
                 nboard[sr+r][sc+c] -= 1
@@ -81,4 +82,4 @@ for _ in range(K):
     er,ec = find_exit(board) 
     
 print(-ans) 
-print(er,ec) 
+print(er+1,ec+1) 
