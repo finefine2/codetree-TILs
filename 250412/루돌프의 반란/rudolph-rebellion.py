@@ -51,7 +51,6 @@ for turn in range(1,M+1):
     # rudolf 먼저 움직이고 그 이후에 1-p번 산타들이 순차적으로 이동
     # [1] 루돌프의 이동
 
-    tlst = []
     min_dist = 2 * (N**2)
     for idx in santas:
         # 탈락하지 않은 산타를 대상
@@ -61,11 +60,11 @@ for turn in range(1,M+1):
 
         if dist < min_dist:
             min_dist = dist
-            tlst.append((sr,sc,idx))
+            tlst = [(sr,sc,idx)]
         elif dist == min_dist:
             tlst.append((sr,sc,idx))
 
-    tlst.sort(key=lambda x:(-x[0],-x[1]))
+    tlst.sort(reverse=True)
     sr,sc,idx = tlst[0]
             # 목표 확인
         # 방향 찾기
