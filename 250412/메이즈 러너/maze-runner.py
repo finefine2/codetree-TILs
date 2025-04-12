@@ -1,10 +1,17 @@
+# 0 빈칸
+# 1~9 벽
+# -11 출구
+# 사람 -1
+
 N,M,K = map(int,input().split())
 
 board = [list(map(int,input().split())) for _ in range(N)]
 
 for _ in range(M):
     r,c = map(int,input().split())
-    board[r-1][c-1] -= 1
+    r -= 1
+    c -= 1
+    board[r][c] -= 1
 
 er,ec = map(int,input().split())
 er -= 1
@@ -16,7 +23,7 @@ def find_square(arr):
     mn = 2 * N
     for r in range(N):
         for c in range(N):
-            if -11 < arr[r][c] < 0:
+            if -11 < arr[r][c] <0:
                 mn = min(mn,max(abs(er-r),abs(ec-c)))
 
     # mn을 찾았으면 이제 참가자 한명 포함하는 정사각형 찾기
@@ -50,7 +57,7 @@ for _ in range(K):
                 dist = abs(er-r) + abs(ec-c)
                 for dr,dc in ((-1,0),(1,0),(0,-1),(0,1)):
                     nr,nc = r + dr, c + dc
-                    if in_range(nr,nc) and board[nr][nc] <= 0 and dist > (abs(er-nr)+abs(ec-nc)):
+                    if in_range(nr,nc) and board[nr][nc] <=0 and dist > (abs(er-nr)+abs(ec-nc)):
                         ans += board[r][c]
                         nboard[r][c] -= board[r][c]
                         if board[nr][nc] == -11:
@@ -76,4 +83,4 @@ for _ in range(K):
     er,ec = find_exit(board)
 
 print(-ans)
-print(er+1,ec+1) 
+print(er,ec)
