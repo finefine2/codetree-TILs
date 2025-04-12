@@ -25,7 +25,7 @@ def find_square(arr):
             if sr <= er <= sr+mn and sc <= ec <= ec + mn:
                 for r in range(sr,sr+mn+1):
                     for c in range(sc,sc+mn+1):
-                        if -11 < board[r][c] < 0:
+                        if -11 < arr[r][c] < 0:
                             return sr,sc, mn+1
 def find_exit(arr):
     for r in range(N):
