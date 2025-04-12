@@ -48,13 +48,6 @@ def spread():
         for c in range(N):
             board[r][c] += new_board[r][c]
 
-# pprint(board)
-# grow()
-# print("######")
-# pprint(board)
-# print("######")
-# spread()
-# pprint(board)
 def remove():
     global ans
     # 제초제를 뿌리고 사라지는 과정
