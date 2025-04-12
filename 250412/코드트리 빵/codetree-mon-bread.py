@@ -47,7 +47,8 @@ def solve():
         alst = []
         for cr,cc,m in q:
             if arrival[m] == 0:
-                nr,nc = find(stores[m][0],stores[m][1],set(((cr-1),cc),(cr+1,cc),(cr,cc-1),(cr,cc+1)))
+                nr,nc = find(stores[m][0],stores[m][1],set(((cr-1,cc),(cr+1,cc),(cr,cc-1),(cr,cc+1))))
+
                 if (nr,nc) == stores[m]:
                     arrival[m] = time
                     alst.append((nr,nc))
@@ -68,4 +69,4 @@ def solve():
         time += 1
     return max(arrival)
 ans = solve()
-print(ans) 
+print(ans)
