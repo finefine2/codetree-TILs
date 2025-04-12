@@ -55,7 +55,7 @@ for _ in range(K):
                 dist = abs(er-r) + abs(ec-c) 
                 for dr,dc in ((-1,0),(1,0),(0,-1),(0,1)): 
                     nr,nc = r + dr, c + dc 
-                    if board[nr][nc] <= 0 and in_range(nr,nc) and dist > (abs(er-nr)+abs(ec-nc)): 
+                    if in_range(nr,nc) and board[nr][nc] <=0 and dist > (abs(er-nr)+abs(ec-nc)): 
                         ans += board[r][c] 
                         nboard[r][c] -= board[r][c] 
                         if board[nr][nc] == -11: 
